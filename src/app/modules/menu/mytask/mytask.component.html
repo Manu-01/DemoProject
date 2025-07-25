@@ -142,7 +142,6 @@
                                     @for(item of priority;track item){
                                     <option [value]="item">{{item}}</option>
                                     }
-
                                 </select>
                                 @if(myForm.get('priority')?.invalid && myForm.get('priority')?.touched){<small>This
                                     Field is Required.</small>}

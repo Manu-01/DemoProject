@@ -63,6 +63,8 @@ export class MytaskComponent {
   }
   toggleShowHide() {
     this.toggleValue = !this.toggleValue;
+
+   
   }
 
   ngOnInit(): void {
@@ -121,9 +123,9 @@ export class MytaskComponent {
 
   gridOptions = {
     defaultColDef: {
-      sortable: true,
-      resizable: false,
-      filter: true,
+      sortable: false,
+      // resizable: false,
+      // filter: true,
       flex: 1,
     },
     context: {
