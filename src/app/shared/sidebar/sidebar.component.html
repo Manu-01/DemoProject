@@ -1,16 +1,18 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar" style="width: 100%; height: 90.5vh;">
     <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item"> <a href="#" class="nav-link " [routerLink]="['']" routerLinkActive="active"
-                aria-current="page">
+
+        <li class="nav-item"> <a class=" " aria-current="page">
                 My Menu
             </a>
             <ul>
-                <li class="childli"> <span> <i-feather name="User"></i-feather></span><a href="#"
-                        class="nav-link text-white">
+
+                <li class="childli"> <span> <i-feather name="User"></i-feather></span>
+                    <a [routerLink]="['menu/mytask']" routerLinkActive="active" class="nav-link text-white">
                         My Task
-                    </a> </li>
-                <li class="childli"> <span> <i-feather name="Users"></i-feather></span> <a routerLink="menu/teamtask"
-                        class="nav-link text-white">
+                    </a>
+                </li>
+                <li class="childli"> <span> <i-feather name="Users"></i-feather></span> <a
+                        [routerLink]="['menu/teamtask']" routerLinkActive="active" class="nav-link text-white">
                         Team Task
                     </a> </li>
             </ul>
@@ -19,30 +21,28 @@
                 My Organization
             </a>
             <ul>
-                <li class="childli"><span> <i-feather name="User"></i-feather></span> <a routerLink="org/organization"
-                        class="nav-link text-white">
+                <li class="childli"><span> <i-feather name="User"></i-feather></span> <a
+                        [routerLink]="['org/organization']" routerLinkActive="active" class="nav-link text-white">
                         Organization
                     </a> </li>
-                <li class="childli"><span> <i-feather name="git-pull-request"></i-feather></span> <a routerLink="org/contact"
-                        class="nav-link text-white">
+                <li class="childli"><span> <i-feather name="git-pull-request"></i-feather></span> <a
+                        [routerLink]="['org/contact']" routerLinkActive="active" class="nav-link text-white">
                         Contact
                     </a> </li>
-                <li class="childli"> <span> <i-feather name="User"></i-feather></span> <a routerLink="org/solution-area"
-                        class="nav-link text-white">
+                <li class="childli"> <span> <i-feather name="User"></i-feather></span> <a
+                        [routerLink]="['org/solution-area']" routerLinkActive="active" class="nav-link text-white">
                         Solution Area
                     </a> </li>
             </ul>
         </li>
-        <li><a href="#" class="nav-link text-white">
+        <li><a class="nav-link text-white">
                 Table
             </a>
             <ul>
-                <li class="childli"><span> <i-feather name="User"></i-feather></span> <a href="#"
-                        class="nav-link text-white">
+                <li class="childli"><span> <i-feather name="User"></i-feather></span> <a class="nav-link text-white">
                         Products
                     </a> </li>
-                <li class="childli"> <span> <i-feather name="User"></i-feather></span> <a href="#"
-                        class="nav-link text-white">
+                <li class="childli"> <span> <i-feather name="User"></i-feather></span> <a class="nav-link text-white">
                         Form Builder
                     </a> </li>
 
@@ -50,18 +50,4 @@
         </li>
 
     </ul>
-    <hr>
-    <div class="dropdown"> <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-            data-bs-toggle="dropdown" aria-expanded="false"> <img src="https://github.com/mdo.png" alt="" width="32"
-                height="32" class="rounded-circle me-2"> <strong>mdo</strong> </a>
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li>
-                <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
-    </div>
 </div>

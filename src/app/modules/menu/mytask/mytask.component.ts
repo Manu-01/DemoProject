@@ -27,7 +27,6 @@ export class MytaskComponent {
   myForm!: FormGroup;
   toggleValue: boolean = false;
   rowData: any;
-  api: any;
   mode: boolean = false;
   viewCard: boolean = false;
   status = ['Active', 'InActive'];
@@ -46,11 +45,13 @@ export class MytaskComponent {
     });
   }
   saveData() {
+    
     if (this.myForm.valid) {
       this.userService.createUser(this.myForm.value).subscribe((res: any) => {
         this.getData();
         this.toggleValue = false;
         this.myForm.reset();
+        
       });
     } else {
       console.log('error');
@@ -159,17 +160,20 @@ export class MytaskComponent {
   }
 
   onUpdate() {
+    this.mode = false
     if (this.myForm.valid) {
       this.userService
         .updateData(this.singledata, this.myForm.value)
         .subscribe(() => {
           this.toggleValue = false;
           this.getData();
+           ;
         });
       this.myForm.reset();
     } else {
       console.log('Invalid Credentials');
       this.myForm.markAllAsTouched();
+      
     }
   }
 }

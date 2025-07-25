@@ -35,3 +35,7 @@ small{
 .transition{
     transition: 0.5s;
 }
+.card{
+    max-height: 550px;
+    overflow-y: auto;
+}
