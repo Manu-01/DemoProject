@@ -1,0 +1,37 @@
+.dashboard_Layout_box{
+    width: calc(100%);
+    max-width: calc(100%);
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    
+}
+.dashboard_Layout_box .columns_dashboard{
+    width: calc(96% / 4);
+    max-width: calc(96% / 4);
+    border: 1px solid grey;
+    border-radius:5px;
+    display: flex;
+    justify-content: space-between;
+}
+.icon_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.value_container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px 14px 0px 19px ;
+}
+.table_and_form{
+    display: flex;
+}
+small{
+    color: red;
+}
+.transition{
+    transition: 0.5s;
+}

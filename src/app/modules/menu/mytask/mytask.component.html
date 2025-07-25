@@ -1,0 +1,175 @@
+<ul class="nav nav-tabs mt-2">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#">My Task</a>
+    </li>
+
+</ul>
+<div class="dashboard_Layout_box">
+    <div class="columns_dashboard">
+        <div class="value_container">
+            <p class="m-0">Assign to me</p>
+            <h4>1</h4>
+        </div>
+        <div class="icon_container">
+            <span> <i-feather name="User"></i-feather></span>
+        </div>
+    </div>
+    <div class="columns_dashboard">
+        <div class="value_container">
+            <p class="m-0">In Queue</p>
+            <h4>1</h4>
+        </div>
+        <div class="icon_container d-flex justify-content-center align-items-center">
+            <span> <i-feather name="User"></i-feather></span>
+        </div>
+    </div>
+    <div class="columns_dashboard">
+        <div class="value_container">
+            <p class="m-0">Overdue</p>
+            <h4>55</h4>
+        </div>
+        <div class="icon_container">
+            <span> <i-feather name="User"></i-feather></span>
+        </div>
+
+    </div>
+    <div class="columns_dashboard">
+        <div class="value_container">
+            <p class="m-0">Priority</p>
+            <h4>5466</h4>
+        </div>
+        <div class="icon_container">
+            <span> <i-feather name="User"></i-feather></span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid border-bottom border-top">
+    <div class="row mt-2 p-2">
+        <div class="table_header_headding d-flex justify-content-between">
+            <h4>Task List Data</h4>
+            <button type="button" class="btn btn-primary" (click)="toggleShowHide()"> Add Data </button>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="table_and_form">
+            <div class="col-8  p-2" [ngClass]="{'col-12': !toggleValue,'transition':!toggleValue}">
+                <ag-grid-angular style="width: 100%;height:550px;" [columnDefs]="colDefs" [rowData]="rowData"
+                    [pagination]="true" [paginationAutoPageSize]="10" [paginationPageSizeSelector]="[5,10,20]"
+                    [gridOptions]="gridOptions"     [rowSelection]="'multiple'">
+                </ag-grid-angular>
+            </div>
+            @if(toggleValue){<div class="col-4  p-2">
+                <div class="card">
+                    <div class="card-header">
+                        Add Data
+                    </div>
+                    <div class="card-body">
+
+                        <form class="form" [formGroup]="myForm">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Solution Area</label>
+                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                    formControlName="solutionArea" aria-describedby="emailHelp"
+                                    placeholder="Solution Area">
+                                @if(myForm.get('solutionArea')?.invalid &&
+                                myForm.get('solutionArea')?.touched){<small>This Field is Required.</small>}
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">WorkFlow</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1"
+                                    formControlName="workFlow" placeholder="WorkFlow">
+                                @if(myForm.get('workFlow')?.invalid && myForm.get('workFlow')?.touched){<small>This
+                                    Field is Required.</small>}
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="taskid">task id</label>
+                                <input type="number" class="form-control" id="taskid" placeholder="task id"
+                                    formControlName="taskId">
+                                @if(myForm.get('taskId')?.invalid && myForm.get('taskId')?.touched){<small>This
+                                    Field is
+                                    Required.</small>}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="taskname">task Name</label>
+                                <input type="text" class="form-control" id="taskname" placeholder="task name"
+                                    formControlName="taskName">
+                                @if(myForm.get('taskName')?.invalid && myForm.get('taskName')?.touched){<small>This
+                                    Field is Required.</small>}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select class="form-control" formControlName="status">
+                                    <option value="" disabled selected>select</option>
+                                    @for(item of status;track item){
+                                    <option [value]="item">{{item}}</option>
+                                    }
+
+                                </select>
+                                @if(myForm.get('status')?.invalid && myForm.get('status')?.touched){<small>This
+                                    Field is
+                                    Required.</small>}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="startDate">Start Date</label>
+                                <input type="date" class="form-control" id="StartDate" placeholder="Start Date"
+                                    formControlName="startDate">
+                                @if(myForm.get('startDate')?.invalid &&
+                                myForm.get('startDate')?.touched){<small>This
+                                    Field is Required.</small>}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="DueDate">Due Date</label>
+                                <input type="date" class="form-control" id="DueDate" placeholder="Due Date"
+                                    formControlName="dueDate">
+                                @if(myForm.get('dueDate')?.invalid && myForm.get('dueDate')?.touched){<small>This
+                                    Field
+                                    is Required.</small>}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="priority">Priority</label>
+                                <select class="form-control" formControlName="priority">
+                                    <option value="" disabled selected>select</option>
+                                    @for(item of priority;track item){
+                                    <option [value]="item">{{item}}</option>
+                                    }
+
+                                </select>
+                                @if(myForm.get('priority')?.invalid && myForm.get('priority')?.touched){<small>This
+                                    Field is Required.</small>}
+                            </div>
+
+                            <div class="col-6 d-flex justify-content-around gap-2 mt-2">
+                                @if (mode) {
+                                <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid"
+                                    (click)="onUpdate()">Update</button>
+                                } @if (!mode) {
+                                <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid"
+                                    (click)="saveData()">Submit</button>
+                                }
+
+                                <button type="submit" class="btn btn-secondary" (click)="clearAll()">Clear</button>
+                                <button type="submit" class="btn btn-secondary"
+                                    (click)="toggleShowHide()">Cancel</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </div>
+            }
+
+        </div>
+    </div>
+</div>
