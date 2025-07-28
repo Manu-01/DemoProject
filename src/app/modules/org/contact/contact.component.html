@@ -1,1 +1,96 @@
-<p>contact works!</p>
+<div class="container-fluid border-bottom border-top">
+    <div class="row mt-2 p-2">
+        <div class="table_header_headding d-flex justify-content-between">
+            <div class="col-6">
+                <ul class="d-flex justify-content-between align-items-center p-0">
+                    <li><a> <i-feather name="plus" class="me-2"></i-feather>Add new item</a></li>
+                    <li><a><i-feather name="briefcase" class="me-2"></i-feather> Add to Maketing List</a></li>
+                    <li><a> <i-feather name="share-2" class="me-2"></i-feather>Share</a></li>
+                    <li><a><i-feather name="log-in" class="me-2"></i-feather> Import</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-tabs">
+    <li class="nav-item" [ngbNavItem]="0">
+        <button ngbNavLink>Organization</button>
+    </li>
+    @for (item of navs; track item) {
+    <li  [ngbNavItem]="item.id" >
+        <button ngbNavLink>
+            {{item.organizationName}}
+            <span class="btn-close ms-3 fw-light" (click)="close($event, item)"></span>
+        </button>
+        <ng-template ngbNavContent>
+            <app-organization-details [mydata] ="sendData">
+
+            </app-organization-details>
+        </ng-template>
+    </li>
+    }
+
+</ul>
+
+<div [ngbNavOutlet]="nav" class="mt-2">
+
+
+</div> -->
+
+
+<div class="container-fluid mt-3 p-0">
+    <div class="row d-flex g-0">
+        <div class="sidebar_section col-2 p-2 rounded">
+            <div class="bg-light " style="height: 73vh;">
+                <h3>Contacts</h3>
+                <div class="input_box bg-light d-flex justify-content-between align-items-center">
+                    <input type="text" class="form-control rounded" placeholder="search here...">
+                    <span class="ms-2"><i-feather name="search" class="me-2 "></i-feather> </span>
+                </div>
+                @for (item of OrganizaionsData; track $index) {
+                <ul>
+                    <div class="d-flex flex-column gap-3">
+                        <li class="pointer_tab" (click)="fetchData(item.organizationName)">
+                            <a>
+                                <div class="text_filed d-flex m-0">
+                                    <i-feather name="users" class="me-2 "></i-feather>
+                                    <p class="m-0"> {{item.organizationName}}</p>
+                                </div>
+                                <p>{{item.contacts.length}} Contacts</p>
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+
+                }
+
+            </div>
+
+        </div>
+        <div class="table_and_form col-10 p-2">
+            <div class="header_sections d-flex justify-content-between align-items-center px-3 mb-3">
+                <h3> All Contact Lists
+                </h3>
+                <div class="input_box bg-light d-flex justify-content-between align-items-center">
+                    <input type="text" class="form-control rounded" placeholder="search here...">
+                    <span class="ms-2"><i-feather name="search" class="me-2 "></i-feather> </span>
+                </div>
+
+            </div>
+
+            <ag-grid-angular style="width: 100%;height:550px;" [columnDefs]="colDefs" [rowData]="rowData"
+                [pagination]="true" [paginationAutoPageSize]="10" [paginationPageSizeSelector]="[5,10,20]"
+                [gridOptions]="gridOptions" [rowSelection]="'multiple'">
+            </ag-grid-angular>
+
+
+
+        </div>
+    </div>
+</div>

@@ -7,6 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   private url = 'http://localhost:3000/task';
+
+  private orgUrl ='http://localhost:3000/organization'
+
+  private conatactUrl = 'http://localhost:3000/contacts'
   constructor(private http: HttpClient) {}
 
   getData(): Observable<any> {
@@ -25,4 +29,18 @@ export class UserService {
   deletById(id: any): Observable<any> {
     return this.http.delete(`${this.url}/${id}`);
   }
+
+  // OrganizationsData
+  
+  getOrgData(): Observable<any> {
+    return this.http.get(`${this.orgUrl}`);
+  }
+
+  
+
+  // ContactData
+  getContactData(): Observable<any> {
+    return this.http.get(`${this.conatactUrl}`);
+  }
+
 }

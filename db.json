@@ -8,7 +8,7 @@
       "taskName": "ghmdfvbnvxcvcbx",
       "startDate": "2025-07-04",
       "dueDate": "2025-07-18",
-      "priority": "Low",
+      "priority": "Medium",
       "id": "1a56"
     },
     {
@@ -21,6 +21,350 @@
       "startDate": "2025-07-10",
       "dueDate": "2025-07-23",
       "priority": "Low"
+    }
+  ],
+  "organization": [
+    {
+      "id": "1a56",
+      "organizationName": "TechNova Inc.",
+      "type": "Customer",
+      "industry": "Information Technology",
+      "onboarding": "Active",
+      "product": "NovaSuite CRM",
+      "email": "contact@technova.com",
+      "phone": "+1-555-123-4567"
+    },
+    {
+      "id": "2b67",
+      "organizationName": "GreenLeaf Ltd.",
+      "type": "Non-Customer",
+      "industry": "Agriculture",
+      "onboarding": "Pending",
+      "product": "AgriTrack",
+      "email": "support@greenleaf.com",
+      "phone": "+1-555-234-5678"
+    },
+    {
+      "id": "3c78",
+      "organizationName": "MediCore Health",
+      "type": "Non-Customer",
+      "industry": "Healthcare",
+      "onboarding": "Active",
+      "product": "MediServe",
+      "email": "info@medicore.org",
+      "phone": "+1-555-345-6789"
+    },
+    {
+      "id": "4d89",
+      "organizationName": "EduWave Systems",
+      "type": "Customer",
+      "industry": "Education",
+      "onboarding": "Inactive",
+      "product": "LearnPro LMS",
+      "email": "hello@eduwave.com",
+      "phone": "+1-555-456-7890"
+    },
+    {
+      "id": "5e90",
+      "organizationName": "FinEdge Capital",
+      "type": "Customer",
+      "industry": "Finance",
+      "onboarding": "Active",
+      "product": "EdgeBank Suite",
+      "email": "support@finedge.com",
+      "phone": "+1-555-567-8901"
+    },
+    {
+      "id": "6f01",
+      "organizationName": "BuildRight Co.",
+      "type": "Non-Customer",
+      "industry": "Construction",
+      "onboarding": "Pending",
+      "product": "ConstructHub",
+      "email": "info@buildright.com",
+      "phone": "+1-555-678-9012"
+    },
+    {
+      "id": "7g12",
+      "organizationName": "RetailSphere",
+      "type": "Customer",
+      "industry": "Retail",
+      "onboarding": "Active",
+      "product": "ShopEase POS",
+      "email": "contact@retailsphere.com",
+      "phone": "+1-555-789-0123"
+    },
+    {
+      "id": "8h23",
+      "organizationName": "EcoDrive Motors",
+      "type": "Non-Customer",
+      "industry": "Automotive",
+      "onboarding": "Inactive",
+      "product": "DriveControl",
+      "email": "support@ecodrive.com",
+      "phone": "+1-555-890-1234"
+    },
+    {
+      "id": "9i34",
+      "organizationName": "FoodChain Logistics",
+      "type": "Customer",
+      "industry": "Logistics",
+      "onboarding": "Active",
+      "product": "ChainTrack",
+      "email": "info@foodchainlog.com",
+      "phone": "+1-555-901-2345"
+    },
+    {
+      "id": "0j45",
+      "organizationName": "BrightPixel Studios",
+      "type": "Customer",
+      "industry": "Media & Entertainment",
+      "onboarding": "Pending",
+      "product": "PixArt Suite",
+      "email": "hello@brightpixel.com",
+      "phone": "+1-555-012-3456"
+    }
+  ],
+  "contacts": [
+    {
+      "organizationName": "In2IT",
+      "contacts": [
+        {
+          "id": "1001",
+          "organizationName": "In2IT",
+          "type": "Customer",
+          "industry": "Information Technology",
+          "onboarding": "Active",
+          "product": "NovaSuite CRM",
+          "email": "support@technova.com",
+          "phone": "+1-555-1001"
+        },
+        {
+          "id": "1002",
+          "organizationName": "In2IT",
+          "type": "Partner",
+          "industry": "Data Analytics",
+          "onboarding": "Active",
+          "product": "SparkInsight",
+          "email": "hello@dataspark.io",
+          "phone": "+1-555-1002"
+        },
+        {
+          "id": "1003",
+          "organizationName": "In2IT",
+          "type": "Customer",
+          "industry": "Finance",
+          "onboarding": "Pending",
+          "product": "FinLogic ERP",
+          "email": "contact@finware.com",
+          "phone": "+1-555-1003"
+        },
+        {
+          "id": "1004",
+          "organizationName": "In2IT",
+          "type": "Customer",
+          "industry": "Healthcare",
+          "onboarding": "Active",
+          "product": "MediLink",
+          "email": "info@healthbyte.org",
+          "phone": "+1-555-1004"
+        }
+      ]
+    },
+    {
+      "organizationName": "In2IT A",
+      "contacts": [
+        {
+          "id": "2001",
+          "organizationName": "In2IT A",
+          "type": "Customer",
+          "industry": "Automotive",
+          "onboarding": "Active",
+          "product": "AutoLogic Suite",
+          "email": "support@autosys.com",
+          "phone": "+1-555-2001"
+        },
+        {
+          "id": "2002",
+          "organizationName": "In2IT A",
+          "type": "Customer",
+          "industry": "Energy",
+          "onboarding": "Pending",
+          "product": "VoltManager",
+          "email": "contact@greenvolt.com",
+          "phone": "+1-555-2002"
+        },
+        {
+          "id": "2003",
+          "organizationName": "In2IT A",
+          "type": "Partner",
+          "industry": "Education",
+          "onboarding": "Active",
+          "product": "SmartLMS",
+          "email": "info@edusmart.edu",
+          "phone": "+1-555-2003"
+        },
+        {
+          "id": "2004",
+          "organizationName": "In2IT A",
+          "type": "Customer",
+          "industry": "Finance",
+          "onboarding": "Active",
+          "product": "FinLogic ERP",
+          "email": "support@finware.com",
+          "phone": "+1-555-2004"
+        },
+        {
+          "id": "2005",
+          "organizationName": "In2IT A",
+          "type": "Customer",
+          "industry": "Biotech",
+          "onboarding": "Inactive",
+          "product": "GeneTrack",
+          "email": "bio@biosoft.com",
+          "phone": "+1-555-2005"
+        },
+        {
+          "id": "2006",
+          "organizationName": "In2IT A",
+          "type": "Customer",
+          "industry": "Retail",
+          "onboarding": "Active",
+          "product": "EdgePOS",
+          "email": "sales@retailedge.com",
+          "phone": "+1-555-2006"
+        }
+      ]
+    },
+    {
+      "organizationName": "NextGen IT",
+      "contacts": [
+        {
+          "id": "3001",
+          "organizationName": "NextGen IT",
+          "type": "Partner",
+          "industry": "IT Services",
+          "onboarding": "Active",
+          "product": "InfraManager",
+          "email": "team@intrasoft.com",
+          "phone": "+1-555-3001"
+        },
+        {
+          "id": "3002",
+          "organizationName": "NextGen IT",
+          "type": "Customer",
+          "industry": "Logistics",
+          "onboarding": "Pending",
+          "product": "FleetTrack Pro",
+          "email": "info@fleetcontrol.io",
+          "phone": "+1-555-3002"
+        },
+        {
+          "id": "3003",
+          "organizationName": "NextGen IT",
+          "type": "Customer",
+          "industry": "Cybersecurity",
+          "onboarding": "Active",
+          "product": "ShieldSuite",
+          "email": "support@securetech.com",
+          "phone": "+1-555-3003"
+        },
+        {
+          "id": "3004",
+          "organizationName": "NextGen IT",
+          "type": "Customer",
+          "industry": "Finance",
+          "onboarding": "Inactive",
+          "product": "FinLogic ERP",
+          "email": "help@finware.com",
+          "phone": "+1-555-3004"
+        },
+        {
+          "id": "3005",
+          "organizationName": "NextGen IT",
+          "type": "Customer",
+          "industry": "Data Integration",
+          "onboarding": "Active",
+          "product": "BridgeCore",
+          "email": "contact@databridge.net",
+          "phone": "+1-555-3005"
+        },
+        {
+          "id": "3006",
+          "organizationName": "NextGen IT",
+          "type": "Partner",
+          "industry": "AI",
+          "onboarding": "Active",
+          "product": "CortexAI",
+          "email": "ai@neurolink.ai",
+          "phone": "+1-555-3006"
+        },
+        {
+          "id": "3007",
+          "organizationName": "NextGen IT",
+          "type": "Customer",
+          "industry": "Healthcare",
+          "onboarding": "Pending",
+          "product": "MediLink",
+          "email": "care@healthbyte.org",
+          "phone": "+1-555-3007"
+        },
+        {
+          "id": "3008",
+          "organizationName": "NextGen IT",
+          "type": "Customer",
+          "industry": "Information Technology",
+          "onboarding": "Active",
+          "product": "NovaSuite CRM",
+          "email": "tech@technova.com",
+          "phone": "+1-555-3008"
+        }
+      ]
+    },
+    {
+      "organizationName": "CloudAxis",
+      "contacts": [
+        {
+          "id": "4001",
+          "organizationName": "CloudAxis",
+          "type": "Customer",
+          "industry": "Cloud Computing",
+          "onboarding": "Active",
+          "product": "SkyCloud",
+          "email": "support@skynetix.cloud",
+          "phone": "+1-555-4001"
+        },
+        {
+          "id": "4002",
+          "organizationName": "CloudAxis",
+          "type": "Partner",
+          "industry": "Security",
+          "onboarding": "Inactive",
+          "product": "EdgeDefender",
+          "email": "contact@edgesecure.com",
+          "phone": "+1-555-4002"
+        },
+        {
+          "id": "4003",
+          "organizationName": "CloudAxis",
+          "type": "Customer",
+          "industry": "Supply Chain",
+          "onboarding": "Active",
+          "product": "ChainFlow",
+          "email": "sales@logixware.io",
+          "phone": "+1-555-4003"
+        },
+        {
+          "id": "4004",
+          "organizationName": "CloudAxis",
+          "type": "Customer",
+          "industry": "Automotive",
+          "onboarding": "Pending",
+          "product": "AutoLogic Suite",
+          "email": "contact@autosys.com",
+          "phone": "+1-555-4004"
+        }
+      ]
     }
   ]
 }

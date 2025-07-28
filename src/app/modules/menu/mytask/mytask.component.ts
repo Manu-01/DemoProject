@@ -45,13 +45,11 @@ export class MytaskComponent {
     });
   }
   saveData() {
-    
     if (this.myForm.valid) {
       this.userService.createUser(this.myForm.value).subscribe((res: any) => {
         this.getData();
         this.toggleValue = false;
         this.myForm.reset();
-        
       });
     } else {
       console.log('error');
@@ -154,7 +152,7 @@ export class MytaskComponent {
   onDelete(id: any) {
     let userConfirmed = confirm('Are you sure you want to delete this user?');
     if (userConfirmed) {
-      this.userService.deletById(id).subscribe((res) => {
+      this.userService.deletById(id).subscribe(() => {
         this.getData();
       });
     } else {

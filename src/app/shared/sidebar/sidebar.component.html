@@ -1,52 +1,52 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar" style="width: 100%; height: 90.5vh;">
-    <ul class="nav nav-pills flex-column mb-auto">
+    <ul class="nav nav-pills flex-column mb-auto ">
 
-        <li class="nav-item"> <a class=" " aria-current="page">
+        <li class="nav-item  "> <a class=" " aria-current="page">
                 My Menu
             </a>
-            <ul>
+            <div class="">
 
-                <li class="childli"> 
-                    <a [routerLink]="['menu/mytask']" routerLinkActive="active" class="nav-link text-white">
-                    <span> <i-feather name="User"></i-feather></span>    My Task
+                <div class="childli  ">
+                    <a [routerLink]="['menu/mytask']" routerLinkActive="active" class=" w-100 nav-link text-white">
+                        <span> <i-feather name="User"></i-feather></span> My Task
                     </a>
-                </li>
-                <li class="childli">  <a
-                        [routerLink]="['menu/teamtask']" routerLinkActive="active" class="nav-link text-white">
-                    <span> <i-feather name="Users"></i-feather></span>    Team Task
-                    </a> </li>
-            </ul>
+                </div>
+                <div class="childli"> <a [routerLink]="['menu/teamtask']" routerLinkActive="active"
+                        class=" w-100 nav-link text-white">
+                        <span> <i-feather name="Users"></i-feather></span> Team Task
+                    </a> </div>
+            </div>
         </li>
         <li><a routerLink="org" class="nav-link text-white">
                 My Organization
             </a>
-            <ul>
-                <li class="childli"> <a
-                        [routerLink]="['org/organization']" routerLinkActive="active" class="nav-link text-white">
-                     <span> <i-feather name="User"></i-feather></span>   Organization
-                    </a> </li>
-                <li class="childli"> <a
-                        [routerLink]="['org/contact']" routerLinkActive="active" class="nav-link text-white">
-                     <span> <i-feather name="git-pull-request"></i-feather></span>   Contact
-                    </a> </li>
-                <li class="childli">  <a
-                        [routerLink]="['org/solution-area']" routerLinkActive="active" class="nav-link text-white">
-                      <span> <i-feather name="User"></i-feather></span>  Solution Area
-                    </a> </li>
-            </ul>
+            <div>
+                <div class="childli"> <a [routerLink]="['org/organization']" routerLinkActive="active"
+                        class=" w-100 nav-link text-white">
+                        <span> <i-feather name="User"></i-feather></span> Organization
+                    </a> </div>
+                <div class="childli"> <a [routerLink]="['org/contact']" routerLinkActive="active"
+                        class=" w-100 nav-link text-white">
+                        <span> <i-feather name="git-pull-request"></i-feather></span> Contact
+                    </a> </div>
+                <div class="childli"> <a [routerLink]="['org/solution-area']" routerLinkActive="active"
+                        class=" w-100 nav-link text-white">
+                        <span> <i-feather name="User"></i-feather></span> Solution Area
+                    </a> </div>
+            </div>
         </li>
         <li><a class="nav-link text-white">
                 Table
             </a>
-            <ul>
-                <li class="childli"> <a class="nav-link text-white">
-                     <span> <i-feather name="User"></i-feather></span>   Products
-                    </a> </li>
-                <li class="childli"> <a class="nav-link text-white">
-                     <span> <i-feather name="User"></i-feather></span>    Form Builder
-                    </a> </li>
+            <div>
+                <div class="childli"> <a class=" w-100 nav-link text-white">
+                        <span> <i-feather name="User"></i-feather></span> Products
+                    </a> </div>
+                <div class="childli"> <a class=" w-100 nav-link text-white">
+                        <span> <i-feather name="User"></i-feather></span> Form Builder
+                    </a> </div>
 
-            </ul>
+            </div>
         </li>
 
     </ul>

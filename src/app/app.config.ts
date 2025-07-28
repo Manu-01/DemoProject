@@ -11,13 +11,18 @@ import {
   AlertTriangle,
   AlignRight,
   Bell,
-  Delete,
+  Briefcase,
   Edit,
   GitPullRequest,
+  LogIn,
+  Plus,
+  Search,
+  Share2,
   Star,
   Trash2,
   User,
   Users,
+  UserX,
 } from 'angular-feather/icons';
 const icons = {
   Bell,
@@ -26,9 +31,15 @@ const icons = {
   AlignRight,
   AlertTriangle,
   Users,
-Trash2,
+  Trash2,
   Edit,
-  GitPullRequest
+  GitPullRequest,
+  Plus,
+  Share2,
+  Briefcase,
+  LogIn,
+  UserX,
+  Search
 };
 export const appConfig: ApplicationConfig = {
   providers: [
