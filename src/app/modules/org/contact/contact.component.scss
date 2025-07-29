@@ -9,11 +9,20 @@ ul li {
 .nav-link:hover > .close {
   opacity: 0.8;
 }
-.pointer_tab{
+.pointer_tab {
   cursor: pointer;
+  padding: 6px 0px 0px 16px;
 }
-.input_box{
-    border-radius: 20px;
-    overflow: hidden;
-    padding: 10px;
+.input_box {
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 10px;
+}
+.transition {
+  transition: 0.5s;
+}
+.active_link {
+  background: rgb(187, 187, 187);
+  color: black;
+  border-radius: 5px;
 }

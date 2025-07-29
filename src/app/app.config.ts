@@ -39,7 +39,7 @@ const icons = {
   Briefcase,
   LogIn,
   UserX,
-  Search
+  Search,
 };
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -14,26 +14,22 @@ import { NgIf } from '@angular/common';
     AgGridAngular,
     NgbNavModule,
     OrganizationDetailsComponent,
-    
   ],
   templateUrl: './organization.component.html',
   styleUrl: './organization.component.scss',
 })
 export class OrganizationComponent {
- 
   rowData: any;
   navs: any[] = [];
   active: any;
   tabName: any;
   counter = this.navs.length + 1;
-  sendData:any[]=[]
+  sendData: any[] = [];
 
-  constructor(private userService: UserService){}
-    
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.getData('All');
-    console.log(this.active);
   }
   getData(data: any) {
     this.userService.getOrgData().subscribe((res: any) => {
@@ -79,17 +75,14 @@ export class OrganizationComponent {
   };
 
   close(event: MouseEvent, toRemove: number) {
-  
     this.navs = this.navs.filter((id) => id !== toRemove);
     event.preventDefault();
     event.stopImmediatePropagation();
-    
   }
 
   add(event: any) {
-    this.sendData = event
+    this.sendData = event;
     this.navs.push(event);
     this.active = event.id;
-    
   }
 }

@@ -9,7 +9,8 @@ const routes: Routes = [
     path: '',
     redirectTo: 'organization',
     pathMatch: 'full',
-  }, { path: 'organization', component: OrganizationComponent },
+  },
+  { path: 'organization', component: OrganizationComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'solution-area', component: SolutionAreaComponent },
 ];
@@ -18,4 +19,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class OrgRoutingModule { }
+export class OrgRoutingModule {}

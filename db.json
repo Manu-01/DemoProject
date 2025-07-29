@@ -125,6 +125,7 @@
       "phone": "+1-555-012-3456"
     }
   ],
+
   "contacts": [
     {
       "organizationName": "In2IT",
@@ -132,7 +133,7 @@
         {
           "id": "1001",
           "organizationName": "In2IT",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Information Technology",
           "onboarding": "Active",
           "product": "NovaSuite CRM",
@@ -142,7 +143,7 @@
         {
           "id": "1002",
           "organizationName": "In2IT",
-          "type": "Partner",
+          "role": "Partner",
           "industry": "Data Analytics",
           "onboarding": "Active",
           "product": "SparkInsight",
@@ -152,7 +153,7 @@
         {
           "id": "1003",
           "organizationName": "In2IT",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Finance",
           "onboarding": "Pending",
           "product": "FinLogic ERP",
@@ -162,7 +163,7 @@
         {
           "id": "1004",
           "organizationName": "In2IT",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Healthcare",
           "onboarding": "Active",
           "product": "MediLink",
@@ -177,7 +178,7 @@
         {
           "id": "2001",
           "organizationName": "In2IT A",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Automotive",
           "onboarding": "Active",
           "product": "AutoLogic Suite",
@@ -187,7 +188,7 @@
         {
           "id": "2002",
           "organizationName": "In2IT A",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Energy",
           "onboarding": "Pending",
           "product": "VoltManager",
@@ -197,7 +198,7 @@
         {
           "id": "2003",
           "organizationName": "In2IT A",
-          "type": "Partner",
+          "role": "Partner",
           "industry": "Education",
           "onboarding": "Active",
           "product": "SmartLMS",
@@ -207,7 +208,7 @@
         {
           "id": "2004",
           "organizationName": "In2IT A",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Finance",
           "onboarding": "Active",
           "product": "FinLogic ERP",
@@ -217,7 +218,7 @@
         {
           "id": "2005",
           "organizationName": "In2IT A",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Biotech",
           "onboarding": "Inactive",
           "product": "GeneTrack",
@@ -227,7 +228,7 @@
         {
           "id": "2006",
           "organizationName": "In2IT A",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Retail",
           "onboarding": "Active",
           "product": "EdgePOS",
@@ -242,7 +243,7 @@
         {
           "id": "3001",
           "organizationName": "NextGen IT",
-          "type": "Partner",
+          "role": "Partner",
           "industry": "IT Services",
           "onboarding": "Active",
           "product": "InfraManager",
@@ -252,7 +253,7 @@
         {
           "id": "3002",
           "organizationName": "NextGen IT",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Logistics",
           "onboarding": "Pending",
           "product": "FleetTrack Pro",
@@ -262,7 +263,7 @@
         {
           "id": "3003",
           "organizationName": "NextGen IT",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Cybersecurity",
           "onboarding": "Active",
           "product": "ShieldSuite",
@@ -272,7 +273,7 @@
         {
           "id": "3004",
           "organizationName": "NextGen IT",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Finance",
           "onboarding": "Inactive",
           "product": "FinLogic ERP",
@@ -282,7 +283,7 @@
         {
           "id": "3005",
           "organizationName": "NextGen IT",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Data Integration",
           "onboarding": "Active",
           "product": "BridgeCore",
@@ -292,7 +293,7 @@
         {
           "id": "3006",
           "organizationName": "NextGen IT",
-          "type": "Partner",
+          "role": "Partner",
           "industry": "AI",
           "onboarding": "Active",
           "product": "CortexAI",
@@ -302,7 +303,7 @@
         {
           "id": "3007",
           "organizationName": "NextGen IT",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Healthcare",
           "onboarding": "Pending",
           "product": "MediLink",
@@ -312,7 +313,7 @@
         {
           "id": "3008",
           "organizationName": "NextGen IT",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Information Technology",
           "onboarding": "Active",
           "product": "NovaSuite CRM",
@@ -327,7 +328,7 @@
         {
           "id": "4001",
           "organizationName": "CloudAxis",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Cloud Computing",
           "onboarding": "Active",
           "product": "SkyCloud",
@@ -337,7 +338,7 @@
         {
           "id": "4002",
           "organizationName": "CloudAxis",
-          "type": "Partner",
+          "role": "Partner",
           "industry": "Security",
           "onboarding": "Inactive",
           "product": "EdgeDefender",
@@ -347,7 +348,7 @@
         {
           "id": "4003",
           "organizationName": "CloudAxis",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Supply Chain",
           "onboarding": "Active",
           "product": "ChainFlow",
@@ -357,7 +358,7 @@
         {
           "id": "4004",
           "organizationName": "CloudAxis",
-          "type": "Customer",
+          "role": "Customer",
           "industry": "Automotive",
           "onboarding": "Pending",
           "product": "AutoLogic Suite",

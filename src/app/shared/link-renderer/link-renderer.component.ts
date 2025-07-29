@@ -11,19 +11,13 @@ import { ICellRendererParams } from 'ag-grid-community';
 export class LinkRendererComponent implements ICellRendererAngularComp {
   param: any;
 
-
   agInit(params: any): void {
     this.param = params;
-   
   }
 
-  refresh(params: ICellRendererParams<any, any, any>): any {
-    
-  }
+  refresh(params: ICellRendererParams<any, any, any>): any {}
 
   viewDetails() {
-    console.log("called cell rdnE")
-    this.param.context.componentParent.add(this.param.data)
- 
+    this.param.context.componentParent.add(this.param.data);
   }
 }

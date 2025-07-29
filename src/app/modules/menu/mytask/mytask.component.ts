@@ -28,7 +28,6 @@ export class MytaskComponent {
   toggleValue: boolean = false;
   rowData: any;
   mode: boolean = false;
-  viewCard: boolean = false;
   status = ['Active', 'InActive'];
   priority = ['Low', 'Medium', 'High'];
 
@@ -61,12 +60,11 @@ export class MytaskComponent {
   }
   toggleShowHide() {
     this.toggleValue = !this.toggleValue;
-
-   
   }
 
   ngOnInit(): void {
     this.getData();
+    this.SetBreadCrumb();
   }
   getData() {
     this.userService.getData().subscribe((res: any) => {
@@ -122,21 +120,16 @@ export class MytaskComponent {
   gridOptions = {
     defaultColDef: {
       sortable: false,
-      // resizable: false,
-      // filter: true,
       flex: 1,
     },
     context: {
       componentParent: this,
     },
   };
-
-  // viewData() {
-  //   this.userService.getById(this.singledata).subscribe((data) => {
-  //     this.toggleValue = true;
-  //     this.viewCard = true;
-  //   });
-  // }
+  array = ['My Menu', 'My Task'];
+  SetBreadCrumb() {
+    this.userService.mysubject$.next(this.array);
+  }
 
   singledata: any;
   edit(id: any) {
@@ -160,20 +153,18 @@ export class MytaskComponent {
   }
 
   onUpdate() {
-    this.mode = false
+    this.mode = false;
     if (this.myForm.valid) {
       this.userService
         .updateData(this.singledata, this.myForm.value)
         .subscribe(() => {
           this.toggleValue = false;
           this.getData();
-           ;
         });
       this.myForm.reset();
     } else {
       console.log('Invalid Credentials');
       this.myForm.markAllAsTouched();
-      
     }
   }
 }
