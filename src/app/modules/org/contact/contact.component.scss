@@ -22,7 +22,10 @@ ul li {
   transition: 0.5s;
 }
 .active_link {
-  background: rgb(187, 187, 187);
+  background: rgb(228, 228, 228);
   color: black;
   border-radius: 5px;
+}
+.cursor-pointer {
+  cursor: pointer;
 }

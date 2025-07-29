@@ -78,8 +78,11 @@ export class ContactComponent {
       );
     });
   }
-  filteredRole: any;
+  filteredRole: any = null;
   fetchData(data: any) {
+    this.selected = data;
+    this.contactForm.get('organizationName')?.patchValue(this.selected);
+    this.filteredRole = null;
     this.userService.getContactData().subscribe((res: any) => {
       this.rowData = res.map((item: any) => item.contacts).flat();
       if (data == 'All') {
