@@ -7,6 +7,8 @@ import { LinkRendererComponent } from '../../../shared/link-renderer/link-render
 import { FeatherModule } from 'angular-feather';
 import { JsonPipe, NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { ENVIORNMENT } from '../../../../../env';
+// import { env } from 'process';
 import {
   FormControl,
   FormGroup,
@@ -182,13 +184,12 @@ export class ContactComponent {
         console.log(res);
       });
   }
-  searchText: any;
 
+  searchText: any;
   onSearchTextChanged(event: any) {
     let filteredData = this.rowData.filter((item: any) =>
       Object.values(item).join('').toLowerCase().includes(event.toLowerCase())
     );
-    console.log(this.searchText);
     if (this.searchText != '') {
       this.rowData = filteredData;
     } else {

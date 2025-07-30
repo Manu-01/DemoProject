@@ -22,6 +22,7 @@
     "ag-grid-angular": "^34.0.2",
     "angular-feather": "^6.5.1",
     "bootstrap": "^5.3.7",
+    "dotenv": "^17.2.1",
     "json-server": "^1.0.0-beta.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
