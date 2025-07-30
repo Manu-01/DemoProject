@@ -58,7 +58,7 @@
             <div class="col-8  p-2" [ngClass]="{'col-12': !toggleValue,'transition':!toggleValue}">
                 <ag-grid-angular style="width: 100%;height:550px;" [columnDefs]="colDefs" [rowData]="rowData"
                     [pagination]="true" [paginationAutoPageSize]="10" [paginationPageSizeSelector]="[5,10,20]"
-                    [gridOptions]="gridOptions"     [rowSelection]="'multiple'">
+                    [gridOptions]="gridOptions" [rowSelection]="'multiple'">
                 </ag-grid-angular>
             </div>
             @if(toggleValue){<div class="col-4  p-2">
@@ -129,7 +129,7 @@
                             <div class="form-group">
                                 <label for="DueDate">Due Date</label>
                                 <input type="date" class="form-control" id="DueDate" placeholder="Due Date"
-                                    formControlName="dueDate">
+                                    formControlName="dueDate" (click)="validateDueDate($event)">
                                 @if(myForm.get('dueDate')?.invalid && myForm.get('dueDate')?.touched){<small>This
                                     Field
                                     is Required.</small>}

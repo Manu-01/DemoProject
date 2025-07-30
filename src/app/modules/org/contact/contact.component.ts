@@ -65,7 +65,7 @@ export class ContactComponent {
   ];
   contactForm = new FormGroup({
     organizationName: new FormControl('', Validators.required),
-    role: new FormControl('', Validators.required),
+    role: new FormControl(null, Validators.required),
     remarks: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required, Validators.pattern('')]),
@@ -97,26 +97,27 @@ export class ContactComponent {
   filteredRole: any = null;
   fetchData(data: any) {
     this.selected = data;
-    this.contactForm.get('organizationName')?.patchValue(this.selected);
+    // this.contactForm.get('organizationName')?.patchValue(this.selected);
     this.filteredRole = null;
     this.userService.getContactData().subscribe((res: any) => {
-      // if (data == 'All') {
-      //   this.selected = data;
-      //   console.log(data);
-      //   return this.rowData;
-      // } else {
-      //   console.log(data);
-      //   this.selected = data;
-      //   this.rowData = this.rowData.filter(
-      //     (item: any) => item.organizationName === data
-      //   );
-      //   // const usedRoles = this.rowData.map((data: any) => {
-      //   //   return data.role;
-      //   // });
-      //   // this.filteredRole = this.roles.filter(
-      //   //   (items: any) => !usedRoles.includes(items)
-      //   // );
-      // }
+      if (data == 'All') {
+        this.selected = data;
+        console.log(data);
+        return this.rowData;
+      } else {
+        console.log(data);
+        this.selected = data;
+        this.rowData = this.rowData.filter(
+          (item: any) => item.organizationName === data
+        );
+        const usedRoles = this.rowData.map((data: any) => {
+          return data.role;
+        });
+        this.filteredRole = this.roles.filter(
+          (items: any) => !usedRoles.includes(items)
+        );
+        console.log(this.filteredRole);
+      }
     });
   }
 
@@ -178,7 +179,7 @@ export class ContactComponent {
   toggleShowHide() {
     this.viewCard = false;
     this.toggleValue = !this.toggleValue;
-    this.contactForm.get('organizationName')?.patchValue(this.selected);
+    // this.contactForm.get('organizationName')?.patchValue(this.selected);
   }
   toggleViewcard() {
     this.toggleValue = true;
@@ -255,5 +256,9 @@ export class ContactComponent {
   }
   resetForm() {
     this.contactForm.reset();
+  }
+
+  showForm() {
+    console.log(this.contactForm.get('organizationName')?.value);
   }
 }

@@ -167,4 +167,12 @@ export class MytaskComponent {
       this.myForm.markAllAsTouched();
     }
   }
+
+  validateDueDate(event: any) {
+    let today = new Date().toISOString().split('T')[0];
+    event.target.min = today;
+
+    // console.log(today.toString());
+    // return today.toString();
+  }
 }

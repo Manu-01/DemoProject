@@ -161,15 +161,18 @@
                     formControlName="phone" />
                 </div>
               </div>
-              <div class="form-group">
+
+              <div class="form-group ">
                 <label class="form-label"> Role</label>
-                <select name="" id="" class="form-control" formControlName="role">
+                <select class="form-control" formControlName="role" [disabled]="true">
+                  @if(this.contactForm.get('organizationName')?.value){
                   <option value="" disabled selected>Select</option>
-                  @if (!checkRolles) {
                   @for (item of filteredRole? filteredRole: roles; track $index) {
                   <option [value]="item">{{ item }}</option>
                   }
                   }
+
+
                 </select>
               </div>
               <div class="form-group">
