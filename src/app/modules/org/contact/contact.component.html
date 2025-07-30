@@ -133,11 +133,37 @@
                 <label class="form-label">Name <span style="color: red;">*</span></label>
                 <div class="d-flex gap-2">
                   <input type="text" placeholder="fname" formControlName="fname" class="form-control">
-                  <small *ngIf="contactForm.get('fname')?.invalid && contactForm.get('fname')?.touched">This Field is
-                    Required.</small>
+                  @if( contactForm.get('fname')?.touched &&
+                  contactForm.get('fname')?.errors){
+                  <div>
+                    @if(contactForm.get('fname')?.hasError('required'))
+                    {
+                    <small>This Field is Required.</small>
+                    }
+                    @else if (!contactForm.get('fname')?.hasError('required') &&
+                    contactForm.get('fname')?.hasError('pattern'))
+                    {
+                    <small>Only alphabets are required.</small>
+                    }
+                  </div>
+                  }
+
                   <input type="text" placeholder="lname" formControlName="lname" class="form-control">
-                  <small *ngIf="contactForm.get('lname')?.invalid && contactForm.get('lname')?.touched">This Field is
-                    Required.</small>
+                  @if( contactForm.get('lname')?.touched &&
+                  contactForm.get('lname')?.errors){
+                  <div>
+                    @if(contactForm.get('lname')?.hasError('required'))
+                    {
+                    <small>This Field is Required.</small>
+                    }
+                    @else if (!contactForm.get('lname')?.hasError('required') &&
+                    contactForm.get('lname')?.hasError('pattern'))
+                    {
+                    <small>Only alphabets are required.</small>
+                    }
+                  </div>
+                  }
+
                 </div>
                 <label class="form-label">OrganizationName <span style="color: red;">*</span></label>
                 <select name="" id="" class="form-control" formControlName="organizationName">
@@ -146,10 +172,11 @@
                   <option [value]="item">{{ item }}</option>
                   }
                 </select>
-                <small
-                  *ngIf="contactForm.get('organizationName')?.invalid && contactForm.get('organizationName')?.touched">This
-                  Field is
-                  Required.</small>
+                @if(contactForm.get('organizationName')?.invalid && contactForm.get('organizationName')?.touched)
+                {
+                <small>This Field is Required.</small>
+                }
+
               </div>
               <div class="form-group">
                 <label class="form-label">Email <span style="color: red;">*</span></label>
@@ -157,6 +184,8 @@
                 <small *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">This Field is
                   Required.</small>
               </div>
+
+
               <div class="form-group">
                 <label class="form-label">Phone <span style="color: red;">*</span></label>
                 <div class="select-section d-flex gap-2">
@@ -176,6 +205,7 @@
                 </div>
               </div>
 
+
               <div class="form-group ">
                 <label class="form-label"> Role <span style="color: red;">*</span></label>
                 <select class="form-control" formControlName="role" [disabled]="true">
@@ -189,24 +219,48 @@
                 <small *ngIf="contactForm.get('role')?.invalid && contactForm.get('role')?.touched">This Field is
                   Required.</small>
               </div>
+
+
               <div class="form-group">
                 <label class="form-label">Additional Roles <span style="color: red;">*</span></label>
                 <input type="text" placeholder="additional roles" class="form-control"
                   formControlName="additionalroles" />
-                <small
-                  *ngIf="contactForm.get('additionalroles')?.invalid && contactForm.get('additionalroles')?.touched">This
-                  Field is
-                  Required.</small>
+                @if( contactForm.get('additionalroles')?.touched &&
+                contactForm.get('additionalroles')?.errors){
+                <div>
+                  @if(contactForm.get('additionalroles')?.hasError('required'))
+                  {
+                  <small>This Field is Required.</small>
+                  }
+                  @else if (!contactForm.get('additionalroles')?.hasError('required') &&
+                  contactForm.get('additionalroles')?.hasError('pattern'))
+                  {
+                  <small>Only alphabets are required.</small>
+                  }
+                </div>
+                }
               </div>
+
+
               <div class="form-group">
                 <label class="form-label">Reamarks <span style="color: red;">*</span></label>
                 <textarea type="text" placeholder="Industry Name" rows="2" class="form-control"
                   formControlName="remarks"></textarea>
-                <small *ngIf="contactForm.get('remarks')?.invalid && contactForm.get('remarks')?.touched">This Field is
-                  Required.</small>
+                @if( contactForm.get('remarks')?.touched &&
+                contactForm.get('remarks')?.errors){
+                <div>
+                  @if(contactForm.get('remarks')?.hasError('required'))
+                  {
+                  <small>This Field is Required.</small>
+                  }
+                  @else if (!contactForm.get('remarks')?.hasError('required') &&
+                  contactForm.get('remarks')?.hasError('pattern'))
+                  {
+                  <small>Only alphabets are required.</small>
+                  }
+                </div>
+                }
               </div>
-
-
 
               <div class="button-row d-flex gap-2">
                 @if (!mode) {

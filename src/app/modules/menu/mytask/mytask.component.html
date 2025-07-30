@@ -74,15 +74,41 @@
                                 <input type="text" class="form-control" id="exampleInputEmail1"
                                     formControlName="solutionArea" aria-describedby="emailHelp"
                                     placeholder="Solution Area">
-                                @if(myForm.get('solutionArea')?.invalid &&
-                                myForm.get('solutionArea')?.touched){<small>This Field is Required.</small>}
+                                @if(myForm.get('solutionArea')?.touched &&
+                                myForm.get('solutionArea')?.errors){
+                                <div>
+                                    @if(myForm.get('solutionArea')?.hasError('required'))
+                                    {
+                                    <small>This Field is Required.</small>
+                                    }
+                                    @else if (!myForm.get('solutionArea')?.hasError('required') &&
+                                    myForm.get('solutionArea')?.hasError('pattern'))
+                                    {
+                                    <small>Only alphabest are required.</small>
+                                    }
+                                </div>
+                                }
+
+
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">WorkFlow <span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" id="exampleInputPassword1"
                                     formControlName="workFlow" placeholder="WorkFlow">
-                                @if(myForm.get('workFlow')?.invalid && myForm.get('workFlow')?.touched){<small>This
-                                    Field is Required.</small>}
+                                @if(myForm.get('workFlow')?.touched &&
+                                myForm.get('workFlow')?.errors){
+                                <div>
+                                    @if(myForm.get('workFlow')?.hasError('required'))
+                                    {
+                                    <small>This Field is Required.</small>
+                                    }
+                                    @else if (!myForm.get('workFlow')?.hasError('required') &&
+                                    myForm.get('workFlow')?.hasError('pattern'))
+                                    {
+                                    <small>Only alphabest are required.</small>
+                                    }
+                                </div>
+                                }
 
                             </div>
 
@@ -99,8 +125,20 @@
                                 <label for="taskname">task Name <span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" id="taskname" placeholder="task name"
                                     formControlName="taskName">
-                                @if(myForm.get('taskName')?.invalid && myForm.get('taskName')?.touched){<small>This
-                                    Field is Required.</small>}
+                                @if(myForm.get('taskName')?.touched &&
+                                myForm.get('taskName')?.errors){
+                                <div>
+                                    @if(myForm.get('taskName')?.hasError('required'))
+                                    {
+                                    <small>This Field is Required.</small>
+                                    }
+                                    @else if (!myForm.get('taskName')?.hasError('required') &&
+                                    myForm.get('taskName')?.hasError('pattern'))
+                                    {
+                                    <small>Only alphabest are required.</small>
+                                    }
+                                </div>
+                                }
                             </div>
 
                             <div class="form-group">
