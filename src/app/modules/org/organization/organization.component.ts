@@ -5,13 +5,14 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { LinkRendererComponent } from '../../../shared/link-renderer/link-renderer.component';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrganizationDetailsComponent } from '../../../shared/organization-details/organization-details.component';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-organization',
   imports: [
     FeatherModule,
+    CommonModule,
     AgGridAngular,
     NgbNavModule,
     OrganizationDetailsComponent,
@@ -88,12 +89,27 @@ export class OrganizationComponent {
     },
   };
 
-  close(event: MouseEvent, toRemove: number) {
-    this.navs = this.navs.filter((id) => id !== toRemove);
-    event.preventDefault();
-    event.stopImmediatePropagation();
+  // close(event: MouseEvent, toRemove: number) {
+  //   this.navs = this.navs.filter((id) => id !== toRemove);
+  //   event.preventDefault();
+  //   event.stopImmediatePropagation();
+  // }
+  trackById(index: number, item: any) {
+    return item.id;
   }
 
+  close(event: MouseEvent, toRemove: any) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    this.navs = this.navs.filter((item) => item.id !== toRemove.id);
+    if (this.navs.length > 0) {
+      this.active = this.navs[this.navs.length - 1].id;
+    } else {
+      this.active = 0;
+    }
+    console.log(this.active);
+  }
   add(event: any) {
     this.sendData = event;
     this.navs.push(event);
