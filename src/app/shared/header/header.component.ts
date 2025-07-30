@@ -25,6 +25,6 @@ export class HeaderComponent {
   }
 
   redirectToLiveSite(): void {
-    window.location.href = 'www.manuspike.netlify.app/'; // Replace with your actual live website URL
+    window.location.href = 'http://manuspike.netlify.app/'; // Replace with your actual live website URL
   }
 }
