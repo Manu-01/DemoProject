@@ -1,35 +1,47 @@
 ul li {
   list-style-type: none;
 }
+
 .close {
   font-size: 1.4rem;
   opacity: 0.1;
   transition: opacity 0.3s;
 }
-.nav-link:hover > .close {
+
+.nav-link:hover>.close {
   opacity: 0.8;
 }
+
 .pointer_tab {
   cursor: pointer;
   padding: 6px 0px 0px 16px;
 }
+
 .input_box {
   border-radius: 20px;
   overflow: hidden;
   padding: 10px;
 }
+
 .transition {
   transition: 0.5s;
 }
+
 .active_link {
   background: rgb(228, 228, 228);
   color: black;
   border-radius: 5px;
 }
+
 .cursor-pointer {
   cursor: pointer;
 }
+
 .text_decoration {
   text-decoration: none;
   color: black;
+}
+
+small {
+  color: red;
 }

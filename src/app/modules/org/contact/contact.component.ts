@@ -5,7 +5,7 @@ import { OrganizationDetailsComponent } from '../../../shared/organization-detai
 import { UserService } from '../../../Service/user.service';
 import { LinkRendererComponent } from '../../../shared/link-renderer/link-renderer.component';
 import { FeatherModule } from 'angular-feather';
-import { JsonPipe, NgClass } from '@angular/common';
+import { JsonPipe, NgClass, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { ENVIORNMENT } from '../../../../../env';
 // import { env } from 'process';
@@ -26,6 +26,7 @@ import {
     NgbDropdownModule,
     ReactiveFormsModule,
     FormsModule,
+    NgIf
     // OrganizationDetailsComponent,
   ],
   templateUrl: './contact.component.html',
@@ -50,7 +51,7 @@ export class ContactComponent {
   singleId: any;
   searchText: any;
 
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private router: Router, private userService: UserService) { }
   orgnizations = ['In2IT', 'In2IT A', 'NextGen IT', 'CloudAxis'];
   onboarding = ['Active', 'Inactive', 'Pending'];
   codes = ['+91', '+1', '+72'];
@@ -66,13 +67,13 @@ export class ContactComponent {
   contactForm = new FormGroup({
     organizationName: new FormControl('', Validators.required),
     role: new FormControl(null, Validators.required),
-    remarks: new FormControl('', Validators.required),
+    remarks: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [Validators.required, Validators.pattern('')]),
+    phone: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
     codes: new FormControl('', Validators.required),
-    fname: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-    lname: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-    additionalroles: new FormControl('', Validators.required),
+    fname: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z]+$/)]),
+    lname: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z]+$/)]),
+    additionalroles: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
   });
   ngOnInit(): void {
     this.getSidebarData();
@@ -233,13 +234,13 @@ export class ContactComponent {
   onChangePlaceHolder() {
     let code = this.contactForm.get('codes')?.value;
     if (code == '+91') {
-      return 'Enter 10 numbers';
+      return 'Enter 10  digit number';
     } else if (code == '+1') {
-      return 'Enter 11 numbers';
+      return 'Enter 10 digit number';
     } else if (code == '+72') {
-      return 'Enter 7 numbers';
+      return 'Enter 7 digit number';
     } else {
-      return 'Enter your number';
+      return 'Enter phone number';
     }
   }
 

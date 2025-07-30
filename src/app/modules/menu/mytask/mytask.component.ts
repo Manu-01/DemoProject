@@ -33,11 +33,11 @@ export class MytaskComponent {
 
   constructor(private userService: UserService) {
     this.myForm = new FormGroup({
-      solutionArea: new FormControl('', Validators.required),
-      workFlow: new FormControl('', Validators.required),
+      solutionArea: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
+      workFlow: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
       taskId: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
-      taskName: new FormControl('', Validators.required),
+      taskName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]),
       startDate: new FormControl('', Validators.required),
       dueDate: new FormControl('', Validators.required),
       priority: new FormControl('', Validators.required),

@@ -130,25 +130,35 @@
             <form [formGroup]="contactForm">
               <div class="form-group">
 
-                <label class="form-label">Name</label>
+                <label class="form-label">Name <span style="color: red;">*</span></label>
                 <div class="d-flex gap-2">
                   <input type="text" placeholder="fname" formControlName="fname" class="form-control">
+                  <small *ngIf="contactForm.get('fname')?.invalid && contactForm.get('fname')?.touched">This Field is
+                    Required.</small>
                   <input type="text" placeholder="lname" formControlName="lname" class="form-control">
+                  <small *ngIf="contactForm.get('lname')?.invalid && contactForm.get('lname')?.touched">This Field is
+                    Required.</small>
                 </div>
-                <label class="form-label">OrganizationName</label>
+                <label class="form-label">OrganizationName <span style="color: red;">*</span></label>
                 <select name="" id="" class="form-control" formControlName="organizationName">
                   <option value="" disabled selected>Select</option>
                   @for (item of orgnizations; track $index) {
                   <option [value]="item">{{ item }}</option>
                   }
                 </select>
+                <small
+                  *ngIf="contactForm.get('organizationName')?.invalid && contactForm.get('organizationName')?.touched">This
+                  Field is
+                  Required.</small>
               </div>
               <div class="form-group">
-                <label class="form-label">Email</label>
+                <label class="form-label">Email <span style="color: red;">*</span></label>
                 <input type="text" placeholder="enter your email" class="form-control" formControlName="email" />
+                <small *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">This Field is
+                  Required.</small>
               </div>
               <div class="form-group">
-                <label class="form-label">Phone:</label>
+                <label class="form-label">Phone <span style="color: red;">*</span></label>
                 <div class="select-section d-flex gap-2">
                   <select name="" id="" class="form-control w-25" formControlName="codes">
                     <option value="" disabled selected>Select</option>
@@ -156,14 +166,18 @@
                     <option [value]="item">{{ item }}</option>
                     }
                   </select>
+                  <small *ngIf="contactForm.get('codes')?.invalid && contactForm.get('codes')?.touched">This Field is
+                    Required.</small>
 
                   <input type="text" [placeholder]="onChangePlaceHolder()" class="form-control"
                     formControlName="phone" />
+                  <small *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">This Field is
+                    Required.</small>
                 </div>
               </div>
 
               <div class="form-group ">
-                <label class="form-label"> Role</label>
+                <label class="form-label"> Role <span style="color: red;">*</span></label>
                 <select class="form-control" formControlName="role" [disabled]="true">
                   @if(this.contactForm.get('organizationName')?.value){
                   <option value="" disabled selected>Select</option>
@@ -171,19 +185,25 @@
                   <option [value]="item">{{ item }}</option>
                   }
                   }
-
-
                 </select>
+                <small *ngIf="contactForm.get('role')?.invalid && contactForm.get('role')?.touched">This Field is
+                  Required.</small>
               </div>
               <div class="form-group">
-                <label class="form-label">Additional Roles</label>
-                <input type="text" placeholder="enter your email" class="form-control"
+                <label class="form-label">Additional Roles <span style="color: red;">*</span></label>
+                <input type="text" placeholder="additional roles" class="form-control"
                   formControlName="additionalroles" />
+                <small
+                  *ngIf="contactForm.get('additionalroles')?.invalid && contactForm.get('additionalroles')?.touched">This
+                  Field is
+                  Required.</small>
               </div>
               <div class="form-group">
-                <label class="form-label">Reamarks</label>
+                <label class="form-label">Reamarks <span style="color: red;">*</span></label>
                 <textarea type="text" placeholder="Industry Name" rows="2" class="form-control"
                   formControlName="remarks"></textarea>
+                <small *ngIf="contactForm.get('remarks')?.invalid && contactForm.get('remarks')?.touched">This Field is
+                  Required.</small>
               </div>
 
 

@@ -70,7 +70,7 @@
 
                         <form class="form" [formGroup]="myForm">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Solution Area</label>
+                                <label for="exampleInputEmail1">Solution Area <span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" id="exampleInputEmail1"
                                     formControlName="solutionArea" aria-describedby="emailHelp"
                                     placeholder="Solution Area">
@@ -78,7 +78,7 @@
                                 myForm.get('solutionArea')?.touched){<small>This Field is Required.</small>}
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">WorkFlow</label>
+                                <label for="exampleInputPassword1">WorkFlow <span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" id="exampleInputPassword1"
                                     formControlName="workFlow" placeholder="WorkFlow">
                                 @if(myForm.get('workFlow')?.invalid && myForm.get('workFlow')?.touched){<small>This
@@ -87,7 +87,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="taskid">task id</label>
+                                <label for="taskid">task id <span style="color: red;">*</span></label>
                                 <input type="number" class="form-control" id="taskid" placeholder="task id"
                                     formControlName="taskId">
                                 @if(myForm.get('taskId')?.invalid && myForm.get('taskId')?.touched){<small>This
@@ -96,7 +96,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="taskname">task Name</label>
+                                <label for="taskname">task Name <span style="color: red;">*</span></label>
                                 <input type="text" class="form-control" id="taskname" placeholder="task name"
                                     formControlName="taskName">
                                 @if(myForm.get('taskName')?.invalid && myForm.get('taskName')?.touched){<small>This
@@ -104,7 +104,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="status">Status</label>
+                                <label for="status">Status <span style="color: red;">*</span></label>
                                 <select class="form-control" formControlName="status">
                                     <option value="" disabled selected>select</option>
                                     @for(item of status;track item){
@@ -118,7 +118,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="startDate">Start Date</label>
+                                <label for="startDate">Start Date <span style="color: red;">*</span></label>
                                 <input type="date" class="form-control" id="StartDate" placeholder="Start Date"
                                     formControlName="startDate">
                                 @if(myForm.get('startDate')?.invalid &&
@@ -127,7 +127,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="DueDate">Due Date</label>
+                                <label for="DueDate">Due Date <span style="color: red;">*</span></label>
                                 <input type="date" class="form-control" id="DueDate" placeholder="Due Date"
                                     formControlName="dueDate" (click)="validateDueDate($event)">
                                 @if(myForm.get('dueDate')?.invalid && myForm.get('dueDate')?.touched){<small>This
@@ -136,7 +136,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="priority">Priority</label>
+                                <label for="priority">Priority <span style="color: red;">*</span></label>
                                 <select class="form-control" formControlName="priority">
                                     <option value="" disabled selected>select</option>
                                     @for(item of priority;track item){
