@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FeatherModule } from 'angular-feather';
 import { UserService } from '../../Service/user.service';
 
@@ -18,5 +18,9 @@ export class HeaderComponent {
     this.service.mysubject$.subscribe((breadCrumb) => {
       this.breadCrumbData = breadCrumb;
     });
+  }
+
+  redirectToLiveSite(): void {
+    window.location.href = 'https://www.manuspike.netlify.app/'; // Replace with your actual live website URL
   }
 }

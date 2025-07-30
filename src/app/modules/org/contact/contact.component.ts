@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -22,6 +23,7 @@ import {
     NgClass,
     NgbDropdownModule,
     ReactiveFormsModule,
+    FormsModule,
     // OrganizationDetailsComponent,
   ],
   templateUrl: './contact.component.html',
@@ -78,6 +80,7 @@ export class ContactComponent {
       );
     });
   }
+
   filteredRole: any = null;
   fetchData(data: any) {
     this.selected = data;
@@ -137,18 +140,10 @@ export class ContactComponent {
     },
   };
 
-  close(event: MouseEvent, toRemove: number) {
-    this.navs = this.navs.filter((id) => id !== toRemove);
-    // event.preventDefault();
-    event.stopImmediatePropagation();
-  }
-
   add(event: any) {
     this.sendData = event;
-    this.active = event.id;
-    this.navs.push(event);
     this.router.navigate(['/org/organization'], {
-      state: { data: event.data },
+      state: { data: event },
     });
   }
 
@@ -186,5 +181,29 @@ export class ContactComponent {
       .subscribe((res) => {
         console.log(res);
       });
+  }
+  searchText: any;
+
+  onSearchTextChanged(event: any) {
+    let filteredData = this.rowData.filter((item: any) =>
+      Object.values(item).join('').toLowerCase().includes(event.toLowerCase())
+    );
+    console.log(this.searchText);
+    if (this.searchText != '') {
+      this.rowData = filteredData;
+    } else {
+      this.fetchData('All');
+    }
+  }
+
+  onSearchOrg(event: any) {
+    let filteredData = this.OrganizaionsData.filter((item: any) =>
+      item.organizationName.toLowerCase().includes(event.toLowerCase())
+    );
+    if (this.searchText != '') {
+      this.OrganizaionsData = filteredData;
+    } else {
+      this.getData();
+    }
   }
 }

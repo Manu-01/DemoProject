@@ -6,6 +6,7 @@ import { LinkRendererComponent } from '../../../shared/link-renderer/link-render
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrganizationDetailsComponent } from '../../../shared/organization-details/organization-details.component';
 import { NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-organization',
@@ -25,11 +26,24 @@ export class OrganizationComponent {
   tabName: any;
   counter = this.navs.length + 1;
   sendData: any[] = [];
-
-  constructor(private userService: UserService) {}
+  stateContactData$: any;
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.getData('All');
+    this.onBreadCrumb();
+    this.stateContactData$ = history.state.data;
+
+    if (this.stateContactData$) {
+      this.sendData = this.stateContactData$;
+      this.add(this.stateContactData$);
+    }
+  }
+
+  breadCrumb = ['Organization', 'Org'];
+
+  onBreadCrumb() {
+    this.userService.mysubject$.next(this.breadCrumb);
   }
   getData(data: any) {
     this.userService.getOrgData().subscribe((res: any) => {

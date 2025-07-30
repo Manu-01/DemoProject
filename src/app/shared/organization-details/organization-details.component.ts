@@ -13,7 +13,5 @@ export class OrganizationDetailsComponent implements OnInit {
   Explaindata: any[] = [];
   ngOnInit(): void {
     this.Explaindata.push(this.mydata);
-
-    console.log(this.Explaindata);
   }
 }

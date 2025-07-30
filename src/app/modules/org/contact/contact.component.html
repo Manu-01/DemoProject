@@ -69,7 +69,8 @@
       <div class="bg-light border p-2 ps-3" style="height: 73vh">
         <h3>Contacts</h3>
         <div class="input_box bg-light d-flex justify-content-between align-items-center">
-          <input type="text" class="form-control rounded" placeholder="search here..." />
+          <input type="text" class="form-control rounded" placeholder="search here..." [(ngModel)]="searchText"
+            (ngModelChange)="onSearchOrg(searchText)" />
           <span class="ms-2"><i-feather name="search" class="me-2"></i-feather>
           </span>
         </div>
@@ -109,7 +110,8 @@
         <div class="header_sections d-flex justify-content-between align-items-center px-3 mb-3">
           <h3>All Contact Lists</h3>
           <div class="input_box bg-light d-flex justify-content-between align-items-center">
-            <input type="text" class="form-control rounded" placeholder="search here..." />
+            <input type="text" class="form-control rounded" placeholder="search here..." [(ngModel)]="searchText"
+              (ngModelChange)="onSearchTextChanged(searchText)" />
             <span class="ms-2"><i-feather name="search" class="me-2"></i-feather>
             </span>
           </div>
