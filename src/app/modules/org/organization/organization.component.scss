@@ -9,6 +9,16 @@ ul li {
 .nav-link:hover > .close {
   opacity: 0.8;
 }
-.pointer_tab{
+.pointer_tab {
   cursor: pointer;
+}
+.input_box {
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 10px;
+}
+.active {
+  background: rgb(228, 228, 228);
+  color: black;
+  border-radius: 5px;
 }

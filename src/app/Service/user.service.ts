@@ -8,7 +8,8 @@ import { Observable, Subject } from 'rxjs';
 export class UserService {
   private url = 'http://localhost:3000/task';
   private orgUrl = 'http://localhost:3000/organization';
-  private conatactUrl = 'http://localhost:3000/contacts';
+  private sidebarJsonUrl = 'http://localhost:3000/sidebarJson';
+  private contactsData = 'http://localhost:3000/ContactData';
   mysubject$ = new Subject<any>();
 
   constructor(private http: HttpClient) {}
@@ -31,16 +32,25 @@ export class UserService {
   }
 
   // OrganizationsData
-
   getOrgData(): Observable<any> {
     return this.http.get(`${this.orgUrl}`);
   }
 
-  // ContactData
-  getContactData(): Observable<any> {
-    return this.http.get(`${this.conatactUrl}`);
+  //SidebarJsonData
+  getSidebarData(): Observable<any> {
+    return this.http.get(`${this.sidebarJsonUrl}`);
   }
-  UpdateData(id: any, data: any): Observable<any> {
-    return this.http.put<any>(`${this.conatactUrl}/${id}`, data);
+
+  // Contact Data Handler
+  //CreateData
+  CreateContactData(data: any): Observable<any> {
+    return this.http.post(`${this.contactsData}`, data);
+  }
+  //getAllConatctData
+  getContactData(): Observable<any> {
+    return this.http.get(`${this.contactsData}`);
+  }
+  updateContactData(id: any, data: any): Observable<any> {
+    return this.http.put<any>(`${this.contactsData}/${id}`, data);
   }
 }

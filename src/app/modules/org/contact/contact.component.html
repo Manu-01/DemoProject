@@ -82,26 +82,25 @@
                   <i-feather name="users" class="me-2"></i-feather>
                   <p class="m-0">All Contacts</p>
                 </div>
-                <p>{{ OrganizaionsDataLength?.flat()?.length }} Contacts</p>
+                <p>{{ rowData?.length }} Contacts</p>
               </a>
             </li>
           </div>
-          @for (item of OrganizaionsData; track $index) {
-
+          @for (item of organizaionsData ; track $index) {
           <div class="d-flex flex-column gap-3">
             <li class="pointer_tab" (click)="fetchData(item.organizationName)"
               [ngClass]="{ active_link: item.organizationName == selected }">
               <a>
                 <div class="text_filed d-flex m-0">
                   <i-feather name="users" class="me-2"></i-feather>
-                  <p class="m-0">{{ item.organizationName }}</p>
+                  <a class="m-0 text_decoration">{{ item.organizationName }}</a>
                 </div>
-                <p>{{ item.contacts.length }} Contacts</p>
+                <p>{{ item.contactsLength}} Contacts</p>
               </a>
             </li>
           </div>
-
           }
+
         </ul>
       </div>
     </div>
@@ -130,7 +129,13 @@
           <div class="card-body">
             <form [formGroup]="contactForm">
               <div class="form-group">
-                <label>OrganizationName</label>
+
+                <label class="form-label">Name</label>
+                <div class="d-flex gap-2">
+                  <input type="text" placeholder="fname" formControlName="fname" class="form-control">
+                  <input type="text" placeholder="lname" formControlName="lname" class="form-control">
+                </div>
+                <label class="form-label">OrganizationName</label>
                 <select name="" id="" class="form-control" formControlName="organizationName">
                   <option value="" disabled selected>Select</option>
                   @for (item of orgnizations; track $index) {
@@ -139,38 +144,11 @@
                 </select>
               </div>
               <div class="form-group">
-                <label> Role</label>
-                <select name="" id="" class="form-control" formControlName="role">
-                  <option value="" disabled selected>Select</option>
-
-                  @for (item of filteredRole? filteredRole: roles; track $index) {
-                  <option [value]="item">{{ item }}</option>
-                  }
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Industry:</label>
-                <input type="text" placeholder="Industry Name" class="form-control" formControlName="industry" />
-              </div>
-              <div class="form-group">
-                <label>Onboarding:</label>
-                <select name="" id="" class="form-control" formControlName="onboarding">
-                  <option value="" disabled selected>Select</option>
-                  @for (item of onboarding; track $index) {
-                  <option [value]="item">{{ item }}</option>
-                  }
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Product</label>
-                <input type="text" placeholder="Industry Name" class="form-control" formControlName="product" />
-              </div>
-              <div class="form-group">
-                <label>Email</label>
+                <label class="form-label">Email</label>
                 <input type="text" placeholder="enter your email" class="form-control" formControlName="email" />
               </div>
               <div class="form-group">
-                <label>Phone:</label>
+                <label class="form-label">Phone:</label>
                 <div class="select-section d-flex gap-2">
                   <select name="" id="" class="form-control w-25" formControlName="codes">
                     <option value="" disabled selected>Select</option>
@@ -178,15 +156,49 @@
                     <option [value]="item">{{ item }}</option>
                     }
                   </select>
-                  <input type="text" placeholder="enter your phone" class="form-control" formControlName="phone" />
+
+                  <input type="text" [placeholder]="onChangePlaceHolder()" class="form-control"
+                    formControlName="phone" />
                 </div>
               </div>
+              <div class="form-group">
+                <label class="form-label"> Role</label>
+                <select name="" id="" class="form-control" formControlName="role">
+                  <option value="" disabled selected>Select</option>
+                  @if (!checkRolles) {
+                  @for (item of filteredRole? filteredRole: roles; track $index) {
+                  <option [value]="item">{{ item }}</option>
+                  }
+                  }
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Additional Roles</label>
+                <input type="text" placeholder="enter your email" class="form-control"
+                  formControlName="additionalroles" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Reamarks</label>
+                <textarea type="text" placeholder="Industry Name" rows="2" class="form-control"
+                  formControlName="remarks"></textarea>
+              </div>
+
+
 
               <div class="button-row d-flex gap-2">
-                <button type="submit" class="btn btn-primary mt-2" (click)="onSubmit($event)">
+                @if (!mode) {
+                <button type="submit" class="btn btn-primary mt-2" [disabled]="contactForm.invalid"
+                  (click)="onSubmit()">
                   Submit
                 </button>
-                <button type="submit" class="btn btn-secondary mt-2" (click)="this.contactForm.reset()">
+                }
+                @if (mode) {
+                <button type="submit" class="btn btn-primary mt-2" (click)="Updatedata()"
+                  [disabled]="contactForm.invalid">
+                  Update
+                </button>
+                }
+                <button type="submit" class="btn btn-secondary mt-2" (click)="resetForm()">
                   Clear All
                 </button>
                 <button type="submit" class="btn btn-light mt-2" (click)="toggleShowHide()">
@@ -225,13 +237,3 @@
     </div>
   </div>
 </div>
-<!-- {
-          "id": "2004",
-          "organizationName": "In2IT A",
-          "type": "Customer",
-          "industry": "Finance",
-          "onboarding": "Active",
-          "product": "FinLogic ERP",
-          "email": "support@finware.com",
-          "phone": "+1-555-2004"
-        }, -->

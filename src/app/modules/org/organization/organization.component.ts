@@ -7,6 +7,7 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { OrganizationDetailsComponent } from '../../../shared/organization-details/organization-details.component';
 import { CommonModule, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-organization',
@@ -15,6 +16,7 @@ import { Router } from '@angular/router';
     CommonModule,
     AgGridAngular,
     NgbNavModule,
+    FormsModule,
     OrganizationDetailsComponent,
   ],
   templateUrl: './organization.component.html',
@@ -28,13 +30,13 @@ export class OrganizationComponent {
   counter = this.navs.length + 1;
   sendData: any[] = [];
   stateContactData$: any;
+  selected: any;
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.getData('All');
     this.onBreadCrumb();
     this.stateContactData$ = history.state.data;
-
     if (this.stateContactData$) {
       this.sendData = this.stateContactData$;
       this.add(this.stateContactData$);
@@ -47,6 +49,7 @@ export class OrganizationComponent {
     this.userService.mysubject$.next(this.breadCrumb);
   }
   getData(data: any) {
+    this.selected = data;
     this.userService.getOrgData().subscribe((res: any) => {
       if (data == 'All') {
         this.rowData = res;
@@ -89,19 +92,9 @@ export class OrganizationComponent {
     },
   };
 
-  // close(event: MouseEvent, toRemove: number) {
-  //   this.navs = this.navs.filter((id) => id !== toRemove);
-  //   event.preventDefault();
-  //   event.stopImmediatePropagation();
-  // }
-  trackById(index: number, item: any) {
-    return item.id;
-  }
-
   close(event: MouseEvent, toRemove: any) {
     event.preventDefault();
     event.stopImmediatePropagation();
-
     this.navs = this.navs.filter((item) => item.id !== toRemove.id);
     if (this.navs.length > 0) {
       this.active = this.navs[this.navs.length - 1].id;
@@ -114,5 +107,17 @@ export class OrganizationComponent {
     this.sendData = event;
     this.navs.push(event);
     this.active = event.id;
+  }
+  searchText: any;
+  onSearchOrg(event: any) {
+    let filteredData = this.rowData.filter((item: any) =>
+      Object.values(item).join('').toLowerCase().includes(this.searchText)
+    );
+
+    if (this.searchText != '') {
+      this.rowData = filteredData;
+    } else {
+      this.getData('All');
+    }
   }
 }

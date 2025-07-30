@@ -39,13 +39,17 @@ export class ContactComponent {
   tabName: any;
   counter = this.navs.length + 1;
   sendData: any[] = [];
-  OrganizaionsData: any[] = [];
-  OrganizaionsDataLength: any;
+  organizaionsData: any[] = [];
+  organizaionsDataLength: any;
   toggleValue: boolean = false;
   viewCard: boolean = false;
   copyRowData: any[] = [];
+  checkRolles: any;
+  mode: boolean = false;
+  viewData: any;
+  singleId: any;
+  searchText: any;
 
-  // constructor() {}
   constructor(private router: Router, private userService: UserService) {}
   orgnizations = ['In2IT', 'In2IT A', 'NextGen IT', 'CloudAxis'];
   onboarding = ['Active', 'Inactive', 'Pending'];
@@ -62,24 +66,31 @@ export class ContactComponent {
   contactForm = new FormGroup({
     organizationName: new FormControl('', Validators.required),
     role: new FormControl('', Validators.required),
-    industry: new FormControl('', Validators.required),
-    onboarding: new FormControl('', Validators.required),
-    product: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    phone: new FormControl('', Validators.required),
-    codes: new FormControl(''),
+    remarks: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required, Validators.pattern('')]),
+    codes: new FormControl('', Validators.required),
+    fname: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+    lname: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+    additionalroles: new FormControl('', Validators.required),
   });
   ngOnInit(): void {
-    this.getData();
+    this.getSidebarData();
     this.fetchData('All');
     this.onBreadCrumb();
+    this.onChangePlaceHolder();
+    this.getContactdata();
   }
-  getData() {
+  getSidebarData() {
+    this.userService.getSidebarData().subscribe((res: any) => {
+      this.organizaionsData = res;
+      console.log(this.organizaionsData);
+    });
+  }
+  getContactdata() {
     this.userService.getContactData().subscribe((res: any) => {
-      this.OrganizaionsData = res;
-      this.OrganizaionsDataLength = this.OrganizaionsData.map(
-        (item: any) => item.contacts
-      );
+      this.rowData = res;
+      console.log(this.rowData);
     });
   }
 
@@ -89,23 +100,23 @@ export class ContactComponent {
     this.contactForm.get('organizationName')?.patchValue(this.selected);
     this.filteredRole = null;
     this.userService.getContactData().subscribe((res: any) => {
-      this.rowData = res.map((item: any) => item.contacts).flat();
-      if (data == 'All') {
-        this.selected = data;
-        return this.rowData;
-      } else {
-        this.selected = data;
-        this.rowData = this.rowData.filter(
-          (item: any) => item.organizationName === data
-        );
-        const usedRoles = this.rowData.map((data: any) => {
-          return data.role;
-        });
-
-        this.filteredRole = this.roles.filter(
-          (items: any) => !usedRoles.includes(items)
-        );
-      }
+      // if (data == 'All') {
+      //   this.selected = data;
+      //   console.log(data);
+      //   return this.rowData;
+      // } else {
+      //   console.log(data);
+      //   this.selected = data;
+      //   this.rowData = this.rowData.filter(
+      //     (item: any) => item.organizationName === data
+      //   );
+      //   // const usedRoles = this.rowData.map((data: any) => {
+      //   //   return data.role;
+      //   // });
+      //   // this.filteredRole = this.roles.filter(
+      //   //   (items: any) => !usedRoles.includes(items)
+      //   // );
+      // }
     });
   }
 
@@ -120,15 +131,25 @@ export class ContactComponent {
       headerName: 'OrganizationName',
       cellRenderer: LinkRendererComponent,
     },
-    { field: 'role', headerName: 'Role', cellRenderer: LinkRendererComponent },
-    { field: 'industry', headerName: 'Industry' },
+    {
+      headerName: 'FulName',
+      valueGetter: (params: any) =>
+        `${params.data?.fname}  ${params.data?.lname}`,
 
-    { field: 'onboarding', headerName: 'Onboarding' },
-    { field: 'product', headerName: 'Product' },
+      cellRenderer: LinkRendererComponent,
+    },
+    { field: 'role', headerName: 'Role' },
+    {
+      field: 'additionalroles',
+      headerName: 'AdditionalRoles',
+    },
+
+    { field: 'remarks', headerName: 'Remarks' },
     { field: 'email', headerName: 'Email' },
     {
-      field: 'phone',
       headerName: 'Phone',
+      valueGetter: (params: any) =>
+        params.data?.codes + ' ' + params.data?.phone,
     },
   ];
 
@@ -148,7 +169,6 @@ export class ContactComponent {
       state: { data: event },
     });
   }
-
   breadCrumb = ['Organization', 'Contact'];
 
   onBreadCrumb() {
@@ -164,8 +184,9 @@ export class ContactComponent {
     this.toggleValue = true;
     this.viewCard = !this.viewCard;
   }
-  viewData: any;
+
   rowDataSelect(event: any) {
+    this.singleId = event.id;
     this.toggleValue = true;
     this.viewCard = true;
     this.viewData = event.data;
@@ -173,19 +194,19 @@ export class ContactComponent {
 
   patchData() {
     this.viewCard = false;
+    this.mode = true;
     this.contactForm.patchValue(this.viewData);
   }
 
-  onSubmit(event: any) {
-    console.log('onsubmit called');
+  onSubmit() {
     this.userService
-      .UpdateData(this.viewData.id, this.contactForm.value)
+      .CreateContactData(this.contactForm.value)
       .subscribe((res) => {
-        console.log(res);
+        this.getContactdata();
+        this.toggleValue = false;
       });
   }
 
-  searchText: any;
   onSearchTextChanged(event: any) {
     let filteredData = this.rowData.filter((item: any) =>
       Object.values(item).join('').toLowerCase().includes(event.toLowerCase())
@@ -198,13 +219,41 @@ export class ContactComponent {
   }
 
   onSearchOrg(event: any) {
-    let filteredData = this.OrganizaionsData.filter((item: any) =>
+    let filteredData = this.organizaionsData.filter((item: any) =>
       item.organizationName.toLowerCase().includes(event.toLowerCase())
     );
     if (this.searchText != '') {
-      this.OrganizaionsData = filteredData;
+      this.organizaionsData = filteredData;
     } else {
-      this.getData();
+      this.getSidebarData();
     }
+  }
+
+  onChangePlaceHolder() {
+    let code = this.contactForm.get('codes')?.value;
+    if (code == '+91') {
+      return 'Enter 10 numbers';
+    } else if (code == '+1') {
+      return 'Enter 11 numbers';
+    } else if (code == '+72') {
+      return 'Enter 7 numbers';
+    } else {
+      return 'Enter your number';
+    }
+  }
+
+  Updatedata() {
+    this.userService
+      .updateContactData(this.singleId, this.contactForm.value)
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
+  Cancel() {
+    this.toggleValue = !this.toggleValue;
+    this.contactForm.reset();
+  }
+  resetForm() {
+    this.contactForm.reset();
   }
 }

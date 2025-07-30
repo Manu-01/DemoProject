@@ -2,25 +2,14 @@
   "task": [
     {
       "solutionArea": "tyuytutyuyt",
-      "workFlow": "terhdfdfvf",
-      "taskId": 34567898765432,
+      "workFlow": "kumar",
+      "taskId": 2,
       "status": "Active",
-      "taskName": "ghmdfvbnvxcvcbx",
-      "startDate": "2025-07-04",
-      "dueDate": "2025-07-18",
+      "taskName": "545dfh",
+      "startDate": "2025-07-08",
+      "dueDate": "2025-07-25",
       "priority": "Medium",
-      "id": "1a56"
-    },
-    {
-      "id": "614f",
-      "solutionArea": "fszdfgdf",
-      "workFlow": "dfszdf",
-      "taskId": 245,
-      "status": "Active",
-      "taskName": "sfd",
-      "startDate": "2025-07-10",
-      "dueDate": "2025-07-23",
-      "priority": "Low"
+      "id": "4956"
     }
   ],
   "organization": [
@@ -125,247 +114,132 @@
       "phone": "+1-555-012-3456"
     }
   ],
-
-  "contacts": [
+  "sidebarJson": [
     {
       "organizationName": "In2IT",
-      "contacts": [
-        {
-          "id": "1001",
-          "organizationName": "In2IT",
-          "role": "Customer",
-          "industry": "Information Technology",
-          "onboarding": "Active",
-          "product": "NovaSuite CRM",
-          "email": "support@technova.com",
-          "phone": "+1-555-1001"
-        },
-        {
-          "id": "1002",
-          "organizationName": "In2IT",
-          "role": "Partner",
-          "industry": "Data Analytics",
-          "onboarding": "Active",
-          "product": "SparkInsight",
-          "email": "hello@dataspark.io",
-          "phone": "+1-555-1002"
-        },
-        {
-          "id": "1003",
-          "organizationName": "In2IT",
-          "role": "Customer",
-          "industry": "Finance",
-          "onboarding": "Pending",
-          "product": "FinLogic ERP",
-          "email": "contact@finware.com",
-          "phone": "+1-555-1003"
-        },
-        {
-          "id": "1004",
-          "organizationName": "In2IT",
-          "role": "Customer",
-          "industry": "Healthcare",
-          "onboarding": "Active",
-          "product": "MediLink",
-          "email": "info@healthbyte.org",
-          "phone": "+1-555-1004"
-        }
-      ]
+      "contactsLength": 4
     },
     {
       "organizationName": "In2IT A",
-      "contacts": [
-        {
-          "id": "2001",
-          "organizationName": "In2IT A",
-          "role": "Customer",
-          "industry": "Automotive",
-          "onboarding": "Active",
-          "product": "AutoLogic Suite",
-          "email": "support@autosys.com",
-          "phone": "+1-555-2001"
-        },
-        {
-          "id": "2002",
-          "organizationName": "In2IT A",
-          "role": "Customer",
-          "industry": "Energy",
-          "onboarding": "Pending",
-          "product": "VoltManager",
-          "email": "contact@greenvolt.com",
-          "phone": "+1-555-2002"
-        },
-        {
-          "id": "2003",
-          "organizationName": "In2IT A",
-          "role": "Partner",
-          "industry": "Education",
-          "onboarding": "Active",
-          "product": "SmartLMS",
-          "email": "info@edusmart.edu",
-          "phone": "+1-555-2003"
-        },
-        {
-          "id": "2004",
-          "organizationName": "In2IT A",
-          "role": "Customer",
-          "industry": "Finance",
-          "onboarding": "Active",
-          "product": "FinLogic ERP",
-          "email": "support@finware.com",
-          "phone": "+1-555-2004"
-        },
-        {
-          "id": "2005",
-          "organizationName": "In2IT A",
-          "role": "Customer",
-          "industry": "Biotech",
-          "onboarding": "Inactive",
-          "product": "GeneTrack",
-          "email": "bio@biosoft.com",
-          "phone": "+1-555-2005"
-        },
-        {
-          "id": "2006",
-          "organizationName": "In2IT A",
-          "role": "Customer",
-          "industry": "Retail",
-          "onboarding": "Active",
-          "product": "EdgePOS",
-          "email": "sales@retailedge.com",
-          "phone": "+1-555-2006"
-        }
-      ]
+      "contactsLength": 6
     },
     {
       "organizationName": "NextGen IT",
-      "contacts": [
-        {
-          "id": "3001",
-          "organizationName": "NextGen IT",
-          "role": "Partner",
-          "industry": "IT Services",
-          "onboarding": "Active",
-          "product": "InfraManager",
-          "email": "team@intrasoft.com",
-          "phone": "+1-555-3001"
-        },
-        {
-          "id": "3002",
-          "organizationName": "NextGen IT",
-          "role": "Customer",
-          "industry": "Logistics",
-          "onboarding": "Pending",
-          "product": "FleetTrack Pro",
-          "email": "info@fleetcontrol.io",
-          "phone": "+1-555-3002"
-        },
-        {
-          "id": "3003",
-          "organizationName": "NextGen IT",
-          "role": "Customer",
-          "industry": "Cybersecurity",
-          "onboarding": "Active",
-          "product": "ShieldSuite",
-          "email": "support@securetech.com",
-          "phone": "+1-555-3003"
-        },
-        {
-          "id": "3004",
-          "organizationName": "NextGen IT",
-          "role": "Customer",
-          "industry": "Finance",
-          "onboarding": "Inactive",
-          "product": "FinLogic ERP",
-          "email": "help@finware.com",
-          "phone": "+1-555-3004"
-        },
-        {
-          "id": "3005",
-          "organizationName": "NextGen IT",
-          "role": "Customer",
-          "industry": "Data Integration",
-          "onboarding": "Active",
-          "product": "BridgeCore",
-          "email": "contact@databridge.net",
-          "phone": "+1-555-3005"
-        },
-        {
-          "id": "3006",
-          "organizationName": "NextGen IT",
-          "role": "Partner",
-          "industry": "AI",
-          "onboarding": "Active",
-          "product": "CortexAI",
-          "email": "ai@neurolink.ai",
-          "phone": "+1-555-3006"
-        },
-        {
-          "id": "3007",
-          "organizationName": "NextGen IT",
-          "role": "Customer",
-          "industry": "Healthcare",
-          "onboarding": "Pending",
-          "product": "MediLink",
-          "email": "care@healthbyte.org",
-          "phone": "+1-555-3007"
-        },
-        {
-          "id": "3008",
-          "organizationName": "NextGen IT",
-          "role": "Customer",
-          "industry": "Information Technology",
-          "onboarding": "Active",
-          "product": "NovaSuite CRM",
-          "email": "tech@technova.com",
-          "phone": "+1-555-3008"
-        }
-      ]
+      "contactsLength": 4
     },
     {
       "organizationName": "CloudAxis",
-      "contacts": [
-        {
-          "id": "4001",
-          "organizationName": "CloudAxis",
-          "role": "Customer",
-          "industry": "Cloud Computing",
-          "onboarding": "Active",
-          "product": "SkyCloud",
-          "email": "support@skynetix.cloud",
-          "phone": "+1-555-4001"
-        },
-        {
-          "id": "4002",
-          "organizationName": "CloudAxis",
-          "role": "Partner",
-          "industry": "Security",
-          "onboarding": "Inactive",
-          "product": "EdgeDefender",
-          "email": "contact@edgesecure.com",
-          "phone": "+1-555-4002"
-        },
-        {
-          "id": "4003",
-          "organizationName": "CloudAxis",
-          "role": "Customer",
-          "industry": "Supply Chain",
-          "onboarding": "Active",
-          "product": "ChainFlow",
-          "email": "sales@logixware.io",
-          "phone": "+1-555-4003"
-        },
-        {
-          "id": "4004",
-          "organizationName": "CloudAxis",
-          "role": "Customer",
-          "industry": "Automotive",
-          "onboarding": "Pending",
-          "product": "AutoLogic Suite",
-          "email": "contact@autosys.com",
-          "phone": "+1-555-4004"
-        }
-      ]
+      "contactsLength": 8
+    }
+  ],
+  "ContactData": [
+    {
+      "id": "eb03",
+      "organizationName": "In2IT",
+      "role": "Product-Manager",
+      "remarks": "212sg5ds3fg45df",
+      "email": "Kumargumrt",
+      "phone": "587928485",
+      "codes": "+91",
+      "fname": "Gurmeet",
+      "lname": "Kumar",
+      "additionalroles": "KumarGUum"
+    },
+    {
+      "id": "ad13",
+      "organizationName": "In2IT",
+      "role": "Product-Manager",
+      "remarks": "212sg5ds3fg45df",
+      "email": "Kumargumrt",
+      "phone": "587928485",
+      "codes": "+91",
+      "fname": "Gurmeet",
+      "lname": "Kumar",
+      "additionalroles": "KumarGUum"
+    },
+    {
+      "id": "896a",
+      "organizationName": "In2IT",
+      "role": "Product-Manager",
+      "remarks": "212sg5ds3fg45df",
+      "email": "Kumargumrt",
+      "phone": "587928485",
+      "codes": "+91",
+      "fname": "Gurmeet",
+      "lname": "Kumar",
+      "additionalroles": "KumarGUum"
+    },
+    {
+      "id": "39e7",
+      "organizationName": "In2IT",
+      "role": "Product-Manager",
+      "remarks": "212sg5ds3fg45df",
+      "email": "Kumargumrt",
+      "phone": "587928485",
+      "codes": "+91",
+      "fname": "Gurmeet",
+      "lname": "Kumar",
+      "additionalroles": "KumarGUum"
+    },
+    {
+      "id": "a4d7",
+      "organizationName": "In2IT A",
+      "role": "Product-Manager",
+      "remarks": "212sg5ds3fg45df",
+      "email": "Kumargumrt",
+      "phone": "587928485",
+      "codes": "+91",
+      "fname": "rahul",
+      "lname": "Kumar",
+      "additionalroles": "KumarGUum"
+    },
+    {
+      "id": "b68a",
+      "organizationName": "In2IT A",
+      "role": "Manager",
+      "remarks": "212sg5ds3fg45df",
+      "email": "Kumargumrt",
+      "phone": "587928485",
+      "codes": "+91",
+      "fname": "rahul123",
+      "lname": "Kumar",
+      "additionalroles": "KumarGUum"
+    },
+    {
+      "id": "ecb1",
+      "organizationName": "CloudAxis",
+      "role": "Manager",
+      "remarks": "sdgsdfgjdskj",
+      "email": "kumarManu@gmail.com",
+      "phone": "12235454535",
+      "codes": "+72",
+      "fname": "Manu",
+      "lname": "Kumar",
+      "additionalroles": "Developer"
+    },
+    {
+      "id": "1b38",
+      "organizationName": "CloudAxis",
+      "role": "Customer",
+      "remarks": "asgsgasgs",
+      "email": "sjbhasdghasgasfg",
+      "phone": "gsasfgasgs",
+      "codes": "+91",
+      "fname": "Inzimam",
+      "lname": "dfgfdgfd",
+      "additionalroles": "asgsdgasfg"
+    },
+    {
+      "id": "689e",
+      "organizationName": "In2IT A",
+      "role": "Customer",
+      "remarks": "asgsgasgs",
+      "email": "kumargumeet09@gmail.com",
+      "phone": "gsasfgasgs",
+      "codes": "+91",
+      "fname": "Inzimam",
+      "lname": "kumar",
+      "additionalroles": "asgsdgasfg"
     }
   ]
 }
