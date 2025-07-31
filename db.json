@@ -94,6 +94,30 @@
       "lname": "shukla",
       "additionalroles": "kuchnhi",
       "id": "33bf"
+    },
+    {
+      "id": "d35b",
+      "organizationName": "In2IT",
+      "role": "Partner",
+      "remarks": "wertg",
+      "email": "demo@emailc.om",
+      "phone": "1212122121",
+      "codes": "+91",
+      "fname": "test",
+      "lname": "demo",
+      "additionalroles": "wewrg"
+    },
+    {
+      "id": "0b39",
+      "organizationName": "In2IT",
+      "role": "Customer",
+      "remarks": "drwefe",
+      "email": "demo@kijh",
+      "phone": "1223456712",
+      "codes": "+91",
+      "fname": "dmeo",
+      "lname": "emo",
+      "additionalroles": "ergert"
     }
   ]
 }

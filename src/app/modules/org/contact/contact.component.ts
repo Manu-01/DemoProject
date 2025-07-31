@@ -125,17 +125,9 @@ export class ContactComponent {
       );
       const usedRoles = this.rowData.map((d: any) => d.role);
 
-      let isManagerUsed = usedRoles.includes('Manager');
-      if (isManagerUsed) {
-        if (this.mode == false) {
-          this.filteredRole = this.roles.filter((item) => item);
-        } else {
-          this.filteredRole = this.roles.filter((item) => item != 'Manager');
-        }
-      }
-      // this.filteredRole = this.roles?.filter(
-      //   (r: any) => !usedRoles.includes(r)
-      // );
+      this.filteredRole = this.roles?.filter(
+        (r: any) => !usedRoles.includes(r)
+      );
       // this.contactForm.get('role')?.patchValue(this.filteredRole);
     });
   }
@@ -307,6 +299,7 @@ export class ContactComponent {
         this.contactForm.reset();
       });
   }
+
   deleteData() {
     let confirmed = confirm('are you sure you want to delete ?');
     if (confirmed) {
