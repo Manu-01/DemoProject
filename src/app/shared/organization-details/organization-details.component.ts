@@ -20,12 +20,12 @@ export class OrganizationDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.Explaindata.push(this.mydata);
 
-    this.getallData();
+    this.getAllData();
     this.organizationName = this.mydata.organizationName;
   }
   // get contacts for the rowdata
 
-  getallData() {
+  getAllData() {
     this.service.getContactData().subscribe((res: any) => {
       let data = res.filter(
         (item: any) => item.organizationName == this.organizationName

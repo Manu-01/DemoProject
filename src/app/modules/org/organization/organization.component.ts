@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FeatherModule } from 'angular-feather';
 import { UserService } from '../../../Service/user.service';
 import { AgGridAngular } from 'ag-grid-angular';

@@ -10,7 +10,10 @@
                   <span id="dropdownBasic1" ngbDropdownToggle class="cursor-pointer form-control">
                     <i-feather name="plus" class="me-2"></i-feather>Add new item
                   </span>
+                  @if(deleteId){
                   <span (click)="deleteData()" class="ms-2"> <i-feather name="trash2" class="me-2"></i-feather></span>
+
+                  }
                 </div>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                   <button ngbDropdownItem (click)="toggleShowHide()">
@@ -129,7 +132,7 @@
       <!--Form Sections -->
       <div class="col-4 px-3">
         <div class="card">
-          <div class="card-header">Add Contacts</div>
+          <div class="card-header">{{headerValue}}</div>
           <div class="card-body">
             <form [formGroup]="contactForm">
               <div class="form-group">
@@ -290,7 +293,7 @@
                 <button type="submit" class="btn btn-secondary mt-2" (click)="resetForm()">
                   Clear All
                 </button>
-                <button type="submit" class="btn btn-light mt-2" (click)="toggleShowHide()">
+                <button type="submit" class="btn btn-light mt-2" (click)="cancel()">
                   Cancel
                 </button>
               </div>

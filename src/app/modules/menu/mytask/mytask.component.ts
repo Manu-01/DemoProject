@@ -52,6 +52,11 @@ export class MytaskComponent {
       priority: new FormControl('', Validators.required),
     });
   }
+  ngOnInit(): void {
+    this.getData();
+    this.SetBreadCrumb();
+  }
+
   saveData() {
     if (this.myForm.valid) {
       this.userService.createUser(this.myForm.value).subscribe((res: any) => {
@@ -71,10 +76,6 @@ export class MytaskComponent {
     this.toggleValue = !this.toggleValue;
   }
 
-  ngOnInit(): void {
-    this.getData();
-    this.SetBreadCrumb();
-  }
   getData() {
     this.userService.getData().subscribe((res: any) => {
       this.rowData = res;
@@ -140,10 +141,10 @@ export class MytaskComponent {
     this.userService.mysubject$.next(this.array);
   }
 
-  singledata: any;
+  singleData: any;
   edit(id: any) {
     this.userService.getById(id).subscribe((data) => {
-      this.singledata = data.id;
+      this.singleData = data.id;
       this.toggleValue = true;
       this.myForm.patchValue(data);
       this.getData();
@@ -165,7 +166,7 @@ export class MytaskComponent {
     this.mode = false;
     if (this.myForm.valid) {
       this.userService
-        .updateData(this.singledata, this.myForm.value)
+        .updateData(this.singleData, this.myForm.value)
         .subscribe(() => {
           this.toggleValue = false;
           this.getData();
@@ -180,8 +181,5 @@ export class MytaskComponent {
   validateDueDate(event: any) {
     let today = new Date().toISOString().split('T')[0];
     event.target.min = today;
-
-    // console.log(today.toString());
-    // return today.toString();
   }
 }

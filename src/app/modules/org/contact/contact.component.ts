@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridAngular } from 'ag-grid-angular';
-import { OrganizationDetailsComponent } from '../../../shared/organization-details/organization-details.component';
+
 import { UserService } from '../../../Service/user.service';
 import { LinkRendererComponent } from '../../../shared/link-renderer/link-renderer.component';
 import { FeatherModule } from 'angular-feather';
-import { JsonPipe, NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
-import { ENVIORNMENT } from '../../../../../env';
-// import { env } from 'process';
+
 import {
   FormControl,
   FormGroup,
@@ -27,7 +26,6 @@ import {
     ReactiveFormsModule,
     FormsModule,
     NgIf,
-    // OrganizationDetailsComponent,
   ],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss',
@@ -45,13 +43,13 @@ export class ContactComponent {
   toggleValue: boolean = false;
   viewCard: boolean = false;
   copyRowData: any[] = [];
-  checkRolles: any;
   mode: boolean = false;
   viewData: any;
   singleId: any;
   searchText: any;
   gridApi: any;
-  deleteId: any;
+  headerValue = 'Add Contacts';
+  deleteId: any = null;
   constructor(private router: Router, private userService: UserService) {}
   orgnizations = ['In2IT', 'In2IT A', 'NextGen IT', 'CloudAxis'];
   onboarding = ['Active', 'Inactive', 'Pending'];
@@ -95,14 +93,14 @@ export class ContactComponent {
     this.fetchData('All');
     this.onBreadCrumb();
     this.onChangePlaceHolder();
-    this.getContactdata();
+    this.getContactData();
   }
   getSidebarData() {
     this.userService.getSidebarData().subscribe((res: any) => {
       this.organizaionsData = res;
     });
   }
-  getContactdata() {
+  getContactData() {
     this.userService.getContactData().subscribe((res: any) => {
       this.allContacts = res;
       this.rowData = [...res];
@@ -125,12 +123,15 @@ export class ContactComponent {
       this.rowData = this.allContacts.filter(
         (item: any) => item.organizationName === data
       );
-
       const usedRoles = this.rowData.map((d: any) => d.role);
 
       let isManagerUsed = usedRoles.includes('Manager');
       if (isManagerUsed) {
-        this.filteredRole = this.roles.filter((item) => item != 'Manager');
+        if (this.mode == false) {
+          this.filteredRole = this.roles.filter((item) => item);
+        } else {
+          this.filteredRole = this.roles.filter((item) => item != 'Manager');
+        }
       }
       // this.filteredRole = this.roles?.filter(
       //   (r: any) => !usedRoles.includes(r)
@@ -188,7 +189,12 @@ export class ContactComponent {
     },
     onSelectionChanged: () => {
       const selectedRows = this.gridApi.getSelectedRows();
-      this.deleteId = selectedRows[0].id;
+      console.log(selectedRows);
+      if (selectedRows.length > 0) {
+        this.deleteId = selectedRows[0].id;
+      } else {
+        this.deleteId = null;
+      }
     },
   };
 
@@ -198,15 +204,20 @@ export class ContactComponent {
       state: { data: event },
     });
   }
-  breadCrumb = ['Organization', 'Contact'];
 
+  breadCrumb = ['Organization', 'Contact'];
   onBreadCrumb() {
     this.userService.mysubject$.next(this.breadCrumb);
   }
 
   toggleShowHide() {
     this.viewCard = false;
-    this.toggleValue = !this.toggleValue;
+    if (this.toggleValue == false) {
+      this.toggleValue = true;
+    }
+    this.headerValue = 'Add Contact';
+    this.mode = false;
+    this.contactForm.reset();
     this.contactForm.get('organizationName')?.patchValue(this.selected);
   }
   toggleViewcard() {
@@ -216,23 +227,25 @@ export class ContactComponent {
 
   rowDataSelect(event: any) {
     this.singleId = event.data.id;
-
     this.toggleValue = true;
     this.viewCard = true;
     this.viewData = event.data;
   }
 
   patchData() {
+    this.contactForm.patchValue(this.viewData);
     this.viewCard = false;
     this.mode = true;
-    this.contactForm.patchValue(this.viewData);
+    this.headerValue = ' Edit Contact';
+
+    console.log('cll pathc');
   }
 
   onSubmit() {
     this.userService
       .CreateContactData(this.contactForm.value)
       .subscribe((res) => {
-        this.getContactdata();
+        this.getContactData();
         this.toggleValue = false;
       });
   }
@@ -289,7 +302,7 @@ export class ContactComponent {
     this.userService
       .updateContactData(this.singleId, this.contactForm.value)
       .subscribe((res) => {
-        this.getContactdata();
+        this.getContactData();
         this.toggleValue = false;
         this.contactForm.reset();
       });
@@ -298,7 +311,7 @@ export class ContactComponent {
     let confirmed = confirm('are you sure you want to delete ?');
     if (confirmed) {
       this.userService.deleteContactData(this.deleteId).subscribe((res) => {
-        this.getContactdata();
+        this.getContactData();
       });
     }
   }
