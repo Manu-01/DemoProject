@@ -6,9 +6,12 @@
           <li>
             <div class="col">
               <div ngbDropdown class="d-inline-block">
-                <span id="dropdownBasic1" ngbDropdownToggle class="cursor-pointer form-control">
-                  <i-feather name="plus" class="me-2"></i-feather>Add new item
-                </span>
+                <div class="d-flex align-items-center">
+                  <span id="dropdownBasic1" ngbDropdownToggle class="cursor-pointer form-control">
+                    <i-feather name="plus" class="me-2"></i-feather>Add new item
+                  </span>
+                  <span (click)="deleteData()" class="ms-2"> <i-feather name="trash2" class="me-2"></i-feather></span>
+                </div>
                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                   <button ngbDropdownItem (click)="toggleShowHide()">
                     Single Contact
@@ -25,6 +28,7 @@
           <li>
             <a><i-feather name="briefcase" class="me-2"></i-feather> Add to
               Maketing List</a>
+
           </li>
           <li>
             <a> <i-feather name="share-2" class="me-2"></i-feather>Share</a>
@@ -66,7 +70,7 @@
 <div class="container-fluid mt-3 p-0">
   <div class="row d-flex g-0">
     <div class="sidebar_section col-2 p-2 rounded">
-      <div class="bg-light border p-2 ps-3" style="height: 73vh">
+      <div class="bg-light border p-2 ps-3" style="min-height: 77vh">
         <h3>Contacts</h3>
         <div class="input_box bg-light d-flex justify-content-between align-items-center">
           <input type="text" class="form-control rounded" placeholder="search here..." [(ngModel)]="searchText"
@@ -82,7 +86,7 @@
                   <i-feather name="users" class="me-2"></i-feather>
                   <p class="m-0">All Contacts</p>
                 </div>
-                <p>{{ rowData?.length }} Contacts</p>
+                <p>{{ allContacts.length }} Contacts</p>
               </a>
             </li>
           </div>
@@ -95,7 +99,7 @@
                   <i-feather name="users" class="me-2"></i-feather>
                   <a class="m-0 text_decoration">{{ item.organizationName }}</a>
                 </div>
-                <p>{{ item.contactsLength}} Contacts</p>
+                <p>{{ getContactCount(item.organizationName) }} Contacts</p>
               </a>
             </li>
           </div>
@@ -132,42 +136,46 @@
 
                 <label class="form-label">Name <span style="color: red;">*</span></label>
                 <div class="d-flex gap-2">
-                  <input type="text" placeholder="fname" formControlName="fname" class="form-control">
-                  @if( contactForm.get('fname')?.touched &&
-                  contactForm.get('fname')?.errors){
-                  <div>
-                    @if(contactForm.get('fname')?.hasError('required'))
-                    {
-                    <small>This Field is Required.</small>
-                    }
-                    @else if (!contactForm.get('fname')?.hasError('required') &&
-                    contactForm.get('fname')?.hasError('pattern'))
-                    {
-                    <small>Only alphabets are required.</small>
+                  <div class="d-flex flex-column">
+                    <input type="text" placeholder="fname" formControlName="fname" class="form-control">
+                    @if( contactForm.get('fname')?.touched &&
+                    contactForm.get('fname')?.errors){
+                    <div>
+                      @if(contactForm.get('fname')?.hasError('required'))
+                      {
+                      <small>This Field is Required.</small>
+                      }
+                      @else if (!contactForm.get('fname')?.hasError('required') &&
+                      contactForm.get('fname')?.hasError('pattern'))
+                      {
+                      <small>Only alphabets are required.</small>
+                      }
+                    </div>
                     }
                   </div>
-                  }
 
-                  <input type="text" placeholder="lname" formControlName="lname" class="form-control">
-                  @if( contactForm.get('lname')?.touched &&
-                  contactForm.get('lname')?.errors){
-                  <div>
-                    @if(contactForm.get('lname')?.hasError('required'))
-                    {
-                    <small>This Field is Required.</small>
-                    }
-                    @else if (!contactForm.get('lname')?.hasError('required') &&
-                    contactForm.get('lname')?.hasError('pattern'))
-                    {
-                    <small>Only alphabets are required.</small>
+                  <div class="d-flex flex-column">
+                    <input type="text" placeholder="lname" formControlName="lname" class="form-control">
+                    @if( contactForm.get('lname')?.touched &&
+                    contactForm.get('lname')?.errors){
+                    <div>
+                      @if(contactForm.get('lname')?.hasError('required'))
+                      {
+                      <small>This Field is Required.</small>
+                      }
+                      @else if (!contactForm.get('lname')?.hasError('required') &&
+                      contactForm.get('lname')?.hasError('pattern'))
+                      {
+                      <small>Only alphabets are required.</small>
+                      }
+                    </div>
                     }
                   </div>
-                  }
 
                 </div>
                 <label class="form-label">OrganizationName <span style="color: red;">*</span></label>
                 <select name="" id="" class="form-control" formControlName="organizationName">
-                  <option value="" disabled selected>Select</option>
+                  <option value="Select" disabled>Select</option>
                   @for (item of orgnizations; track $index) {
                   <option [value]="item">{{ item }}</option>
                   }
@@ -198,10 +206,24 @@
                   <small *ngIf="contactForm.get('codes')?.invalid && contactForm.get('codes')?.touched">This Field is
                     Required.</small>
 
-                  <input type="text" [placeholder]="onChangePlaceHolder()" class="form-control"
-                    formControlName="phone" />
-                  <small *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">This Field is
-                    Required.</small>
+                  <div class="d-flex flex-column">
+                    <input type="text" [placeholder]="onChangePlaceHolder()" class="form-control"
+                      formControlName="phone" />
+                    @if( contactForm.get('phone')?.touched &&
+                    contactForm.get('phone')?.errors){
+                    <div>
+                      @if(contactForm.get('phone')?.hasError('required'))
+                      {
+                      <small>This Field is Required.</small>
+                      }
+                      @else if (!contactForm.get('phone')?.hasError('required') &&
+                      contactForm.get('phone')?.hasError('pattern'))
+                      {
+                      <small>Only Numbers are required.</small>
+                      }
+                    </div>
+                    }
+                  </div>
                 </div>
               </div>
 
@@ -247,18 +269,8 @@
                 <textarea type="text" placeholder="Industry Name" rows="2" class="form-control"
                   formControlName="remarks"></textarea>
                 @if( contactForm.get('remarks')?.touched &&
-                contactForm.get('remarks')?.errors){
-                <div>
-                  @if(contactForm.get('remarks')?.hasError('required'))
-                  {
-                  <small>This Field is Required.</small>
-                  }
-                  @else if (!contactForm.get('remarks')?.hasError('required') &&
-                  contactForm.get('remarks')?.hasError('pattern'))
-                  {
-                  <small>Only alphabets are required.</small>
-                  }
-                </div>
+                contactForm.get('remarks')?.invalid){
+                <small>This Field is required.</small>
                 }
               </div>
 
@@ -270,7 +282,7 @@
                 </button>
                 }
                 @if (mode) {
-                <button type="submit" class="btn btn-primary mt-2" (click)="Updatedata()"
+                <button type="submit" class="btn btn-primary mt-2" (click)="updateData()"
                   [disabled]="contactForm.invalid">
                   Update
                 </button>

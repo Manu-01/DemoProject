@@ -7,7 +7,6 @@ import { Observable, Subject } from 'rxjs';
 })
 export class UserService {
   private url = 'http://localhost:3000/task';
-  private orgUrl = 'http://localhost:3000/organization';
   private sidebarJsonUrl = 'http://localhost:3000/sidebarJson';
   private contactsData = 'http://localhost:3000/ContactData';
   mysubject$ = new Subject<any>();
@@ -33,7 +32,7 @@ export class UserService {
 
   // OrganizationsData
   getOrgData(): Observable<any> {
-    return this.http.get(`${this.orgUrl}`);
+    return this.http.get(`${this.contactsData}`);
   }
 
   //SidebarJsonData
@@ -41,7 +40,6 @@ export class UserService {
     return this.http.get(`${this.sidebarJsonUrl}`);
   }
 
-  // Contact Data Handler
   //CreateData
   CreateContactData(data: any): Observable<any> {
     return this.http.post(`${this.contactsData}`, data);
@@ -52,5 +50,8 @@ export class UserService {
   }
   updateContactData(id: any, data: any): Observable<any> {
     return this.http.put<any>(`${this.contactsData}/${id}`, data);
+  }
+  deleteContactData(id: any): Observable<any> {
+    return this.http.delete(`${this.contactsData}/${id}`);
   }
 }

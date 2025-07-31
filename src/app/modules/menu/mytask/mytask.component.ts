@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { AgGridAngular } from 'ag-grid-angular';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ActionsRenderComponent } from '../../../shared/actions-button/actions-button.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../Service/user.service';
@@ -33,11 +33,20 @@ export class MytaskComponent {
 
   constructor(private userService: UserService) {
     this.myForm = new FormGroup({
-      solutionArea: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
-      workFlow: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
+      solutionArea: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z\s]+$/),
+      ]),
+      workFlow: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z\s]+$/),
+      ]),
       taskId: new FormControl('', Validators.required),
       status: new FormControl('', Validators.required),
-      taskName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)]),
+      taskName: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z\s]+$/),
+      ]),
       startDate: new FormControl('', Validators.required),
       dueDate: new FormControl('', Validators.required),
       priority: new FormControl('', Validators.required),

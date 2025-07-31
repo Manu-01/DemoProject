@@ -26,7 +26,7 @@ import {
     NgbDropdownModule,
     ReactiveFormsModule,
     FormsModule,
-    NgIf
+    NgIf,
     // OrganizationDetailsComponent,
   ],
   templateUrl: './contact.component.html',
@@ -50,8 +50,9 @@ export class ContactComponent {
   viewData: any;
   singleId: any;
   searchText: any;
-
-  constructor(private router: Router, private userService: UserService) { }
+  gridApi: any;
+  deleteId: any;
+  constructor(private router: Router, private userService: UserService) {}
   orgnizations = ['In2IT', 'In2IT A', 'NextGen IT', 'CloudAxis'];
   onboarding = ['Active', 'Inactive', 'Pending'];
   codes = ['+91', '+1', '+72'];
@@ -65,15 +66,29 @@ export class ContactComponent {
     'Developer',
   ];
   contactForm = new FormGroup({
-    organizationName: new FormControl('', Validators.required),
+    organizationName: new FormControl('Select', Validators.required),
     role: new FormControl(null, Validators.required),
-    remarks: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
+    remarks: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [Validators.required, Validators.pattern(/^\d{10}$/)]),
+    phone: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[1-9][0-9]*$/),
+    ]),
     codes: new FormControl('', Validators.required),
-    fname: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z]+$/)]),
-    lname: new FormControl('', [Validators.required, Validators.maxLength(10), Validators.pattern(/^[a-zA-Z]+$/)]),
-    additionalroles: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]),
+    fname: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(10),
+      Validators.pattern(/^[a-zA-Z\s]+$/),
+    ]),
+    lname: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(10),
+      Validators.pattern(/^[a-zA-Z\s]+$/),
+    ]),
+    additionalroles: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z\s]+$/),
+    ]),
   });
   ngOnInit(): void {
     this.getSidebarData();
@@ -85,43 +100,48 @@ export class ContactComponent {
   getSidebarData() {
     this.userService.getSidebarData().subscribe((res: any) => {
       this.organizaionsData = res;
-      console.log(this.organizaionsData);
     });
   }
   getContactdata() {
     this.userService.getContactData().subscribe((res: any) => {
-      this.rowData = res;
-      console.log(this.rowData);
+      this.allContacts = res;
+      this.rowData = [...res];
     });
   }
-
+  allContacts: any[] = [];
   filteredRole: any = null;
   fetchData(data: any) {
     this.selected = data;
-    // this.contactForm.get('organizationName')?.patchValue(this.selected);
     this.filteredRole = null;
     this.userService.getContactData().subscribe((res: any) => {
-      if (data == 'All') {
-        this.selected = data;
-        console.log(data);
-        return this.rowData;
-      } else {
-        console.log(data);
-        this.selected = data;
-        this.rowData = this.rowData.filter(
-          (item: any) => item.organizationName === data
-        );
-        const usedRoles = this.rowData.map((data: any) => {
-          return data.role;
-        });
-        this.filteredRole = this.roles.filter(
-          (items: any) => !usedRoles.includes(items)
-        );
-        console.log(this.filteredRole);
+      this.selected = data;
+
+      if (data === 'All') {
+        this.rowData = [...this.allContacts];
+        this.filteredRole = null;
+        return;
       }
+
+      this.rowData = this.allContacts.filter(
+        (item: any) => item.organizationName === data
+      );
+
+      const usedRoles = this.rowData.map((d: any) => d.role);
+
+      let isManagerUsed = usedRoles.includes('Manager');
+      if (isManagerUsed) {
+        this.filteredRole = this.roles.filter((item) => item != 'Manager');
+      }
+      // this.filteredRole = this.roles?.filter(
+      //   (r: any) => !usedRoles.includes(r)
+      // );
+      // this.contactForm.get('role')?.patchValue(this.filteredRole);
     });
   }
-
+  getContactCount(orgName: string): number {
+    return this.allContacts.filter((item) => item.organizationName === orgName)
+      .length;
+  }
   colDefs = [
     {
       filed: '',
@@ -163,6 +183,13 @@ export class ContactComponent {
     context: {
       componentParent: this,
     },
+    onGridReady: (params: any) => {
+      this.gridApi = params.api;
+    },
+    onSelectionChanged: () => {
+      const selectedRows = this.gridApi.getSelectedRows();
+      this.deleteId = selectedRows[0].id;
+    },
   };
 
   add(event: any) {
@@ -180,7 +207,7 @@ export class ContactComponent {
   toggleShowHide() {
     this.viewCard = false;
     this.toggleValue = !this.toggleValue;
-    // this.contactForm.get('organizationName')?.patchValue(this.selected);
+    this.contactForm.get('organizationName')?.patchValue(this.selected);
   }
   toggleViewcard() {
     this.toggleValue = true;
@@ -188,7 +215,8 @@ export class ContactComponent {
   }
 
   rowDataSelect(event: any) {
-    this.singleId = event.id;
+    this.singleId = event.data.id;
+
     this.toggleValue = true;
     this.viewCard = true;
     this.viewData = event.data;
@@ -233,33 +261,54 @@ export class ContactComponent {
 
   onChangePlaceHolder() {
     let code = this.contactForm.get('codes')?.value;
+    let phone = this.contactForm.get('phone');
+
     if (code == '+91') {
-      return 'Enter 10  digit number';
+      return phone?.setValidators([
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10),
+      ]);
     } else if (code == '+1') {
-      return 'Enter 10 digit number';
+      phone?.setValidators([
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(10),
+      ]);
+      return '10 only';
     } else if (code == '+72') {
-      return 'Enter 7 digit number';
-    } else {
-      return 'Enter phone number';
+      return phone?.setValidators([
+        Validators.required,
+        Validators.minLength(10),
+        Validators.maxLength(7),
+      ]);
     }
   }
 
-  Updatedata() {
+  updateData() {
     this.userService
       .updateContactData(this.singleId, this.contactForm.value)
       .subscribe((res) => {
-        console.log(res);
+        this.getContactdata();
+        this.toggleValue = false;
+        this.contactForm.reset();
       });
   }
-  Cancel() {
+  deleteData() {
+    let confirmed = confirm('are you sure you want to delete ?');
+    if (confirmed) {
+      this.userService.deleteContactData(this.deleteId).subscribe((res) => {
+        this.getContactdata();
+      });
+    }
+  }
+
+  cancel() {
     this.toggleValue = !this.toggleValue;
     this.contactForm.reset();
   }
   resetForm() {
     this.contactForm.reset();
-  }
-
-  showForm() {
-    console.log(this.contactForm.get('organizationName')?.value);
+    this.contactForm.get('codes');
   }
 }

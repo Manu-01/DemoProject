@@ -31,11 +31,25 @@ export class OrganizationComponent {
   sendData: any[] = [];
   stateContactData$: any;
   selected: any;
+  organizaionsData: any[] = [];
+  organizaionsDataLength: any;
+  allContacts: any[] = [];
+  filteredRole: any = null;
+  roles = [
+    'Customer',
+    'Partner',
+    'Product-Manager',
+    'Manager',
+    'VP',
+    'Tester',
+    'Developer',
+  ];
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.getData('All');
+    this.getData();
     this.onBreadCrumb();
+    this.getSidebarData();
     this.stateContactData$ = history.state.data;
     if (this.stateContactData$) {
       this.sendData = this.stateContactData$;
@@ -43,22 +57,51 @@ export class OrganizationComponent {
     }
   }
 
+  getSidebarData() {
+    this.userService.getSidebarData().subscribe((res: any) => {
+      this.organizaionsData = res;
+    });
+  }
+
   breadCrumb = ['Organization', 'Org'];
 
   onBreadCrumb() {
     this.userService.mysubject$.next(this.breadCrumb);
   }
-  getData(data: any) {
-    this.selected = data;
-    this.userService.getOrgData().subscribe((res: any) => {
-      if (data == 'All') {
-        this.rowData = res;
-      } else {
-        this.rowData = res.filter((item: any) => item.type == data);
-      }
+
+  getData() {
+    this.userService.getContactData().subscribe((res: any) => {
+      this.allContacts = res;
+      this.rowData = [...res];
     });
   }
 
+  fetchData(data: any) {
+    this.selected = data;
+    this.filteredRole = null;
+    this.userService.getContactData().subscribe((res: any) => {
+      this.selected = data;
+
+      if (data === 'All') {
+        this.rowData = [...this.allContacts];
+        this.filteredRole = null;
+        return;
+      }
+
+      this.rowData = this.allContacts.filter(
+        (item: any) => item.organizationName === data
+      );
+
+      const usedRoles = this.rowData.map((d: any) => d.role);
+      this.filteredRole = this.roles?.filter(
+        (r: any) => !usedRoles.includes(r)
+      );
+    });
+  }
+  getContactCount(orgName: string): number {
+    return this.allContacts.filter((item) => item.organizationName === orgName)
+      .length;
+  }
   colDefs = [
     {
       filed: '',
@@ -70,15 +113,23 @@ export class OrganizationComponent {
       headerName: 'OrganizationName',
       cellRenderer: LinkRendererComponent,
     },
-    { field: 'type', headerName: 'Type' },
-    { field: 'industry', headerName: 'Industry' },
+    {
+      headerName: 'FulName',
+      valueGetter: (params: any) =>
+        `${params.data?.fname}  ${params.data?.lname}`,
+    },
+    { field: 'role', headerName: 'Role' },
+    {
+      field: 'additionalroles',
+      headerName: 'AdditionalRoles',
+    },
 
-    { field: 'onboarding', headerName: 'Onboarding' },
-    { field: 'product', headerName: 'Product' },
+    { field: 'remarks', headerName: 'Remarks' },
     { field: 'email', headerName: 'Email' },
     {
-      field: 'phone',
       headerName: 'Phone',
+      valueGetter: (params: any) =>
+        params.data?.codes + ' ' + params.data?.phone,
     },
   ];
 
@@ -101,7 +152,6 @@ export class OrganizationComponent {
     } else {
       this.active = 0;
     }
-    console.log(this.active);
   }
   add(event: any) {
     this.sendData = event;
@@ -117,7 +167,7 @@ export class OrganizationComponent {
     if (this.searchText != '') {
       this.rowData = filteredData;
     } else {
-      this.getData('All');
+      this.getData();
     }
   }
 }

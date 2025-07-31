@@ -1,31 +1,42 @@
 <div class="conatiner">
 	<div class=" card">
-		<section class="py-5 text-center container">
+		<section class=" text-center container">
 			@for (data of Explaindata; track $index) {
 			<div class="row py-lg-5">
 				<div class="col-md-4 ">
-					<h1>{{data.id}}</h1>
-					<h1 class="fw-light">{{data.organizationName}}</h1>
-					<p class="lead text-body-secondary">{{data.industry}}</p>
+					<h1>Contact ID : {{data.id}}</h1>
+					<h3 class="fw-light">Name Of Org: {{data.organizationName}}</h3>
+					<p class="lead text-body-secondary"> Name Of Role: {{data.role}}</p>
+					<p class="lead text-body-secondary"> Contact FullName: {{data.fname}} {{data.lname}}</p>
 					<div class="d-flex justify-content-center gap-3">
 					</div>
 				</div>
 				<div class="col-md-4 ">
-					<h4 class="fw-light">{{data.type}}</h4>
-					<p class="lead text-body-secondary">{{data.onboarding}}</p>
-					<p class="lead text-body-secondary">{{data.product}}</p>
+					<p class="lead text-body-secondary">{{data.remarks}}</p>
+					<p class="lead text-body-secondary">Additional Role: {{data.additionalroles}}</p>
 
 				</div>
 				<div class="col-md-4 ">
-					<h4 class="fw-light">{{data.phone}}</h4>
-					<p class="lead text-body-secondary">{{data.email}}</p>
+					<h4 class="fw-light">Phone No:{{data.codes}} {{data.phone}}</h4>
+					<p class="lead text-body-secondary">Contact Email: {{data.email}}</p>
 					<p class="lead text-body-secondary">{{data.organizationName}}</p>
-
 				</div>
 			</div>
 
 			}
 
+			<!-- {
+    "id": "eb03",
+    "organizationName": "In2IT",
+    "role": "Product-Manager",
+    "remarks": "212sg5ds3fg45df",
+    "email": "Kumargumrt",
+    "phone": "587928485",
+    "codes": "+91",
+    "fname": "Gurmeet",
+    "lname": "Kumar",
+    "additionalroles": "KumarGUum"
+  }, -->
 		</section>
 
 		<ul ngbNav #nav="ngbNav" [(activeId)]="active" [destroyOnHide]="false" class="nav-tabs">
@@ -36,42 +47,143 @@
 						This tab content DOM will de destroyed when not active
 					</ngb-alert>
 
-					<p>
-						Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua,
-						retro
-						synth
-						master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
-						butcher retro
-						keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.
-						Aliquip
-						placeat
-						salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
-					</p>
+					<div _ngcontent-cve-c57="" class="row">
+						<div _ngcontent-cve-c57="" class="col-lg-4 col-md-6">
+							<div _ngcontent-cve-c57="" class="d-flex bg-light p-2">
+								<div _ngcontent-cve-c57="" class="quarterly-revenue p-3">
+									<h5 _ngcontent-cve-c57="">Quarterly Revenue</h5>
+									<h2 _ngcontent-cve-c57="">R O</h2>
+									<p _ngcontent-cve-c57=""><span _ngcontent-cve-c57=""
+											style="color: rgb(45, 223, 0);">0%</span>compared to last quarter </p>
+									<p _ngcontent-cve-c57="" class="pt-2">Customer Lifetime Value</p>
+									<h5 _ngcontent-cve-c57="">R O</h5>
+									<p _ngcontent-cve-c57="">CAST Score</p>
+									<p _ngcontent-cve-c57="">***** 0</p>
+								</div>
+								<div _ngcontent-cve-c57=""><img _ngcontent-cve-c57=""
+										src="https://in2it-demo.netlify.app/assets/img/hero.png" alt=""
+										class="img-fluid"></div>
+							</div>
+						</div>
+						<div _ngcontent-cve-c57="" class="col-lg-3">
+							<div _ngcontent-cve-c57="" class="card">
+								<div _ngcontent-cve-c57="" class="card-body">
+									<div _ngcontent-cve-c57="" class="d-flex justify-content-between">
+										<h5 _ngcontent-cve-c57="">Billing and Payments</h5><i-feather
+											_ngcontent-cve-c57="" name="external-link" _nghost-cve-c41=""><svg
+												xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+												class="feather feather-external-link">
+												<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6">
+												</path>
+												<polyline points="15 3 21 3 21 9"></polyline>
+												<line x1="10" y1="14" x2="21" y2="3"></line>
+											</svg></i-feather>
+									</div>
+									<hr _ngcontent-cve-c57="">
+									<div _ngcontent-cve-c57="" class="d-flex justify-content-between">
+										<p _ngcontent-cve-c57="" class="card-text">Upcoming Payments</p>
+										<p _ngcontent-cve-c57="">Due Date:</p>
+									</div>
+									<h5 _ngcontent-cve-c57="">R O</h5>
+									<hr _ngcontent-cve-c57="">
+									<p _ngcontent-cve-c57="" class="card-text">Pending Payments</p>
+									<h5 _ngcontent-cve-c57="">No Pending Payments</h5>
+									<hr _ngcontent-cve-c57="">
+									<div _ngcontent-cve-c57="" class="d-flex justify-content-between">
+										<p _ngcontent-cve-c57="" class="card-text">Last Payments</p>
+										<p _ngcontent-cve-c57="">Paid:</p>
+									</div>
+									<h5 _ngcontent-cve-c57="">R O</h5>
+								</div>
+							</div>
+						</div>
+						<div _ngcontent-cve-c57="" class="col-lg-3 col-md-6">
+							<div _ngcontent-cve-c57="" class="card">
+								<div _ngcontent-cve-c57="" class="card-body">Card 3</div>
+							</div>
+						</div>
+
+					</div>
 				</ng-template>
 			</li>
 			<li [ngbNavItem]="2">
 				<button ngbNavLink>Invoice & Reports</button>
 				<ng-template ngbNavContent>
-					<ngb-alert [dismissible]="false" class="d-block mt-3" type="success">
-						This tab content DOM will always stay in DOM
-					</ngb-alert>
-
-					<p>
-						Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four
-						loko
-						farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk
-						aliquip jean
-						shorts
-						ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus
-						mollit.
-						Keytar
-						helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio
-						cillum wes
-						anderson
-						8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party
-						scenester
-						stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
-					</p>
+					<div _ngcontent-cve-c57="" class="row">
+						<div _ngcontent-cve-c57="" class="col-lg-4">
+							<div _ngcontent-cve-c57="" class="card">
+								<div _ngcontent-cve-c57="" class="card-body">
+									<div _ngcontent-cve-c57="" class="d-flex justify-content-between">
+										<div _ngcontent-cve-c57="">
+											<h5 _ngcontent-cve-c57="" class="card-title">Quarterly Revenue</h5>
+											<h1 _ngcontent-cve-c57="">R O</h1>
+											<p _ngcontent-cve-c57="" class="card-text">0% campared to last quarter</p>
+											<p _ngcontent-cve-c57="" class="card-text">Customer lifeTime Value</p>
+											<h4 _ngcontent-cve-c57="">R O</h4>
+											<p _ngcontent-cve-c57="" class="card-text">CSAT Score</p>
+										</div>
+										<div _ngcontent-cve-c57="" class="img"><img _ngcontent-cve-c57=""
+												src="https://img.freepik.com/free-vector/design-tools-concept-illustration_114360-1227.jpg?w=740&amp;t=st=1715319940~exp=1715320540~hmac=30ce673b41af2d84fba633cd43c7282e83d0267b23a461e644590b3013faa99a"
+												alt="" class="img-fluid"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div _ngcontent-cve-c57="" class="col-lg-3">
+							<div _ngcontent-cve-c57="" class="card">
+								<div _ngcontent-cve-c57="" class="card-body">
+									<div _ngcontent-cve-c57="" class="d-flex justify-content-between">
+										<h5 _ngcontent-cve-c57="">Billing and Payments</h5><i-feather
+											_ngcontent-cve-c57="" name="external-link" _nghost-cve-c41=""><svg
+												xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+												class="feather feather-external-link">
+												<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6">
+												</path>
+												<polyline points="15 3 21 3 21 9"></polyline>
+												<line x1="10" y1="14" x2="21" y2="3"></line>
+											</svg></i-feather>
+									</div>
+									<hr _ngcontent-cve-c57="">
+									<div _ngcontent-cve-c57="" class="d-flex justify-content-between">
+										<p _ngcontent-cve-c57="" class="card-text">Upcoming Payments</p>
+										<p _ngcontent-cve-c57="">Due Date</p>
+									</div>
+									<h5 _ngcontent-cve-c57="">R O</h5>
+									<hr _ngcontent-cve-c57="">
+									<p _ngcontent-cve-c57="" class="card-text">Pending Payments</p>
+									<h5 _ngcontent-cve-c57="">No Pending Payments</h5>
+									<hr _ngcontent-cve-c57="">
+									<p _ngcontent-cve-c57="" class="card-text">Last Payments</p>
+									<h5 _ngcontent-cve-c57="">R O</h5>
+								</div>
+							</div>
+						</div>
+						<div _ngcontent-cve-c57="" class="col-lg-2">
+							<div _ngcontent-cve-c57="" class="card">
+								<div _ngcontent-cve-c57="" class="card-body">
+									<h5 _ngcontent-cve-c57="">In Operations Requests</h5>
+									<div _ngcontent-cve-c57="" class="box">
+										<p _ngcontent-cve-c57="">no Records found</p>
+									</div>
+									<h4 _ngcontent-cve-c57="">Sales Requests</h4>
+									<p _ngcontent-cve-c57="">Product:Managed SDWAN</p>
+								</div>
+							</div>
+						</div>
+						<div _ngcontent-cve-c57="" class="col-lg-3">
+							<div _ngcontent-cve-c57="" class="card">
+								<div _ngcontent-cve-c57="" class="card-body">
+									<h5 _ngcontent-cve-c57="">Contacts</h5>
+									<div _ngcontent-cve-c57="" class="search-container"><input _ngcontent-cve-c57=""
+											type="text" id="searchInput" placeholder="Search..." class="form-control">
+									</div>
+									<h6 _ngcontent-cve-c57="">Gautam Yadav</h6>
+									<p _ngcontent-cve-c57="">Org Role :</p>
+									<p _ngcontent-cve-c57="">Preference Contact</p>
+								</div>
+							</div>
+						</div>
+					</div>
 				</ng-template>
 			</li>
 			<li [ngbNavItem]="3">
@@ -164,6 +276,15 @@
 						eget
 						neque. Phasellus nec tortor vel tellus pulvinar feugiat.
 					</p>
+				</ng-template>
+			</li>
+			<li [ngbNavItem]="5">
+				<button ngbNavLink>Contacts</button>
+				<ng-template ngbNavContent let-active>
+					<ag-grid-angular style="width: 100%;height:550px;" [columnDefs]="colDefs" [rowData]="rowData"
+						[pagination]="true" [paginationAutoPageSize]="10" [paginationPageSizeSelector]="[5,10,20]"
+						[gridOptions]="gridOptions" [rowSelection]="'multiple'">
+					</ag-grid-angular>
 				</ng-template>
 			</li>
 		</ul>

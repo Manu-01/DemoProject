@@ -12,187 +12,29 @@
       "id": "4956"
     }
   ],
-  "organization": [
-    {
-      "id": "1a56",
-      "organizationName": "TechNova Inc.",
-      "type": "Customer",
-      "industry": "Information Technology",
-      "onboarding": "Active",
-      "product": "NovaSuite CRM",
-      "email": "contact@technova.com",
-      "phone": "+1-555-123-4567"
-    },
-    {
-      "id": "2b67",
-      "organizationName": "GreenLeaf Ltd.",
-      "type": "Non-Customer",
-      "industry": "Agriculture",
-      "onboarding": "Pending",
-      "product": "AgriTrack",
-      "email": "support@greenleaf.com",
-      "phone": "+1-555-234-5678"
-    },
-    {
-      "id": "3c78",
-      "organizationName": "MediCore Health",
-      "type": "Non-Customer",
-      "industry": "Healthcare",
-      "onboarding": "Active",
-      "product": "MediServe",
-      "email": "info@medicore.org",
-      "phone": "+1-555-345-6789"
-    },
-    {
-      "id": "4d89",
-      "organizationName": "EduWave Systems",
-      "type": "Customer",
-      "industry": "Education",
-      "onboarding": "Inactive",
-      "product": "LearnPro LMS",
-      "email": "hello@eduwave.com",
-      "phone": "+1-555-456-7890"
-    },
-    {
-      "id": "5e90",
-      "organizationName": "FinEdge Capital",
-      "type": "Customer",
-      "industry": "Finance",
-      "onboarding": "Active",
-      "product": "EdgeBank Suite",
-      "email": "support@finedge.com",
-      "phone": "+1-555-567-8901"
-    },
-    {
-      "id": "6f01",
-      "organizationName": "BuildRight Co.",
-      "type": "Non-Customer",
-      "industry": "Construction",
-      "onboarding": "Pending",
-      "product": "ConstructHub",
-      "email": "info@buildright.com",
-      "phone": "+1-555-678-9012"
-    },
-    {
-      "id": "7g12",
-      "organizationName": "RetailSphere",
-      "type": "Customer",
-      "industry": "Retail",
-      "onboarding": "Active",
-      "product": "ShopEase POS",
-      "email": "contact@retailsphere.com",
-      "phone": "+1-555-789-0123"
-    },
-    {
-      "id": "8h23",
-      "organizationName": "EcoDrive Motors",
-      "type": "Non-Customer",
-      "industry": "Automotive",
-      "onboarding": "Inactive",
-      "product": "DriveControl",
-      "email": "support@ecodrive.com",
-      "phone": "+1-555-890-1234"
-    },
-    {
-      "id": "9i34",
-      "organizationName": "FoodChain Logistics",
-      "type": "Customer",
-      "industry": "Logistics",
-      "onboarding": "Active",
-      "product": "ChainTrack",
-      "email": "info@foodchainlog.com",
-      "phone": "+1-555-901-2345"
-    },
-    {
-      "id": "0j45",
-      "organizationName": "BrightPixel Studios",
-      "type": "Customer",
-      "industry": "Media & Entertainment",
-      "onboarding": "Pending",
-      "product": "PixArt Suite",
-      "email": "hello@brightpixel.com",
-      "phone": "+1-555-012-3456"
-    }
-  ],
   "sidebarJson": [
     {
       "organizationName": "In2IT",
-      "contactsLength": 4
+      "contactsLength": 4,
+      "id": "1a04"
     },
     {
       "organizationName": "In2IT A",
-      "contactsLength": 6
+      "contactsLength": 6,
+      "id": "cd78"
     },
     {
       "organizationName": "NextGen IT",
-      "contactsLength": 4
+      "contactsLength": 4,
+      "id": "74c9"
     },
     {
       "organizationName": "CloudAxis",
-      "contactsLength": 8
+      "contactsLength": 8,
+      "id": "9ce6"
     }
   ],
   "ContactData": [
-    {
-      "id": "eb03",
-      "organizationName": "In2IT",
-      "role": "Product-Manager",
-      "remarks": "212sg5ds3fg45df",
-      "email": "Kumargumrt",
-      "phone": "587928485",
-      "codes": "+91",
-      "fname": "Gurmeet",
-      "lname": "Kumar",
-      "additionalroles": "KumarGUum"
-    },
-    {
-      "id": "ad13",
-      "organizationName": "In2IT",
-      "role": "Product-Manager",
-      "remarks": "212sg5ds3fg45df",
-      "email": "Kumargumrt",
-      "phone": "587928485",
-      "codes": "+91",
-      "fname": "Gurmeet",
-      "lname": "Kumar",
-      "additionalroles": "KumarGUum"
-    },
-    {
-      "id": "896a",
-      "organizationName": "In2IT",
-      "role": "Product-Manager",
-      "remarks": "212sg5ds3fg45df",
-      "email": "Kumargumrt",
-      "phone": "587928485",
-      "codes": "+91",
-      "fname": "Gurmeet",
-      "lname": "Kumar",
-      "additionalroles": "KumarGUum"
-    },
-    {
-      "id": "39e7",
-      "organizationName": "In2IT",
-      "role": "Product-Manager",
-      "remarks": "212sg5ds3fg45df",
-      "email": "Kumargumrt",
-      "phone": "587928485",
-      "codes": "+91",
-      "fname": "Gurmeet",
-      "lname": "Kumar",
-      "additionalroles": "KumarGUum"
-    },
-    {
-      "id": "a4d7",
-      "organizationName": "In2IT A",
-      "role": "Product-Manager",
-      "remarks": "212sg5ds3fg45df",
-      "email": "Kumargumrt",
-      "phone": "587928485",
-      "codes": "+91",
-      "fname": "rahul",
-      "lname": "Kumar",
-      "additionalroles": "KumarGUum"
-    },
     {
       "id": "b68a",
       "organizationName": "In2IT A",
@@ -240,6 +82,18 @@
       "fname": "Inzimam",
       "lname": "kumar",
       "additionalroles": "asgsdgasfg"
+    },
+    {
+      "organizationName": "In2IT A",
+      "role": "Partner",
+      "remarks": "bahut badiya",
+      "email": "manu12@gmail.com",
+      "phone": "9876543210",
+      "codes": "+91",
+      "fname": "manu",
+      "lname": "shukla",
+      "additionalroles": "kuchnhi",
+      "id": "33bf"
     }
   ]
 }

@@ -17,8 +17,15 @@ ul li {
   overflow: hidden;
   padding: 10px;
 }
-.active {
+.active_link {
   background: rgb(228, 228, 228);
   color: black;
   border-radius: 5px;
+}
+div li {
+  padding: 3px 11px;
+}
+a {
+  text-decoration: none;
+  color: black;
 }

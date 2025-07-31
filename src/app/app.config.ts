@@ -12,6 +12,7 @@ import {
   AlignRight,
   Bell,
   Briefcase,
+  Delete,
   Edit,
   GitPullRequest,
   LogIn,
@@ -40,6 +41,7 @@ const icons = {
   LogIn,
   UserX,
   Search,
+  Delete,
 };
 export const appConfig: ApplicationConfig = {
   providers: [

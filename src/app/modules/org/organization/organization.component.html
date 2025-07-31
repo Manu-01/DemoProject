@@ -58,23 +58,36 @@
 <div class="container-fluid mt-3 p-0 nav-item">
     <div class="row d-flex g-0">
         <div class="sidebar_section col-2 p-2 rounded">
-            <div class="bg-light " style="height: 73vh;">
-                <ul class="p-2">
-                    <h3>List</h3>
+            <div class="bg-light p-3" style="height: 73vh;">
+                <ul class="g-0 p-0">
+                    <h2>List</h2>
                     <div class="d-flex flex-column gap-3">
-                        <li (click)="getData('All')" class="pointer_tab p-2" [ngClass]="{'active':selected=='All'}">
-                            <a><i-feather name="users" class="me-2 "></i-feather> All
-                                Organizations</a>
+                        <li class="pointer_tab mb-2" (click)="fetchData('All')"
+                            [ngClass]="{ active_link: selected == 'All' }">
+                            <a>
+                                <div class="text_filed d-flex m-0">
+                                    <i-feather name="users" class="me-2"></i-feather>
+                                    <p class="m-0">All Contacts</p>
+                                </div>
+                                <p>{{ allContacts.length }} Contacts</p>
+                            </a>
                         </li>
-                        <li (click)="getData('Customer')" [ngClass]="{'active':selected=='Customer'}"
-                            class="pointer_tab p-2">
-                            <a><i-feather name="user" class="me-2 "></i-feather>
-                                Customer</a>
-                        </li>
-                        <li (click)="getData('Non-Customer')" [ngClass]="{'active':selected=='Non-Customer'}"
-                            class="pointer_tab p-2"><a><i-feather name="user-x" class="me-2 "></i-feather>
-                                Non-customers</a></li>
                     </div>
+                    @for (item of organizaionsData ; track $index) {
+                    <div class="d-flex flex-column gap-3">
+                        <li class="pointer_tab" (click)="fetchData(item.organizationName)"
+                            [ngClass]="{ active_link: item.organizationName == selected }">
+                            <a>
+                                <div class="text_filed d-flex m-0">
+                                    <i-feather name="users" class="me-2"></i-feather>
+                                    <a class="m-0 text_decoration">{{ item.organizationName }}</a>
+                                </div>
+                                <p>{{ getContactCount(item.organizationName) }} Contacts</p>
+                            </a>
+                        </li>
+                    </div>
+                    }
+
                 </ul>
             </div>
 
