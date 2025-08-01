@@ -1,15 +1,26 @@
 {
   "task": [
     {
-      "solutionArea": "tyuytutyuyt",
-      "workFlow": "kumar",
-      "taskId": 2,
+      "solutionArea": "dfghjk",
+      "workFlow": "fdghj",
+      "taskId": 142424242,
       "status": "Active",
-      "taskName": "545dfh",
-      "startDate": "2025-07-08",
-      "dueDate": "2025-07-25",
-      "priority": "Medium",
+      "taskName": "fgjf",
+      "startDate": "2025-08-01",
+      "dueDate": "2025-08-14",
+      "priority": "High",
       "id": "4956"
+    },
+    {
+      "solutionArea": "manu",
+      "workFlow": "yuiyuru",
+      "taskId": 4075640,
+      "status": "Active",
+      "taskName": "gryet",
+      "startDate": "2025-08-21",
+      "dueDate": "2025-08-19",
+      "priority": "Medium",
+      "id": "9faf"
     }
   ],
   "sidebarJson": [
@@ -36,78 +47,6 @@
   ],
   "ContactData": [
     {
-      "id": "b68a",
-      "organizationName": "In2IT A",
-      "role": "Manager",
-      "remarks": "212sg5ds3fg45df",
-      "email": "Kumargumrt",
-      "phone": "587928485",
-      "codes": "+91",
-      "fname": "rahul123",
-      "lname": "Kumar",
-      "additionalroles": "KumarGUum"
-    },
-    {
-      "id": "ecb1",
-      "organizationName": "CloudAxis",
-      "role": "Manager",
-      "remarks": "sdgsdfgjdskj",
-      "email": "kumarManu@gmail.com",
-      "phone": "12235454535",
-      "codes": "+72",
-      "fname": "Manu",
-      "lname": "Kumar",
-      "additionalroles": "Developer"
-    },
-    {
-      "id": "1b38",
-      "organizationName": "CloudAxis",
-      "role": "Customer",
-      "remarks": "asgsgasgs",
-      "email": "sjbhasdghasgasfg",
-      "phone": "gsasfgasgs",
-      "codes": "+91",
-      "fname": "Inzimam",
-      "lname": "dfgfdgfd",
-      "additionalroles": "asgsdgasfg"
-    },
-    {
-      "id": "689e",
-      "organizationName": "In2IT A",
-      "role": "Customer",
-      "remarks": "asgsgasgs",
-      "email": "kumargumeet09@gmail.com",
-      "phone": "gsasfgasgs",
-      "codes": "+91",
-      "fname": "Inzimam",
-      "lname": "kumar",
-      "additionalroles": "asgsdgasfg"
-    },
-    {
-      "organizationName": "In2IT A",
-      "role": "Partner",
-      "remarks": "bahut badiya",
-      "email": "manu12@gmail.com",
-      "phone": "9876543210",
-      "codes": "+91",
-      "fname": "manu",
-      "lname": "shukla",
-      "additionalroles": "kuchnhi",
-      "id": "33bf"
-    },
-    {
-      "id": "d35b",
-      "organizationName": "In2IT",
-      "role": "Partner",
-      "remarks": "wertg",
-      "email": "demo@emailc.om",
-      "phone": "1212122121",
-      "codes": "+91",
-      "fname": "test",
-      "lname": "demo",
-      "additionalroles": "wewrg"
-    },
-    {
       "id": "0b39",
       "organizationName": "In2IT",
       "role": "Customer",
@@ -118,6 +57,69 @@
       "fname": "dmeo",
       "lname": "emo",
       "additionalroles": "ergert"
+    },
+    {
+      "organizationName": "NextGen IT",
+      "role": "Manager",
+      "remarks": "puspa jhukega nhi ",
+      "email": "pushPa@gmail.com",
+      "phone": "9821654987",
+      "codes": "+1",
+      "fname": "pushpa",
+      "lname": "Bhau",
+      "additionalroles": "Angular developer",
+      "addMedium": [],
+      "id": "09a5"
+    },
+    {
+      "organizationName": "In2IT A",
+      "role": "Product-Manager",
+      "remarks": "hhhhh",
+      "email": "abcd@in2it.com",
+      "phone": "2356894500",
+      "codes": "+91",
+      "fname": "tester",
+      "lname": "manu",
+      "additionalroles": "hhhh",
+      "addMedium": [
+        {
+          "addMediumtype": "phone",
+          "email": "",
+          "phone": ""
+        },
+        {
+          "addMediumtype": ["email"],
+          "email": "",
+          "phone": ""
+        }
+      ],
+      "id": "4940"
+    },
+    {
+      "id": "7344",
+      "organizationName": "NextGen IT",
+      "role": "Product-Manager",
+      "remarks": "localhost4200menumytask",
+      "email": "kumarrahul@ga",
+      "phone": "2312331321",
+      "codes": "+91",
+      "fname": "rahul ",
+      "lname": "kumar",
+      "additionalroles": "Angular develper",
+      "addMedium": []
+    },
+    {
+      "id": "7b79",
+      "organizationName": "In2IT A",
+      "role": "Manager",
+      "remarks": "fsdfsdsdfg",
+      "email": "manu@gmail",
+      "phone": "1236478964",
+      "codes": "+91",
+      "fname": "Manu",
+      "lname": "kumar",
+      "additionalroles": "Angla bksjd",
+      "addMedium": []
     }
   ]
 }

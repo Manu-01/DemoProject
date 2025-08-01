@@ -44,6 +44,7 @@ export class OrganizationComponent {
     'Tester',
     'Developer',
   ];
+  filteredData: any[] = [];
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
@@ -88,10 +89,10 @@ export class OrganizationComponent {
         return;
       }
 
-      this.rowData = this.allContacts.filter(
+      this.filteredData = this.allContacts.filter(
         (item: any) => item.organizationName === data
       );
-
+      this.rowData = this.filteredData;
       const usedRoles = this.rowData.map((d: any) => d.role);
       this.filteredRole = this.roles?.filter(
         (r: any) => !usedRoles.includes(r)
@@ -107,6 +108,7 @@ export class OrganizationComponent {
       filed: '',
       checkboxSelection: true,
       headerCheckboxSelection: true,
+      flex: 1,
     },
     {
       field: 'organizationName',
@@ -136,7 +138,7 @@ export class OrganizationComponent {
   gridOptions = {
     defaultColDef: {
       sortable: false,
-      flex: 1,
+      flex: 2,
     },
     context: {
       componentParent: this,
@@ -159,15 +161,30 @@ export class OrganizationComponent {
     this.active = event.id;
   }
   searchText: any;
-  onSearchOrg(event: any) {
-    let filteredData = this.rowData.filter((item: any) =>
-      Object.values(item).join('').toLowerCase().includes(this.searchText)
-    );
 
-    if (this.searchText != '') {
-      this.rowData = filteredData;
-    } else {
-      this.getData();
+  onSearchOrg() {
+    const search = this.searchText?.trim().toLowerCase();
+
+    let sourceData: any[] = [];
+
+    if (!search) {
+      if (this.selected === 'All' || !this.selected) {
+        this.rowData = [...this.allContacts];
+      } else {
+        this.rowData = [...this.filteredData];
+      }
+      return;
     }
+
+    if (this.selected === 'All' || !this.filteredData?.length) {
+      sourceData = this.allContacts;
+    } else {
+      sourceData = this.filteredData;
+    }
+
+    this.rowData = sourceData.filter((item: any) => {
+      const combinedString = Object.values(item).join(' ').toLowerCase();
+      return combinedString.includes(search);
+    });
   }
 }

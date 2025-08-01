@@ -24,45 +24,42 @@ import { UserService } from '../../../Service/user.service';
   styleUrl: './mytask.component.scss',
 })
 export class MytaskComponent {
-  myForm!: FormGroup;
   toggleValue: boolean = false;
   rowData: any;
   mode: boolean = false;
   status = ['Active', 'InActive'];
   priority = ['Low', 'Medium', 'High'];
 
-  constructor(private userService: UserService) {
-    this.myForm = new FormGroup({
-      solutionArea: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z\s]+$/),
-      ]),
-      workFlow: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z\s]+$/),
-      ]),
-      taskId: new FormControl('', Validators.required),
-      status: new FormControl('', Validators.required),
-      taskName: new FormControl('', [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z\s]+$/),
-      ]),
-      startDate: new FormControl('', Validators.required),
-      dueDate: new FormControl('', Validators.required),
-      priority: new FormControl('', Validators.required),
-    });
-  }
+  constructor(private userService: UserService) {}
   ngOnInit(): void {
     this.getData();
     this.SetBreadCrumb();
   }
-
+  myForm = new FormGroup({
+    solutionArea: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z\s]+$/),
+    ]),
+    workFlow: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z\s]+$/),
+    ]),
+    taskId: new FormControl('', Validators.required),
+    status: new FormControl('', Validators.required),
+    taskName: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z\s]+$/),
+    ]),
+    startDate: new FormControl('', Validators.required),
+    dueDate: new FormControl('', Validators.required),
+    priority: new FormControl('', Validators.required),
+  });
   saveData() {
     if (this.myForm.valid) {
       this.userService.createUser(this.myForm.value).subscribe((res: any) => {
         this.getData();
         this.toggleValue = false;
-        this.myForm.reset();
+        this.resetForm();
       });
     } else {
       console.log('error');
@@ -70,9 +67,11 @@ export class MytaskComponent {
   }
 
   clearAll() {
-    this.myForm.reset();
+    this.resetForm();
   }
   toggleShowHide() {
+    this.resetForm();
+    this.mode = false;
     this.toggleValue = !this.toggleValue;
   }
 
@@ -87,6 +86,7 @@ export class MytaskComponent {
       filed: '',
       checkboxSelection: true,
       headerCheckboxSelection: true,
+      flex: 1,
     },
     { field: 'id', headerName: 'Id' },
     { field: 'solutionArea', headerName: 'SolutionArea' },
@@ -130,7 +130,7 @@ export class MytaskComponent {
   gridOptions = {
     defaultColDef: {
       sortable: false,
-      flex: 1,
+      flex: 2,
     },
     context: {
       componentParent: this,
@@ -171,7 +171,7 @@ export class MytaskComponent {
           this.toggleValue = false;
           this.getData();
         });
-      this.myForm.reset();
+      this.resetForm();
     } else {
       console.log('Invalid Credentials');
       this.myForm.markAllAsTouched();
@@ -181,5 +181,18 @@ export class MytaskComponent {
   validateDueDate(event: any) {
     let today = new Date().toISOString().split('T')[0];
     event.target.min = today;
+  }
+
+  resetForm() {
+    this.myForm.reset({
+      solutionArea: '',
+      workFlow: '',
+      taskId: '',
+      status: 'select',
+      taskName: '',
+      startDate: '',
+      dueDate: '',
+      priority: 'select',
+    });
   }
 }

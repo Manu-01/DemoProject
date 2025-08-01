@@ -75,7 +75,7 @@
                                     formControlName="solutionArea" aria-describedby="emailHelp"
                                     placeholder="Solution Area">
                                 @if(myForm.get('solutionArea')?.touched &&
-                                myForm.get('solutionArea')?.errors){
+                                myForm.get('solutionArea')?.invalid){
                                 <div>
                                     @if(myForm.get('solutionArea')?.hasError('required'))
                                     {
@@ -144,7 +144,7 @@
                             <div class="form-group">
                                 <label for="status">Status <span style="color: red;">*</span></label>
                                 <select class="form-control" formControlName="status">
-                                    <option value="" disabled selected>select</option>
+                                    <option value="select" disabled selected>select</option>
                                     @for(item of status;track item){
                                     <option [value]="item">{{item}}</option>
                                     }
@@ -176,7 +176,7 @@
                             <div class="form-group">
                                 <label for="priority">Priority <span style="color: red;">*</span></label>
                                 <select class="form-control" formControlName="priority">
-                                    <option value="" disabled selected>select</option>
+                                    <option value="select" disabled selected>select</option>
                                     @for(item of priority;track item){
                                     <option [value]="item">{{item}}</option>
                                     }

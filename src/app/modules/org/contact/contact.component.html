@@ -21,9 +21,7 @@
                   </button>
                   <hr class="m-0 p-0" />
                   <button ngbDropdownItem>Bulk Upload</button>
-                  <button ngbDropdownItem (click)="toggleViewcard()">
-                    view card
-                  </button>
+
                 </div>
               </div>
             </div>
@@ -116,8 +114,8 @@
         <div class="header_sections d-flex justify-content-between align-items-center px-3 mb-3">
           <h3>All Contact Lists</h3>
           <div class="input_box bg-light d-flex justify-content-between align-items-center">
-            <input type="text" class="form-control rounded" placeholder="search here..." [(ngModel)]="searchText"
-              (ngModelChange)="onSearchTextChanged(searchText)" />
+            <input type="text" class="form-control rounded" placeholder="search here..." [(ngModel)]="searchText2"
+              (ngModelChange)="onSearchTextChanged()" />
             <span class="ms-2"><i-feather name="search" class="me-2"></i-feather>
             </span>
           </div>
@@ -178,7 +176,7 @@
                 </div>
                 <label class="form-label">OrganizationName <span style="color: red;">*</span></label>
                 <select name="" id="" class="form-control" formControlName="organizationName">
-                  <option value="Select" disabled>Select</option>
+                  <option value="Select" disabled selected>Select</option>
                   @for (item of orgnizations; track $index) {
                   <option [value]="item">{{ item }}</option>
                   }
@@ -201,7 +199,7 @@
                 <label class="form-label">Phone <span style="color: red;">*</span></label>
                 <div class="select-section d-flex gap-2">
                   <select name="" id="" class="form-control w-25" formControlName="codes">
-                    <option value="" disabled selected>Code</option>
+                    <option value="Select" disabled selected>Select</option>
                     @for (item of codes; track $index) {
                     <option [value]="item">{{ item }}</option>
                     }
@@ -210,8 +208,7 @@
                     Required.</small>
 
                   <div class="d-flex flex-column">
-                    <input type="text" [placeholder]="onChangePlaceHolder()" class="form-control"
-                      formControlName="phone" />
+                    <input type="text" placeholder="Type your number" class="form-control" formControlName="phone" />
                     @if( contactForm.get('phone')?.touched &&
                     contactForm.get('phone')?.errors){
                     <div>
@@ -224,18 +221,88 @@
                       {
                       <small>Only Numbers are required.</small>
                       }
+                      @else if(contactForm.get('phone')?.errors?.['maxlength']){
+                      <small>Maxium 10 length is required.</small>
+                      }
                     </div>
                     }
                   </div>
                 </div>
               </div>
+              <div class="form_array" formArrayName="addMedium">
+                <div class="mb-3" *ngFor="let addMedium of addMedium.controls; let i = index" [formGroupName]="i">
+                  <label for="" class="form-label">Another <span style="color: red;">*</span></label>
 
+                  <div class="row align-items-center">
+                    <div class="d-flex align-items-start ">
+
+
+
+                      <div class="input-group d-flex gap-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group">
+                            <select class="form-control w-auto" formControlName="addMediumtype"
+                              (change)="getCodeValue($event,i)">
+
+                              <option value="email" selected>Email</option>
+                              <option value="phone">Phone</option>
+                            </select>
+                          </div>
+                        </div>
+                        @if (addMedium.get('addMediumtype')?.value == 'phone' ) {
+                        <input type="text" placeholder="phone" class="form-control" formControlName="phone" />
+                        <div>
+                          @if(addMedium.get('phone')?.hasError('required'))
+                          {
+                          <small>This Field is Required.</small>
+                          }
+                          @else if (!addMedium.get('phone')?.hasError('required') &&
+                          addMedium.get('phone')?.hasError('pattern'))
+                          {
+                          <small>Only Numbers are required.</small>
+                          }
+                          @else if(addMedium.get('phone')?.errors?.['maxlength']){
+                          <small>Maxium 10 length is required.</small>
+                          }
+                        </div>
+                        }
+                        @if(addMedium.get('addMediumtype')?.value == 'email'){
+                        <input type="text" placeholder="email" class="form-control col-auto" formControlName="email" />
+                        <div class="invalid-feedback" style="width: 100%;"
+                          *ngIf="addMedium.get('email')?.invalid && addMedium.get('email')?.touched">
+                          Email is required.
+                        </div>
+
+                        }
+
+                        <!-- Trash Icon -->
+                        <i-feather name="trash2" class="mt-2 cursor-pointer" (click)="removeAddMedium(i)"></i-feather>
+                      </div>
+
+
+                    </div>
+
+
+                    <!-- <div class="col-md-4">
+                      <label class="form-label">Phone</label>
+                      <input type="text" class="form-control" formControlName="phone" placeholder="Enter number here">
+                      <small class="form-text text-danger"
+                        *ngIf="addMedium.get('phone')?.invalid && addMedium.get('phone')?.touched">
+                        Phone name is required.
+                      </small>
+                    </div> -->
+
+                  </div>
+                </div>
+                <a href="javascript:void(0)" (click)="addMediumfiled()">add here</a>
+
+              </div>
 
               <div class="form-group ">
                 <label class="form-label"> Role <span style="color: red;">*</span></label>
-                <select class="form-control" formControlName="role" [disabled]="true">
+                <select class="form-control" formControlName="role">
                   @if(this.contactForm.get('organizationName')?.value){
-                  <option value="" disabled selected>Select</option>
+                  <option value="Select" disabled selected>Select</option>
                   @for (item of filteredRole? filteredRole: roles; track $index) {
                   <option [value]="item">{{ item }}</option>
                   }
@@ -268,13 +335,10 @@
 
 
               <div class="form-group">
-                <label class="form-label">Reamarks <span style="color: red;">*</span></label>
+                <label class="form-label">Reamarks </label>
                 <textarea type="text" placeholder="Industry Name" rows="2" class="form-control"
                   formControlName="remarks"></textarea>
-                @if( contactForm.get('remarks')?.touched &&
-                contactForm.get('remarks')?.invalid){
-                <small>This Field is required.</small>
-                }
+
               </div>
 
               <div class="button-row d-flex gap-2">

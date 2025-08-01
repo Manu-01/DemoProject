@@ -3,10 +3,17 @@ import { NgbAlertModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridAngular } from 'ag-grid-angular';
 import { FeatherModule } from 'angular-feather';
 import { UserService } from '../../Service/user.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-organization-details',
-  imports: [NgbNavModule, NgbAlertModule, AgGridAngular, FeatherModule],
+  imports: [
+    NgbNavModule,
+    NgbAlertModule,
+    AgGridAngular,
+    FeatherModule,
+    NgClass,
+  ],
   templateUrl: './organization-details.component.html',
   styleUrl: './organization-details.component.scss',
 })
@@ -75,4 +82,11 @@ export class OrganizationDetailsComponent implements OnInit {
       componentParent: this,
     },
   };
+  viewData: any;
+  viewCard: boolean = false;
+  rowDataSelect(event: any) {
+    this.viewData = event.data;
+    this.viewCard = true;
+    console.log(this.viewData);
+  }
 }

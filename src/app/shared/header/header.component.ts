@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FeatherModule } from 'angular-feather';
 import { UserService } from '../../Service/user.service';
-import { ENVIORNMENT } from '../../../../env';
+import { ENVIORNMENT } from '../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -12,11 +12,10 @@ import { ENVIORNMENT } from '../../../../env';
 })
 export class HeaderComponent {
   breadCrumbData: any;
-
+  isProduction!: boolean;
   constructor(private router: Router, private service: UserService) {
     this.isProduction = ENVIORNMENT.production;
   }
-  isProduction!: boolean;
 
   ngOnInit() {
     this.service.mysubject$.subscribe((breadCrumb) => {
@@ -25,6 +24,7 @@ export class HeaderComponent {
   }
 
   redirectToLiveSite(): void {
+    console.log(this.isProduction);
     window.location.href = 'http://manuspike.netlify.app/'; // Replace with your actual live website URL
   }
 }

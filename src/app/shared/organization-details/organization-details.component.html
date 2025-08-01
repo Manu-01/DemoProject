@@ -2,41 +2,33 @@
 	<div class=" card">
 		<section class=" text-center container">
 			@for (data of Explaindata; track $index) {
-			<div class="row py-lg-5">
-				<div class="col-md-4 ">
-					<h1>Contact ID : {{data.id}}</h1>
-					<h3 class="fw-light">Name Of Org: {{data.organizationName}}</h3>
-					<p class="lead text-body-secondary"> Name Of Role: {{data.role}}</p>
-					<p class="lead text-body-secondary"> Contact FullName: {{data.fname}} {{data.lname}}</p>
-					<div class="d-flex justify-content-center gap-3">
-					</div>
+			<div _ngcontent-lln-c57="" class="row py-3">
+				<div _ngcontent-lln-c57="" class="col-4">
+					<ul _ngcontent-lln-c57="">
+						<h4>Contact ID : {{data.id}}</h4>
+						<h5 _ngcontent-lln-c57=""> {{data.organizationName}}</h5>
+						<li _ngcontent-lln-c57=""><strong _ngcontent-lln-c57="">Parent Organization </strong> with
+							Related Orgs A Registration Number :AB-123456 </li>
+					</ul>
 				</div>
-				<div class="col-md-4 ">
-					<p class="lead text-body-secondary">{{data.remarks}}</p>
-					<p class="lead text-body-secondary">Additional Role: {{data.additionalroles}}</p>
-
+				<div _ngcontent-lln-c57="" class="col-3">
+					<ul _ngcontent-lln-c57="">
+						<li _ngcontent-lln-c57=""><strong _ngcontent-lln-c57="">Additional
+								Role: </strong>{{data.additionalroles}}</li>
+						<li _ngcontent-lln-c57=""><strong _ngcontent-lln-c57=""> Remarks: </strong>{{data.remarks}}
+						</li>
+					</ul>
 				</div>
-				<div class="col-md-4 ">
-					<h4 class="fw-light">Phone No:{{data.codes}} {{data.phone}}</h4>
-					<p class="lead text-body-secondary">Contact Email: {{data.email}}</p>
-					<p class="lead text-body-secondary">{{data.organizationName}}</p>
+				<div _ngcontent-lln-c57="" class="col-3">
+					<h5 _ngcontent-lln-c57=""> {{data.fname}} {{data.lname}}<span
+							_ngcontent-lln-c57="">{{data.role}}</span></h5>
+					<p _ngcontent-lln-c57="">Email: {{data.email}}</p>
+					<p _ngcontent-lln-c57="">Phone: {{data.codes}} {{data.phone}}</p>
 				</div>
 			</div>
-
 			}
 
-			<!-- {
-    "id": "eb03",
-    "organizationName": "In2IT",
-    "role": "Product-Manager",
-    "remarks": "212sg5ds3fg45df",
-    "email": "Kumargumrt",
-    "phone": "587928485",
-    "codes": "+91",
-    "fname": "Gurmeet",
-    "lname": "Kumar",
-    "additionalroles": "KumarGUum"
-  }, -->
+
 		</section>
 
 		<ul ngbNav #nav="ngbNav" [(activeId)]="active" [destroyOnHide]="false" class="nav-tabs">
@@ -281,10 +273,44 @@
 			<li [ngbNavItem]="5">
 				<button ngbNavLink>Contacts</button>
 				<ng-template ngbNavContent let-active>
-					<ag-grid-angular style="width: 100%;height:550px;" [columnDefs]="colDefs" [rowData]="rowData"
-						[pagination]="true" [paginationAutoPageSize]="10" [paginationPageSizeSelector]="[5,10,20]"
-						[gridOptions]="gridOptions" [rowSelection]="'multiple'">
-					</ag-grid-angular>
+					<div class="row g-0">
+						<div class="col-8" [ngClass]="{'col-12': !viewCard}">
+							<ag-grid-angular style="width: 100%;height:550px;" [columnDefs]="colDefs"
+								[rowData]="rowData" [pagination]="true" [paginationAutoPageSize]="10"
+								[paginationPageSizeSelector]="[5,10,20]" [gridOptions]="gridOptions"
+								[rowSelection]="'multiple'" (rowClicked)="rowDataSelect($event)">
+							</ag-grid-angular>
+						</div>
+						@if (viewCard) {
+						<div class="col-4 px-2">
+							<div class="card">
+								<div class="card-header d-flex justify-content-between align-items-center">
+									<span>view card</span>
+								</div>
+								<div class="card-body">
+									@if(viewData){
+									<h2 class="card-title">{{ viewData.id }}</h2>
+									<h3 class="m-0">{{ viewData.organizationName }}</h3>
+									<p class="m-0">{{ viewData.industry }}</p>
+									<p class="m-0">{{ viewData.type }}</p>
+									<p class="m-0">{{ viewData.product }}</p>
+									<p class="m-0">{{ viewData.onboarding }}</p>
+									<p class="m-0">{{ viewData.email }}</p>
+									<p class="m-0">{{ viewData.phone }}</p>
+									}
+
+									<p class="card-text">
+										With supporting text below as a natural lead-in to additional
+										content.
+									</p>
+									<a class="btn btn-primary" (click)="viewCard = false">Close</a>
+								</div>
+							</div>
+						</div>
+						}
+					</div>
+
+
 				</ng-template>
 			</li>
 		</ul>
