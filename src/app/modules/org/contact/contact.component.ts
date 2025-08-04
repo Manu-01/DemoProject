@@ -17,6 +17,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Target } from 'angular-feather/icons';
 @Component({
   selector: 'app-contact',
   imports: [
@@ -53,8 +54,39 @@ export class ContactComponent {
   gridApi: any;
   headerValue = 'Add Contacts';
   deleteId: any = null;
+  allContacts: any[] = [];
+  filteredRole: any = null;
   getFilterOrganization: any;
   filteredData: any[] = [];
+
+  contactForm = new FormGroup({
+    organizationName: new FormControl('Select', Validators.required),
+    role: new FormControl({ value: '', disabled: true }, Validators.required),
+    remarks: new FormControl(''),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+    ]),
+    phone: new FormControl('', [
+      Validators.required,
+      Validators.pattern(/^[1-9][0-9]*$/),
+      Validators.maxLength(10),
+      Validators.minLength(10),
+    ]),
+    codes: new FormControl('', Validators.required),
+    fname: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(10),
+      Validators.pattern(/^[a-zA-Z\s]+$/),
+    ]),
+    lname: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(10),
+      Validators.pattern(/^[a-zA-Z\s]+$/),
+    ]),
+    additionalroles: new FormControl(''),
+    addMedium: new FormArray([]),
+  });
   constructor(
     private router: Router,
     private userService: UserService,
@@ -73,141 +105,7 @@ export class ContactComponent {
     'Tester',
     'Developer',
   ];
-  ngOnInit(): void {
-    this.getSidebarData();
-    this.fetchData('All');
-    this.onBreadCrumb();
-    this.getContactData();
-    this.contactForm.get('codes')?.valueChanges.subscribe(() => {
-      this.setPhoneValidators();
-    });
-    this.getCodeValue('email', 0);
 
-    this.contactForm.get('fname')?.valueChanges.subscribe((dt) => {
-      console.log('test', this.contactForm.value);
-    });
-  }
-  getCodeValue(event: any, index: number) {
-    const selectedValue = event.target?.value;
-    const mediumGroup = this.contactForm.get('addMedium') as FormArray;
-    const emailControl = mediumGroup?.get('email');
-    const phoneControl = mediumGroup?.get('phone');
-
-    if (selectedValue === 'email') {
-      emailControl?.setValidators([Validators.required, Validators.email]);
-      phoneControl?.clearValidators();
-      phoneControl?.setValue('');
-    } else if (selectedValue === 'phone') {
-      phoneControl?.setValidators([
-        Validators.required,
-        Validators.pattern(/^[1-9][0-9]*$/),
-        Validators.maxLength(10),
-      ]);
-      emailControl?.clearValidators();
-      emailControl?.setValue('');
-    }
-
-    emailControl?.updateValueAndValidity();
-    phoneControl?.updateValueAndValidity();
-  }
-
-  contactForm = new FormGroup({
-    organizationName: new FormControl('Select', Validators.required),
-    role: new FormControl('', Validators.required),
-    remarks: new FormControl(''),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[1-9][0-9]*$/),
-      Validators.maxLength(10),
-    ]),
-    codes: new FormControl('', Validators.required),
-    fname: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(10),
-      Validators.pattern(/^[a-zA-Z\s]+$/),
-    ]),
-    lname: new FormControl('', [
-      Validators.required,
-      Validators.maxLength(10),
-      Validators.pattern(/^[a-zA-Z\s]+$/),
-    ]),
-    additionalroles: new FormControl('', [
-      Validators.required,
-      Validators.pattern(/^[a-zA-Z\s]+$/),
-    ]),
-    addMedium: new FormArray([]),
-  });
-
-  get addMedium(): FormArray {
-    return this.contactForm.get('addMedium') as FormArray;
-  }
-
-  addMediumfiled() {
-    this.addMedium.push(
-      new FormGroup({
-        addMediumtype: new FormControl('email'),
-        email: new FormControl('heello gurmmeet'),
-        phone: new FormControl('', [Validators.required]),
-      })
-    );
-  }
-  removeAddMedium(index: number) {
-    this.addMedium.removeAt(index);
-  }
-
-  getSidebarData() {
-    this.userService.getSidebarData().subscribe((res: any) => {
-      this.organizaionsData = res;
-      this.getFilterOrganization = res;
-    });
-  }
-
-  getContactData() {
-    this.userService.getContactData().subscribe((res: any) => {
-      this.allContacts = res;
-      this.rowData = [...res];
-    });
-  }
-  allContacts: any[] = [];
-  filteredRole: any = null;
-
-  fetchData(data: any) {
-    this.selected = data;
-    // this.filteredRole = null;
-    this.userService.getContactData().subscribe((res: any) => {
-      this.selected = data;
-      if (data === 'All') {
-        this.rowData = [...this.allContacts];
-        this.filteredRole = null;
-        return;
-      }
-      this.filteredData = this.allContacts.filter(
-        (item: any) => item.organizationName === data
-      );
-      this.rowData = this.filteredData;
-
-      const usedRoles = this.rowData.map((d: any) => d.role);
-
-      this.filteredRole = this.roles?.filter((role: string) => {
-        if (['Manager', 'Product-Manager'].includes(role)) {
-          return !usedRoles.includes(role);
-        }
-        return true;
-      });
-
-      // Optional: Reset form role value if current one is not allowed
-      // const currentRole = this.contactForm.get('role')?.value;
-      // if (!this.filteredRole.includes(currentRole)) {
-      //   this.contactForm.get('role')?.patchValue(null);
-      // }
-    });
-  }
-
-  getContactCount(orgName: string): number {
-    return this.allContacts.filter((item) => item.organizationName === orgName)
-      .length;
-  }
   colDefs = [
     {
       filed: '',
@@ -219,15 +117,14 @@ export class ContactComponent {
       field: 'organizationName',
       headerName: 'OrganizationName',
       cellRenderer: LinkRendererComponent,
+      cellRendererParams: { key: 'organizationName' },
     },
     {
       headerName: 'Full Name',
       valueGetter: (params: any) =>
         `${params.data?.fname} ${params.data?.lname}`,
-      cellRenderer: (params: any) => {
-        const fullName = `${params.data?.fname} ${params.data?.lname}`;
-        return `<a href="javascript:void(0)" style="color: blue; text-decoration: underline;">${fullName}</a>`;
-      },
+      cellRenderer: LinkRendererComponent,
+      cellRendererParams: { key: 'full_name' },
     },
     { field: 'role', headerName: 'Role' },
     {
@@ -266,6 +163,95 @@ export class ContactComponent {
     },
   };
 
+  ngOnInit(): void {
+    this.getSidebarData();
+    this.onBreadCrumb();
+    this.getContactData();
+  }
+  getCodeValue(event: any, index: number) {
+    const selectedValue = event?.target?.value;
+    const group = this.addMedium.at(index) as FormGroup;
+
+    const phoneControl = group?.get('phone');
+    const emailControl = group?.get('email');
+
+    if (selectedValue === 'phone') {
+      phoneControl?.setValidators([
+        Validators.required,
+        Validators.pattern(/^[1-9][0-9]*$/),
+        Validators.maxLength(10),
+        Validators.minLength(10),
+      ]);
+      emailControl?.clearValidators();
+    } else {
+      emailControl?.setValidators([Validators.required, Validators.email]);
+      phoneControl?.clearValidators();
+    }
+
+    phoneControl?.updateValueAndValidity();
+    emailControl?.updateValueAndValidity();
+  }
+
+  get addMedium(): FormArray {
+    return this.contactForm.get('addMedium') as FormArray;
+  }
+
+  addMediumfiled() {
+    const group = new FormGroup({
+      addMediumtype: new FormControl('email'),
+      email: new FormControl('', Validators.email),
+      phone: new FormControl(''),
+    });
+
+    this.addMedium.push(group);
+    this.getCodeValue('email', 0);
+  }
+
+  removeAddMedium(index: number) {
+    this.addMedium.removeAt(index);
+  }
+
+  getSidebarData() {
+    this.userService.getSidebarData().subscribe((res: any) => {
+      this.organizaionsData = res;
+      this.getFilterOrganization = res;
+    });
+  }
+
+  getContactData() {
+    this.userService.getContactData().subscribe((res: any) => {
+      this.allContacts = res;
+      this.rowData = [...res];
+      this.fetchData('All');
+    });
+  }
+
+  fetchData(data: any) {
+    this.resetForm();
+    this.toggleValue = false;
+    this.selected = data;
+
+    if (data === 'All') {
+      this.rowData = [...this.allContacts];
+      this.contactForm.get('organizationName')?.enable();
+      this.contactForm.get('organizationName')?.patchValue('Select');
+      this.contactForm.get('role')?.disable();
+      this.contactForm.get('role')?.patchValue('Select');
+      return;
+    }
+    this.filteredData = this.allContacts.filter(
+      (item: any) => item.organizationName === data
+    );
+    this.rowData = this.filteredData;
+    this.contactForm.get('organizationName')?.patchValue(this.selected);
+    this.getRolesByOrg();
+  }
+
+  getContactCount(orgName: string): number {
+    return this.allContacts.filter((item) => item.organizationName === orgName)
+      .length;
+  }
+
   add(event: any) {
     this.sendData = event;
     this.router.navigate(['/org/organization'], {
@@ -289,6 +275,9 @@ export class ContactComponent {
     if (this.selected !== 'All') {
       this.contactForm.get('organizationName')?.patchValue(this.selected);
       this.contactForm.get('organizationName')?.disable();
+      // this.getRolesByOrg();
+    } else {
+      this.contactForm.get('organizationName')?.enable();
     }
   }
   toggleViewcard() {
@@ -307,8 +296,30 @@ export class ContactComponent {
     this.contactForm.patchValue(this.viewData); // Patch normally
     this.viewCard = false;
     this.mode = true;
-    this.headerValue = ' Edit Contact';
-    const role = this.viewData.role;
+    this.headerValue = 'Edit Contact';
+    this.getRolesByOrg();
+    this.contactForm.get('organizationName')?.disable();
+
+    if (this.headerValue == 'Edit Contact' && this.viewData.role == 'Manager') {
+      const usedRoles = this.rowData.map((d: any) => d.role);
+      this.filteredRole = this.roles?.filter((role: string) => {
+        if (['Product-Manager'].includes(role)) {
+          return !usedRoles.includes(role);
+        }
+        return true;
+      });
+    } else if (
+      this.headerValue == 'Edit Contact' &&
+      this.viewData.role == 'Product-Manager'
+    ) {
+      const usedRoles = this.rowData.map((d: any) => d.role);
+      this.filteredRole = this.roles?.filter((role: string) => {
+        if (['Manager'].includes(role)) {
+          return !usedRoles.includes(role);
+        }
+        return true;
+      });
+    }
   }
 
   onSubmit() {
@@ -317,15 +328,14 @@ export class ContactComponent {
       .subscribe((res) => {
         this.getContactData();
         this.toggleValue = false;
+        this.resetForm();
       });
   }
-  //search Filter for Table
 
+  //search Filter for Table
   onSearchTextChanged() {
     const search = this.searchText2?.trim().toLowerCase();
-
     let sourceData: any[] = [];
-
     if (!search) {
       if (this.selected === 'All' || !this.selected) {
         this.rowData = [...this.allContacts];
@@ -345,7 +355,7 @@ export class ContactComponent {
     });
   }
   //search Filter for sidebar
-  onSearchOrg(event: any) {
+  onSearchOrg() {
     const search = this.searchText.trim().toLowerCase();
     if (search) {
       this.organizaionsData = this.getFilterOrganization.filter((item: any) =>
@@ -356,33 +366,31 @@ export class ContactComponent {
     }
   }
 
-  setPhoneValidators() {
-    let code = this.contactForm.get('codes')?.value;
-    let phone = this.contactForm.get('phone');
+  // setPhoneValidators() {
+  //   let code = this.contactForm.get('codes')?.value;
+  //   let phone = this.contactForm.get('phone');
+  //   if (!phone) return;
+  //   if (code === '+91' || code === '+1') {
+  //     phone.setValidators([
+  //       Validators.required,
+  //       Validators.minLength(10),
+  //       Validators.maxLength(10),
+  //     ]);
+  //   } else if (code === '+72') {
+  //     phone.setValidators([
+  //       Validators.required,
+  //       Validators.minLength(7),
+  //       Validators.maxLength(10),
+  //     ]);
+  //   }
 
-    if (!phone) return;
-
-    if (code === '+91' || code === '+1') {
-      phone.setValidators([
-        Validators.required,
-        Validators.minLength(10),
-        Validators.maxLength(10),
-      ]);
-    } else if (code === '+72') {
-      phone.setValidators([
-        Validators.required,
-        Validators.minLength(7),
-        Validators.maxLength(10),
-      ]);
-    }
-
-    phone.updateValueAndValidity();
-  }
+  //   phone.updateValueAndValidity();
+  // }
 
   updateData() {
     this.userService
       .updateContactData(this.singleId, this.contactForm.value)
-      .subscribe((res) => {
+      .subscribe(() => {
         this.getContactData();
         this.toggleValue = false;
         this.resetForm();
@@ -399,24 +407,43 @@ export class ContactComponent {
   }
 
   cancel() {
-    this.toggleValue = !this.toggleValue;
     this.resetForm();
+    this.toggleValue = !this.toggleValue;
   }
   resetForm() {
-    this.contactForm.reset({
-      fname: '',
-      lname: '',
+    this.contactForm.reset();
+    this.contactForm.patchValue({
+      organizationName: 'Select',
+      role: '',
+      remarks: '',
       email: '',
       phone: '',
-      remarks: '',
-      additionalroles: '',
-      organizationName: 'Select',
       codes: 'Select',
-      role: 'Select',
+      fname: '',
+      lname: '',
+      additionalroles: '',
     });
   }
 
-  test() {
-    console.log(this.contactForm.value);
+  // getRolesByOrg(event: any) {
+  //   console.log(event?.target?.value);
+  //   if (this.contactForm.get('organizationName')?.value) {
+  //     this.contactForm.get('role')?.enable();
+  //     console.log(this.contactForm);
+  //   }
+  // }
+
+  getRolesByOrg() {
+    const role = this.contactForm.get('role');
+    if (this.contactForm.get('organizationName')?.value) {
+      role?.enable();
+      const usedRoles = this.rowData.map((d: any) => d.role);
+      this.filteredRole = this.roles?.filter((role: string) => {
+        if (['Manager', 'Product-Manager'].includes(role)) {
+          return !usedRoles.includes(role);
+        }
+        return true;
+      });
+    }
   }
 }

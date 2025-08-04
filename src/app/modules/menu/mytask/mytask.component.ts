@@ -180,6 +180,7 @@ export class MytaskComponent {
 
   validateDueDate(event: any) {
     let today = new Date().toISOString().split('T')[0];
+    event.target.min = this.myForm.get('startDate')?.value;
     event.target.min = today;
   }
 

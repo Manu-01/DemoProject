@@ -21,6 +21,17 @@
       "dueDate": "2025-08-19",
       "priority": "Medium",
       "id": "9faf"
+    },
+    {
+      "solutionArea": "manu",
+      "workFlow": "yuiyuru",
+      "taskId": 4555,
+      "status": "Active",
+      "taskName": "gryet",
+      "startDate": "2025-08-04",
+      "dueDate": "2025-08-06",
+      "priority": "Low",
+      "id": "112a"
     }
   ],
   "sidebarJson": [
@@ -47,24 +58,12 @@
   ],
   "ContactData": [
     {
-      "id": "0b39",
-      "organizationName": "In2IT",
-      "role": "Customer",
-      "remarks": "drwefe",
-      "email": "demo@kijh",
-      "phone": "1223456712",
-      "codes": "+91",
-      "fname": "dmeo",
-      "lname": "emo",
-      "additionalroles": "ergert"
-    },
-    {
       "organizationName": "NextGen IT",
       "role": "Manager",
       "remarks": "puspa jhukega nhi ",
       "email": "pushPa@gmail.com",
       "phone": "9821654987",
-      "codes": "+1",
+      "codes": "+91",
       "fname": "pushpa",
       "lname": "Bhau",
       "additionalroles": "Angular developer",
@@ -88,7 +87,9 @@
           "phone": ""
         },
         {
-          "addMediumtype": ["email"],
+          "addMediumtype": [
+            "email"
+          ],
           "email": "",
           "phone": ""
         }
@@ -109,16 +110,29 @@
       "addMedium": []
     },
     {
-      "id": "7b79",
-      "organizationName": "In2IT A",
-      "role": "Manager",
-      "remarks": "fsdfsdsdfg",
-      "email": "manu@gmail",
-      "phone": "1236478964",
+      "organizationName": "In2IT",
+      "role": "Customer",
+      "remarks": "dfhfgh",
+      "email": "sdfghasd@gmai.com",
+      "phone": "2756456464",
       "codes": "+91",
-      "fname": "Manu",
-      "lname": "kumar",
-      "additionalroles": "Angla bksjd",
+      "fname": "hfg",
+      "lname": "hdfh",
+      "additionalroles": "fghgfhgf",
+      "addMedium": [],
+      "id": "c003"
+    },
+    {
+      "id": "e0d4",
+      "organizationName": "CloudAxis",
+      "role": "Developer",
+      "remarks": "",
+      "email": "ghjghjhjjg@gmail.com",
+      "phone": "2135153145",
+      "codes": "+91",
+      "fname": "gfhghhh",
+      "lname": "hghhgghj",
+      "additionalroles": "",
       "addMedium": []
     }
   ]

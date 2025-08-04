@@ -43,30 +43,6 @@
   </div>
 </div>
 
-<!-- <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-tabs">
-    <li class="nav-item" [ngbNavItem]="0">
-        <button ngbNavLink>Organization</button>
-    </li>
-    @for (item of navs; track item) {
-    <li  [ngbNavItem]="item.id" >
-        <button ngbNavLink>
-            {{item.organizationName}}
-            <span class="btn-close ms-3 fw-light" (click)="close($event, item)"></span>
-        </button>
-        <ng-template ngbNavContent>
-            <app-organization-details [mydata] ="sendData">
-
-            </app-organization-details>
-        </ng-template>
-    </li>
-    }
-
-</ul>
-
-<div [ngbNavOutlet]="nav" class="mt-2">
-
-
-</div> -->
 
 <div class="container-fluid mt-3 p-0">
   <div class="row d-flex g-0">
@@ -75,7 +51,7 @@
         <h3>Contacts</h3>
         <div class="input_box bg-light d-flex justify-content-between align-items-center">
           <input type="text" class="form-control rounded" placeholder="search here..." [(ngModel)]="searchText"
-            (ngModelChange)="onSearchOrg(searchText)" />
+            (ngModelChange)="onSearchOrg()" />
           <span class="ms-2"><i-feather name="search" class="me-2"></i-feather>
           </span>
         </div>
@@ -123,7 +99,7 @@
 
         <ag-grid-angular style="width: 100%; height: 550px" [columnDefs]="colDefs" [rowData]="rowData"
           [pagination]="true" [paginationAutoPageSize]="10" [paginationPageSizeSelector]="[5, 10, 20]"
-          [gridOptions]="gridOptions" [rowSelection]="'multiple'" (rowClicked)="rowDataSelect($event)">
+          [gridOptions]="gridOptions" [rowSelection]="'single'" (rowClicked)="rowDataSelect($event)">
         </ag-grid-angular>
       </div>
       @if(toggleValue){ @if (!viewCard) {
@@ -144,7 +120,7 @@
                     <div>
                       @if(contactForm.get('fname')?.hasError('required'))
                       {
-                      <small>This Field is Required.</small>
+                      <small>First Name is Required.</small>
                       }
                       @else if (!contactForm.get('fname')?.hasError('required') &&
                       contactForm.get('fname')?.hasError('pattern'))
@@ -162,7 +138,7 @@
                     <div>
                       @if(contactForm.get('lname')?.hasError('required'))
                       {
-                      <small>This Field is Required.</small>
+                      <small>Last Name is Required.</small>
                       }
                       @else if (!contactForm.get('lname')?.hasError('required') &&
                       contactForm.get('lname')?.hasError('pattern'))
@@ -175,7 +151,8 @@
 
                 </div>
                 <label class="form-label">OrganizationName <span style="color: red;">*</span></label>
-                <select name="" id="" class="form-control" formControlName="organizationName">
+                <select name="" id="" class="form-control" formControlName="organizationName"
+                  (change)="getRolesByOrg()">
                   <option value="Select" disabled selected>Select</option>
                   @for (item of orgnizations; track $index) {
                   <option [value]="item">{{ item }}</option>
@@ -183,15 +160,22 @@
                 </select>
                 @if(contactForm.get('organizationName')?.invalid && contactForm.get('organizationName')?.touched)
                 {
-                <small>This Field is Required.</small>
+                <small>Organization Name is Required.</small>
                 }
 
               </div>
               <div class="form-group">
                 <label class="form-label">Email <span style="color: red;">*</span></label>
                 <input type="text" placeholder="enter your email" class="form-control" formControlName="email" />
-                <small *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">This Field is
+                @if(contactForm.get('email')?.invalid && contactForm.get('email')?.touched){
+                <small>Email is
                   Required.</small>
+                }
+
+                @if(contactForm.get('email')?.hasError('pattern')){
+                <small>Valid Email is
+                  Required.</small>
+                }
               </div>
 
 
@@ -204,7 +188,7 @@
                     <option [value]="item">{{ item }}</option>
                     }
                   </select>
-                  <small *ngIf="contactForm.get('codes')?.invalid && contactForm.get('codes')?.touched">This Field is
+                  <small *ngIf="contactForm.get('codes')?.invalid && contactForm.get('codes')?.touched">Code is
                     Required.</small>
 
                   <div class="d-flex flex-column">
@@ -214,12 +198,15 @@
                     <div>
                       @if(contactForm.get('phone')?.hasError('required'))
                       {
-                      <small>This Field is Required.</small>
+                      <small>Phone is Required.</small>
                       }
                       @else if (!contactForm.get('phone')?.hasError('required') &&
                       contactForm.get('phone')?.hasError('pattern'))
                       {
                       <small>Only Numbers are required.</small>
+                      }
+                      @else if(contactForm.get('phone')?.errors?.['minlength']){
+                      <small> Minimun 10 length is required.</small>
                       }
                       @else if(contactForm.get('phone')?.errors?.['maxlength']){
                       <small>Maxium 10 length is required.</small>
@@ -250,28 +237,50 @@
                           </div>
                         </div>
                         @if (addMedium.get('addMediumtype')?.value == 'phone' ) {
-                        <input type="text" placeholder="phone" class="form-control" formControlName="phone" />
-                        <div>
-                          @if(addMedium.get('phone')?.hasError('required'))
-                          {
-                          <small>This Field is Required.</small>
-                          }
-                          @else if (!addMedium.get('phone')?.hasError('required') &&
-                          addMedium.get('phone')?.hasError('pattern'))
-                          {
-                          <small>Only Numbers are required.</small>
-                          }
-                          @else if(addMedium.get('phone')?.errors?.['maxlength']){
-                          <small>Maxium 10 length is required.</small>
-                          }
+                        <div class="d-flex flex-column">
+                          <input type="text" placeholder="phone" class="form-control" formControlName="phone" />
+                          <div>
+                            @if( addMedium.get('phone')?.touched &&
+                            addMedium.get('phone')?.errors){
+                            <div>
+                              @if(addMedium.get('phone')?.hasError('required'))
+                              {
+                              <small>Phone is Required.</small>
+                              }
+                              @else if (!addMedium.get('phone')?.hasError('required') &&
+                              addMedium.get('phone')?.hasError('pattern'))
+                              {
+                              <small>Only Numbers are required.</small>
+                              }
+                              @else if(addMedium.get('phone')?.errors?.['minlength']){
+                              <small> Minimun 10 length is required.</small>
+                              }
+                              @else if(addMedium.get('phone')?.errors?.['maxlength']){
+                              <small>Maxium 10 length is required.</small>
+                              }
+                            </div>
+                            }
+                          </div>
                         </div>
                         }
                         @if(addMedium.get('addMediumtype')?.value == 'email'){
-                        <input type="text" placeholder="email" class="form-control col-auto" formControlName="email" />
-                        <div class="invalid-feedback" style="width: 100%;"
-                          *ngIf="addMedium.get('email')?.invalid && addMedium.get('email')?.touched">
-                          Email is required.
+                        <div class="d-flex flex-column">
+                          <input type="text" placeholder="email" class="form-control col-auto"
+                            formControlName="email" />
+                          <div *ngIf="addMedium.get('email')?.touched">
+                            @if(contactForm.get('email')?.invalid && contactForm.get('email')?.touched){
+                            <small>Email is
+                              Required.</small>
+                            }
+
+                            @if(contactForm.get('email')?.hasError('pattern')){
+                            <small>Valid Email is
+                              Required.</small>
+                            }
+                          </div>
+
                         </div>
+
 
                         }
 
@@ -301,36 +310,25 @@
               <div class="form-group ">
                 <label class="form-label"> Role <span style="color: red;">*</span></label>
                 <select class="form-control" formControlName="role">
-                  @if(this.contactForm.get('organizationName')?.value){
-                  <option value="Select" disabled selected>Select</option>
+                  <option value="" disabled selected>Select</option>
                   @for (item of filteredRole? filteredRole: roles; track $index) {
                   <option [value]="item">{{ item }}</option>
                   }
-                  }
+
                 </select>
-                <small *ngIf="contactForm.get('role')?.invalid && contactForm.get('role')?.touched">This Field is
+                @if(contactForm.get('role')?.invalid && contactForm.get('role')?.touched){
+                <small>This Field is
                   Required.</small>
+                }
+
               </div>
 
 
               <div class="form-group">
-                <label class="form-label">Additional Roles <span style="color: red;">*</span></label>
+                <label class="form-label">Additional Roles</label>
                 <input type="text" placeholder="additional roles" class="form-control"
                   formControlName="additionalroles" />
-                @if( contactForm.get('additionalroles')?.touched &&
-                contactForm.get('additionalroles')?.errors){
-                <div>
-                  @if(contactForm.get('additionalroles')?.hasError('required'))
-                  {
-                  <small>This Field is Required.</small>
-                  }
-                  @else if (!contactForm.get('additionalroles')?.hasError('required') &&
-                  contactForm.get('additionalroles')?.hasError('pattern'))
-                  {
-                  <small>Only alphabets are required.</small>
-                  }
-                </div>
-                }
+
               </div>
 
 
@@ -360,6 +358,7 @@
                 <button type="submit" class="btn btn-light mt-2" (click)="cancel()">
                   Cancel
                 </button>
+
               </div>
             </form>
           </div>
