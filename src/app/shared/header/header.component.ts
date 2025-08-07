@@ -3,10 +3,11 @@ import { Router, RouterLink } from '@angular/router';
 import { FeatherModule } from 'angular-feather';
 import { UserService } from '../../Service/user.service';
 import { ENVIORNMENT } from '../../../environments/environment';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-header',
-  imports: [FeatherModule],
+  imports: [FeatherModule, SearchComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

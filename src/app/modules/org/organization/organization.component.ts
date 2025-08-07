@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { FeatherModule } from 'angular-feather';
 import { UserService } from '../../../Service/user.service';
 import { AgGridAngular } from 'ag-grid-angular';
@@ -8,6 +8,11 @@ import { OrganizationDetailsComponent } from '../../../shared/organization-detai
 import { CommonModule, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import {
+  placeholderSignal,
+  searchHide,
+  searchQuery,
+} from '../../../shared/search-store';
 
 @Component({
   selector: 'app-organization',
@@ -23,7 +28,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './organization.component.scss',
 })
 export class OrganizationComponent {
-  rowData: any;
+  rowData = signal<any[]>([]);
   navs: any[] = [];
   active: any;
   tabName: any;
@@ -45,8 +50,30 @@ export class OrganizationComponent {
     'Developer',
   ];
   filteredData: any[] = [];
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {
+    placeholderSignal.set('Search here Organizations...');
+    searchHide.set(true);
+    effect(() => {
+      const search = searchQuery();
 
+      let sourceData =
+        this.selected === 'All' || !this.filteredData?.length
+          ? this.allContacts
+          : this.filteredData;
+
+      if (!search) {
+        this.rowData.set(sourceData);
+        return;
+      }
+
+      const filtered = sourceData.filter((item: any) => {
+        const combinedString = Object.values(item).join(' ').toLowerCase();
+        return combinedString.includes(search);
+      });
+
+      this.rowData.set(filtered);
+    });
+  }
   ngOnInit(): void {
     this.getData();
     this.onBreadCrumb();
@@ -73,7 +100,7 @@ export class OrganizationComponent {
   getData() {
     this.userService.getContactData().subscribe((res: any) => {
       this.allContacts = res;
-      this.rowData = [...res];
+      this.rowData.set([...res]);
     });
   }
 
@@ -84,7 +111,7 @@ export class OrganizationComponent {
       this.selected = data;
 
       if (data === 'All') {
-        this.rowData = [...this.allContacts];
+        this.rowData.set([...this.allContacts]);
         this.filteredRole = null;
         return;
       }
@@ -92,8 +119,8 @@ export class OrganizationComponent {
       this.filteredData = this.allContacts.filter(
         (item: any) => item.organizationName === data
       );
-      this.rowData = this.filteredData;
-      const usedRoles = this.rowData.map((d: any) => d.role);
+      this.rowData.set(this.filteredData);
+      const usedRoles = this.rowData().map((d: any) => d.role);
       this.filteredRole = this.roles?.filter(
         (r: any) => !usedRoles.includes(r)
       );
@@ -162,29 +189,29 @@ export class OrganizationComponent {
   }
   searchText: any;
 
-  onSearchOrg() {
-    const search = this.searchText?.trim().toLowerCase();
+  // onSearchOrg() {
+  //   const search = this.searchText?.trim().toLowerCase();
 
-    let sourceData: any[] = [];
+  //   let sourceData: any[] = [];
 
-    if (!search) {
-      if (this.selected === 'All' || !this.selected) {
-        this.rowData = [...this.allContacts];
-      } else {
-        this.rowData = [...this.filteredData];
-      }
-      return;
-    }
+  //   if (!search) {
+  //     if (this.selected === 'All' || !this.selected) {
+  //       this.rowData.set([...this.allContacts]);
+  //     } else {
+  //       this.rowData.set([...this.filteredData]);
+  //     }
+  //     return;
+  //   }
 
-    if (this.selected === 'All' || !this.filteredData?.length) {
-      sourceData = this.allContacts;
-    } else {
-      sourceData = this.filteredData;
-    }
-
-    this.rowData = sourceData.filter((item: any) => {
-      const combinedString = Object.values(item).join(' ').toLowerCase();
-      return combinedString.includes(search);
-    });
-  }
+  //   if (this.selected === 'All' || !this.filteredData?.length) {
+  //     sourceData = this.allContacts;
+  //   } else {
+  //     sourceData = this.filteredData;
+  //   }
+  //   const allRowDataSave = sourceData.filter((item: any) => {
+  //     const combinedString = Object.values(item).join(' ').toLowerCase();
+  //     return combinedString.includes(search);
+  //   });
+  //   this.rowData.set(allRowDataSave);
+  // }
 }

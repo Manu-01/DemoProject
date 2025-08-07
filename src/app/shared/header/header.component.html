@@ -9,6 +9,9 @@
 
 
     <ul class="nav nav-pills d-flex align-items-center ">
+
+      <app-search></app-search>
+
       @if(!isProduction){
       <li (click)="redirectToLiveSite()" class="nav-item text-underline text-primary cursor-pointer">
         Go Live
@@ -22,6 +25,7 @@
       <li class="nav-item">
         <a class="nav-link"><i-feather name="user"></i-feather></a>
       </li>
+
     </ul>
   </header>
 </div>

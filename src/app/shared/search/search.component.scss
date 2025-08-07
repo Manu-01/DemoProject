@@ -1,0 +1,33 @@
+.input_box {
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 10px;
+  box-shadow: -2px -2px 6px rgba(#fff, 0.6), 2px 2px 12px #c8d8e7;
+}
+
+div li {
+  padding: 11px 11px;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+input.form-control {
+  padding-right: 2.5rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+.clear_icon {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+}
+
+.toogle_css {
+  transition: 1s;
+}

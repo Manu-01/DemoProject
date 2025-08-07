@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { FeatherModule } from 'angular-feather';
 import {
   FormControl,
@@ -11,6 +11,11 @@ import { NgClass } from '@angular/common';
 import { ActionsRenderComponent } from '../../../shared/actions-button/actions-button.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../Service/user.service';
+import {
+  placeholderSignal,
+  searchQuery,
+  searchHide,
+} from '../../../shared/search-store';
 @Component({
   selector: 'app-mytask',
   imports: [
@@ -25,12 +30,24 @@ import { UserService } from '../../../Service/user.service';
 })
 export class MytaskComponent {
   toggleValue: boolean = false;
-  rowData: any;
+  rowData = signal<any[]>([]);
   mode: boolean = false;
   status = ['Active', 'InActive'];
   priority = ['Low', 'Medium', 'High'];
+  sourceData: any[] = [];
+  constructor(private userService: UserService) {
+    placeholderSignal.set('Search here Task .... ');
+    searchHide.set(true);
+    effect(() => {
+      const search = searchQuery();
+      const filtered = this.sourceData.filter((item: any) => {
+        const combinedString = Object.values(item).join(' ').toLowerCase();
+        return combinedString.includes(search);
+      });
 
-  constructor(private userService: UserService) {}
+      this.rowData.set(filtered);
+    });
+  }
   ngOnInit(): void {
     this.getData();
     this.SetBreadCrumb();
@@ -77,7 +94,8 @@ export class MytaskComponent {
 
   getData() {
     this.userService.getData().subscribe((res: any) => {
-      this.rowData = res;
+      this.sourceData = res;
+      this.rowData.set(res);
     });
   }
 

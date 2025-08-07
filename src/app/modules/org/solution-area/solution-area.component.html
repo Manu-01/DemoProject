@@ -1,1 +1,28 @@
-<p>solution-area works!</p>
+<!-- product.component.html -->
+<header>
+    <nav class="d-flex justify-content-between p-4 shadow">
+        <h3>Logo</h3>
+        <ul>
+            <li>
+                <p>cart <sup class="text-danger fw-bold">{{ cartCount() }}</sup></p>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+<h2>Product List</h2>
+<div *ngFor="let product of products()">
+    <div style="border: 1px solid #ccc; padding: 8px; margin: 5px;">
+        <strong>{{ product.name }}</strong> - ₹{{ product.price }}
+        <button (click)="addToCart(product)">Add to Cart</button>
+    </div>
+</div>
+
+
+<h3>Cart Items</h3>
+<div *ngFor="let item of cart()">
+    <div style="border: 1px solid #ccc; padding: 8px; margin: 5px;">
+        <strong>{{ item.name }}</strong> - ₹{{ item.price }}
+        <button (click)="removeFromCart(item)">Remove</button>
+    </div>
+</div>

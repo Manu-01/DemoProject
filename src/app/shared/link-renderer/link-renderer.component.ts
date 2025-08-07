@@ -18,7 +18,6 @@ export class LinkRendererComponent implements ICellRendererAngularComp {
   refresh(params: ICellRendererParams<any, any, any>): any {}
 
   viewDetails() {
-    if (this.param.key === 'organizationName')
-      this.param.context.componentParent.add(this.param.data);
+    this.param.context.componentParent.add(this.param.data);
   }
 }

@@ -89,15 +89,15 @@
       <div class="col-8" [ngClass]="{ 'col-12': !toggleValue, transition: !toggleValue }">
         <div class="header_sections d-flex justify-content-between align-items-center px-3 mb-3">
           <h3>All Contact Lists</h3>
-          <div class="input_box bg-light d-flex justify-content-between align-items-center">
+          <!-- <div class="input_box bg-light d-flex justify-content-between align-items-center">
             <input type="text" class="form-control rounded" placeholder="search here..." [(ngModel)]="searchText2"
               (ngModelChange)="onSearchTextChanged()" />
             <span class="ms-2"><i-feather name="search" class="me-2"></i-feather>
             </span>
-          </div>
+          </div> -->
         </div>
 
-        <ag-grid-angular style="width: 100%; height: 550px" [columnDefs]="colDefs" [rowData]="rowData"
+        <ag-grid-angular style="width: 100%; height: 550px" [columnDefs]="colDefs" [rowData]="rowData()"
           [pagination]="true" [paginationAutoPageSize]="10" [paginationPageSizeSelector]="[5, 10, 20]"
           [gridOptions]="gridOptions" [rowSelection]="'single'" (rowClicked)="rowDataSelect($event)">
         </ag-grid-angular>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { NgbDropdownModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridAngular } from 'ag-grid-angular';
 
@@ -17,7 +17,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Target } from 'angular-feather/icons';
+import {
+  placeholderSignal,
+  searchHide,
+  searchQuery,
+} from '../../../shared/search-store';
 @Component({
   selector: 'app-contact',
   imports: [
@@ -34,7 +38,7 @@ import { Target } from 'angular-feather/icons';
   styleUrl: './contact.component.scss',
 })
 export class ContactComponent {
-  rowData: any;
+  rowData = signal<any[]>([]);
   selected: any;
   navs: any[] = [];
   active: any;
@@ -87,11 +91,30 @@ export class ContactComponent {
     additionalroles: new FormControl(''),
     addMedium: new FormArray([]),
   });
-  constructor(
-    private router: Router,
-    private userService: UserService,
-    private fb: FormBuilder
-  ) {}
+  constructor(private userService: UserService, private router: Router) {
+    placeholderSignal.set('Search here Contacts...');
+    searchHide.set(true);
+    effect(() => {
+      const search = searchQuery();
+
+      let sourceData =
+        this.selected === 'All' || !this.filteredData?.length
+          ? this.allContacts
+          : this.filteredData;
+
+      if (!search) {
+        this.rowData.set(sourceData);
+        return;
+      }
+
+      const filtered = sourceData.filter((item: any) => {
+        const combinedString = Object.values(item).join(' ').toLowerCase();
+        return combinedString.includes(search);
+      });
+
+      this.rowData.set(filtered);
+    });
+  }
 
   orgnizations = ['In2IT', 'In2IT A', 'NextGen IT', 'CloudAxis'];
   onboarding = ['Active', 'Inactive', 'Pending'];
@@ -221,7 +244,7 @@ export class ContactComponent {
   getContactData() {
     this.userService.getContactData().subscribe((res: any) => {
       this.allContacts = res;
-      this.rowData = [...res];
+      this.rowData.set([...res]);
       this.fetchData('All');
     });
   }
@@ -232,7 +255,7 @@ export class ContactComponent {
     this.selected = data;
 
     if (data === 'All') {
-      this.rowData = [...this.allContacts];
+      this.rowData.set([...this.allContacts]);
       this.contactForm.get('organizationName')?.enable();
       this.contactForm.get('organizationName')?.patchValue('Select');
       this.contactForm.get('role')?.disable();
@@ -242,7 +265,7 @@ export class ContactComponent {
     this.filteredData = this.allContacts.filter(
       (item: any) => item.organizationName === data
     );
-    this.rowData = this.filteredData;
+    this.rowData.set(this.filteredData);
     this.contactForm.get('organizationName')?.patchValue(this.selected);
     this.getRolesByOrg();
   }
@@ -301,7 +324,7 @@ export class ContactComponent {
     this.contactForm.get('organizationName')?.disable();
 
     if (this.headerValue == 'Edit Contact' && this.viewData.role == 'Manager') {
-      const usedRoles = this.rowData.map((d: any) => d.role);
+      const usedRoles = this.rowData().map((d: any) => d.role);
       this.filteredRole = this.roles?.filter((role: string) => {
         if (['Product-Manager'].includes(role)) {
           return !usedRoles.includes(role);
@@ -312,7 +335,7 @@ export class ContactComponent {
       this.headerValue == 'Edit Contact' &&
       this.viewData.role == 'Product-Manager'
     ) {
-      const usedRoles = this.rowData.map((d: any) => d.role);
+      const usedRoles = this.rowData().map((d: any) => d.role);
       this.filteredRole = this.roles?.filter((role: string) => {
         if (['Manager'].includes(role)) {
           return !usedRoles.includes(role);
@@ -333,27 +356,28 @@ export class ContactComponent {
   }
 
   //search Filter for Table
-  onSearchTextChanged() {
-    const search = this.searchText2?.trim().toLowerCase();
-    let sourceData: any[] = [];
-    if (!search) {
-      if (this.selected === 'All' || !this.selected) {
-        this.rowData = [...this.allContacts];
-      } else {
-        this.rowData = [...this.filteredData];
-      }
-      return;
-    }
-    if (this.selected === 'All' || !this.filteredData?.length) {
-      sourceData = this.allContacts;
-    } else {
-      sourceData = this.filteredData;
-    }
-    this.rowData = sourceData.filter((item: any) => {
-      const combinedString = Object.values(item).join(' ').toLowerCase();
-      return combinedString.includes(search);
-    });
-  }
+  // onSearchTextChanged() {
+  //   const search = this.searchText2?.trim().toLowerCase();
+  //   let sourceData: any[] = [];
+  //   if (!search) {
+  //     if (this.selected === 'All' || !this.selected) {
+  //       this.rowData.set([...this.allContacts]);
+  //     } else {
+  //       this.rowData.set([...this.filteredData]);
+  //     }
+  //     return;
+  //   }
+  //   if (this.selected === 'All' || !this.filteredData?.length) {
+  //     sourceData = this.allContacts;
+  //   } else {
+  //     sourceData = this.filteredData;
+  //   }
+  //   let rowdataSave = sourceData.filter((item: any) => {
+  //     const combinedString = Object.values(item).join(' ').toLowerCase();
+  //     return combinedString.includes(search);
+  //   });
+  //   this.rowData.set(rowdataSave);
+  // }
   //search Filter for sidebar
   onSearchOrg() {
     const search = this.searchText.trim().toLowerCase();
@@ -437,7 +461,7 @@ export class ContactComponent {
     const role = this.contactForm.get('role');
     if (this.contactForm.get('organizationName')?.value) {
       role?.enable();
-      const usedRoles = this.rowData.map((d: any) => d.role);
+      const usedRoles = this.rowData().map((d: any) => d.role);
       this.filteredRole = this.roles?.filter((role: string) => {
         if (['Manager', 'Product-Manager'].includes(role)) {
           return !usedRoles.includes(role);
