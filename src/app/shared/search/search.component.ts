@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FeatherModule } from 'angular-feather';
-import { searchQuery, placeholderSignal, searchHide } from '../search-store';
 import { CommonModule } from '@angular/common';
+import { UserService } from './../../Service/user.service';
 
 @Component({
   selector: 'app-search',
@@ -12,19 +12,21 @@ import { CommonModule } from '@angular/common';
   styleUrl: './search.component.scss',
 })
 export class SearchComponent {
-  query = searchQuery;
-  searchide = searchHide;
-  placeholderSignal = placeholderSignal;
-  inputSearchValue: boolean = false;
-  constructor() {}
+  constructor(private userService: UserService) {}
+
+  query = computed(() => this.userService._searchData().searchQuery);
+  placeholder = computed(() => this.userService._searchData().placeholder);
+  hide = computed(() => this.userService._searchData().hide);
+
   onInputChange(value: string) {
-    this.query.set(value.trim().toLowerCase());
+    this.userService.updateSearchQuery(value.trim().toLowerCase());
   }
 
   clearSearch() {
-    this.query.set('');
+    this.userService.updateSearchQuery('');
   }
-  toggleInputSeach() {
-    this.inputSearchValue = !this.inputSearchValue;
+
+  toggleInputSearch() {
+    this.userService.setHideState(!this.hide());
   }
 }

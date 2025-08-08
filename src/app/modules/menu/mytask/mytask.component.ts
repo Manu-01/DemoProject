@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, effect, OnDestroy, OnInit, signal } from '@angular/core';
 import { FeatherModule } from 'angular-feather';
 import {
   FormControl,
@@ -11,11 +11,7 @@ import { NgClass } from '@angular/common';
 import { ActionsRenderComponent } from '../../../shared/actions-button/actions-button.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../Service/user.service';
-import {
-  placeholderSignal,
-  searchQuery,
-  searchHide,
-} from '../../../shared/search-store';
+
 @Component({
   selector: 'app-mytask',
   imports: [
@@ -28,7 +24,7 @@ import {
   templateUrl: './mytask.component.html',
   styleUrl: './mytask.component.scss',
 })
-export class MytaskComponent {
+export class MytaskComponent implements OnInit, OnDestroy {
   toggleValue: boolean = false;
   rowData = signal<any[]>([]);
   mode: boolean = false;
@@ -36,19 +32,22 @@ export class MytaskComponent {
   priority = ['Low', 'Medium', 'High'];
   sourceData: any[] = [];
   constructor(private userService: UserService) {
-    placeholderSignal.set('Search here Task .... ');
-    searchHide.set(true);
+    // this.userService.setHideState(true);
+    // this.userService.updatePlaceholder('Seach here mytask');
     effect(() => {
-      const search = searchQuery();
-      const filtered = this.sourceData.filter((item: any) => {
-        const combinedString = Object.values(item).join(' ').toLowerCase();
-        return combinedString.includes(search);
-      });
-
-      this.rowData.set(filtered);
+      const search = this.userService.searchText();
+      if (search != null) {
+        const filtered = this.sourceData.filter((item) => {
+          const combinedString = Object.values(item).join(' ').toLowerCase();
+          return search && combinedString.includes(search);
+        });
+        this.rowData.set(filtered);
+      }
     });
   }
+
   ngOnInit(): void {
+    this.userService.setSearchConfig({ show: true });
     this.getData();
     this.SetBreadCrumb();
   }
@@ -213,5 +212,10 @@ export class MytaskComponent {
       dueDate: '',
       priority: 'select',
     });
+  }
+
+  ngOnDestroy(): void {
+    this.userService.setSearchConfig({ show: false });
+    this.userService.searchText.set(null);
   }
 }

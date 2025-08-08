@@ -1,17 +1,15 @@
-@if(searchide()){
-<div class="input_box bg-light me-2 d-flex justify-content-between align-items-center position-relative">
+<div *ngIf="hide()" class="input_box bg-light me-2 d-flex justify-content-between align-items-center position-relative">
+  <input
+    type="text"
+    class="form-control rounded pe-5"
+    [placeholder]="placeholder()"
+    [ngModel]="query()"
+    (ngModelChange)="onInputChange($event)"
+  />
 
-    <input type="text" class="form-control rounded pe-5" [placeholder]="placeholderSignal()" [ngModel]="query()"
-        (ngModelChange)="onInputChange($event)" />
+  <span class="clear_icon" *ngIf="query()" (click)="clearSearch()">x</span>
 
-
-
-    <span class="clear_icon" *ngIf="query()" (click)="clearSearch()">
-        x
-    </span>
-
-    <span class="ms-2">
-        <i-feather name="search" class="me-2" (click)="toggleInputSeach()"></i-feather>
-    </span>
+  <span class="ms-2">
+    <i-feather name="search" class="me-2" (click)="toggleInputSearch()"></i-feather>
+  </span>
 </div>
-}

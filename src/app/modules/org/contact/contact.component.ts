@@ -17,11 +17,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {
-  placeholderSignal,
-  searchHide,
-  searchQuery,
-} from '../../../shared/search-store';
+
 @Component({
   selector: 'app-contact',
   imports: [
@@ -92,11 +88,10 @@ export class ContactComponent {
     addMedium: new FormArray([]),
   });
   constructor(private userService: UserService, private router: Router) {
-    placeholderSignal.set('Search here Contacts...');
-    searchHide.set(true);
+    this.userService.setHideState(true);
+    this.userService.updatePlaceholder('Search here Contacts...');
     effect(() => {
-      const search = searchQuery();
-
+     const search = this.userService._searchData().searchQuery.toLowerCase();
       let sourceData =
         this.selected === 'All' || !this.filteredData?.length
           ? this.allContacts
@@ -106,7 +101,6 @@ export class ContactComponent {
         this.rowData.set(sourceData);
         return;
       }
-
       const filtered = sourceData.filter((item: any) => {
         const combinedString = Object.values(item).join(' ').toLowerCase();
         return combinedString.includes(search);

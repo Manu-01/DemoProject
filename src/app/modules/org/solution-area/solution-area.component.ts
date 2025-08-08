@@ -2,7 +2,6 @@ import { Component, effect, OnInit } from '@angular/core';
 import { UserService } from '../../../Service/user.service';
 import { signal, computed } from '@angular/core';
 import { NgFor } from '@angular/common';
-import { searchHide } from '../../../shared/search-store';
 @Component({
   selector: 'app-solution-area',
   imports: [NgFor],
@@ -11,7 +10,8 @@ import { searchHide } from '../../../shared/search-store';
 })
 export class SolutionAreaComponent implements OnInit {
   constructor(private userService: UserService) {
-    searchHide.set(false);
+    this.userService.setHideState(true);
+    this.userService.updatePlaceholder('Search here Solution Areas...');
     effect(() => {
       console.log('Cart updated:', this.cart());
     });

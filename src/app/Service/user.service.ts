@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+
+export interface config {
+  show: boolean;
+  placeholder?: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +14,14 @@ export class UserService {
   private url = 'http://localhost:3000/task';
   private sidebarJsonUrl = 'http://localhost:3000/sidebarJson';
   private contactsData = 'http://localhost:3000/ContactData';
+
+  _searchData = signal<config>({
+    placeholder: 'Search here',
+    show: true,
+  });
+
+  searchText = signal<string | null>('');
+
   mysubject$ = new Subject<any>();
 
   constructor(private http: HttpClient) {}
@@ -53,5 +66,26 @@ export class UserService {
   }
   deleteContactData(id: any): Observable<any> {
     return this.http.delete(`${this.contactsData}/${id}`);
+  }
+
+  // signal methods For the search
+
+  // updateSearchQuery(query: string) {
+  //   const current = this._searchData();
+  //   this._searchData.set({ ...current, searchQuery: query });
+  // }
+
+  // updatePlaceholder(placeholder: string) {
+  //   const current = this._searchData();
+  //   this._searchData.set({ ...current, placeholder });
+  // }
+
+  // setHideState(hide: boolean) {
+  //   const current = this._searchData();
+  //   this._searchData.set({ ...current, hide });thi
+  // }
+
+  setSearchConfig(data: config) {
+    this._searchData.set(data);
   }
 }

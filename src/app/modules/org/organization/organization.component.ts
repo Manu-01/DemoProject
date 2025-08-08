@@ -8,11 +8,7 @@ import { OrganizationDetailsComponent } from '../../../shared/organization-detai
 import { CommonModule, NgIf } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import {
-  placeholderSignal,
-  searchHide,
-  searchQuery,
-} from '../../../shared/search-store';
+
 
 @Component({
   selector: 'app-organization',
@@ -51,10 +47,12 @@ export class OrganizationComponent {
   ];
   filteredData: any[] = [];
   constructor(private userService: UserService, private router: Router) {
-    placeholderSignal.set('Search here Organizations...');
-    searchHide.set(true);
+    this.userService.setHideState(true);
+    this.userService.updatePlaceholder('Search here Organizations...');
+    // placeholderSignal.set('Search here Organizations...');
+//    searchHide.set(true);
     effect(() => {
-      const search = searchQuery();
+     const search = this.userService._searchData().searchQuery.toLowerCase();
 
       let sourceData =
         this.selected === 'All' || !this.filteredData?.length
